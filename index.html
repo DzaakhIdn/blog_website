@@ -8,31 +8,30 @@
     <link rel="stylesheet" href="src/css/output.css" />
     <link rel="stylesheet" href="./assets/slick/slick.css" type="text/css" />
     <link rel="stylesheet" href="./assets/slick/slick-theme.css" type="text/css" />
+    <link rel="stylesheet" href="./src/css/custom_css/styles.css">
     <!-- Icon -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
   </head>
-  <style>
-    body {
-      padding: 10px;
-    }
-    * {
-      transition: all 300ms;
-    }
-    .selected {
-      background-color: #ef4444; /* Warna merah */
-      color: aliceblue;
-      font-weight: medium;
-      padding: 5px 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 12px;
-    }
-  </style>
   <body>
     <!-- Navbar -->
     <nav id="navbar" class="nav_lg">
     </nav>
+
+    <header class="hidden"></header>
+    <section class="popular_post mt-5">
+      <div class="sect_title flex items-center w-full justify-between">
+        <p class="font-semibold text-[20px] before:w-1 before:h-1 before:rounded-sm before:mr-2 before:bg-orange-500 before:content-['-'] before:text-orange-500">Popular Posts</p>
+        <div class="slide_control flex flex-row-reverse gap-2">
+          <div class="btn_control" id="btn_right">
+            <i class="ph-bold ph-caret-right"></i>
+          </div>
+          <div class="btn_control" id="btn_left">
+            <i class="ph-bold ph-caret-left"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
     <!-- Mobile Navigation -->
     <footer id="mobile_navigation" class="mobile_navigation"></footer>
