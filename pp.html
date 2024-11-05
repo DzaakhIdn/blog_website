@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Bar</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- CDN untuk Phosphor Icons -->
+  <script src="https://unpkg.com/phosphor-icons"></script>
+  <style>
+    /* Styling tambahan untuk tampilan saat dipilih */
+    *{
+      transition: all 300ms;
+    }
+    .selected {
+      background-color: #ef4444; /* Warna merah */
+      color: aliceblue;
+      font-weight: medium;
+      padding: 5px 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+  <div class="flex items-center gap-10 bg-white px-3 py-4 rounded-tr-lg rounded-tl-lg shadow-md">
+    <!-- Home Button -->
+    <button class="nav-button flex items-center text-gray-500 selected" data-label="Home">
+      <i class="ph-house ph-regular text-lg"></i>
+      <span class="ml-2 ">Home</span>
+    </button>
+    
+    <!-- Bookmark Button -->
+    <button class="nav-button flex items-center text-gray-500" data-label="Bookmark">
+      <i class="ph-bookmark-simple ph-regular text-lg"></i>
+      <span class="ml-2 hidden">Bookmark</span>
+    </button>
+    
+    <!-- User Button -->
+    <button class="nav-button flex items-center text-gray-500" data-label="Profile">
+      <i class="ph-user ph-regular text-lg"></i>
+      <span class="ml-2 hidden">Profile</span>
+    </button>
+    
+    <!-- More Button -->
+    <button class="nav-button flex items-center text-gray-500" data-label="More">
+      <i class="ph-caret-up ph-regular text-xl"></i>
+      <span class="ml-2 hidden">More</span>
+    </button>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons = document.querySelectorAll('.nav-button');
+
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Remove selected class and hide text for all buttons
+          buttons.forEach(btn => {
+            btn.classList.remove('selected');
+            btn.querySelector('span').classList.add('hidden');
+          });
+
+          // Add selected class and show text for the clicked button
+          button.classList.add('selected');
+          button.querySelector('span').classList.remove('hidden');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

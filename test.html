@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Main Page</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="src/css/output.css" />
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    body {
+      padding: 10px;
+    }
+    *{
+      transition: all 300ms;
+    }
+    .selected {
+      background-color: #ef4444; /* Warna merah */
+      color: aliceblue;
+      font-weight: medium;
+      padding: 5px 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar-container">
+    <!-- Komponen Navbar akan dirender di sini oleh renderNavbar -->
+  </nav>
+  
+  <div class="top_mobile_container">
+    <div class="menu_container flex md:justify-between md:w-full">
+      <div class="btn menu_mobile">
+        <i class="ph-bold ph-list text-xl"></i>
+      </div>
+      <div class="menu_tab hidden md:flex md:gap-2">
+        <div class="avatar">
+          <div class="w-[48px] rounded">
+            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Avatar" />
+          </div>
+        </div>
+        <div class="btn icon_bookmark">
+          <i class="ph-bold ph-bookmark-simple text-xl"></i>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center justify-between px-4 py-2 bg-gray-300 rounded-md w-full">
+      <!-- More Options Icon -->
+      <i class="ph-bold ph-dots-three-vertical"></i>
+  
+      <!-- Search Input -->
+      <input type="text" placeholder="Search Anything" class="bg-transparent focus:outline-none text-gray-700 placeholder-gray-300 flex-grow w-full">
+  
+      <!-- Search Icon -->
+      <i class="ph-bold ph-magnifying-glass"></i>
+    </div>
+  </div>
+
+  <!-- JavaScript Module -->
+  <script type="module">
+    import { renderNavbar } from './src/js/component/navbar.js';
+    
+    // Jalankan renderNavbar untuk merender navbar di elemen dengan id "navbar-container"
+    renderNavbar('#navbar-container');
+  </script>
+</body>
+</html>
