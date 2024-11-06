@@ -6,7 +6,7 @@ export function renderNavigation(selector) {
 
     container.innerHTML = `
       <div
-        class="flex items-center justify-between gap-10 w-full bg-white px-3 py-4 rounded-tr-lg rounded-tl-lg shadow-md border"
+        class="flex items-center justify-between gap-6 w-full bg-white px-3 py-4 rounded-tr-lg rounded-tl-lg shadow-md border"
       >
         <!-- Home Button -->
         <button

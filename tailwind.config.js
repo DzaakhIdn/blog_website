@@ -5,7 +5,7 @@ module.exports = {
     'node_modules/preline/dist/*.js'
   ],
   theme: {
-    extend: {},
+    extend: {}
   },
   plugins: [
     require('daisyui'),

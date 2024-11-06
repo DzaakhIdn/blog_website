@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Poppins-Regular', sans-serif;
+    src: url(../../assets/font/Poppins/Poppins-Regular.ttf);
+}
+
 @layer components {
     .top_mobile_container{
         @apply flex gap-2 md:flex-col
@@ -28,9 +33,12 @@
         @apply hidden lg:flex items-center justify-between px-4 py-2 bg-gray-300 rounded-md
     }
     .nav_lg{
-        @apply lg:flex lg:justify-between lg:items-center
+        @apply lg:flex lg:justify-between lg:items-center shadow-md p-5 md:px-10 border
     }
     .btn_control{
         @apply w-10 h-10 bg-slate-300 grid place-items-center p-3 rounded-lg
+    }
+    .judul{
+        @apply bg-slate-200/50 w-auto px-3 py-7 rounded-md absolute bottom-5 left-5 right-5
     }
 }
