@@ -18,6 +18,12 @@
 .carrousel_post .slick-slide {
     margin: 0 10px;
 }
+.large_tags .slick-slide {
+    margin: 0 10px;
+}
+.large_tags{
+    display: none;
+}
 .slick-dots{
     position: absolute;
     bottom: 50px;
@@ -48,6 +54,32 @@ slick-dots li.slick-active button:before {
 .judul{
     translate: (-50%, -50%);
 }
+.disable{
+    color: #c6ced8;
+    cursor: not-allowed;
+}
+.card_tags {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important; 
+}
 
- 
+
+/* @media (min-width: 425px) {
+    #next_tags,
+    #prev_tags,
+    .penutup_kanan,
+    .penutup_kiri{
+        display: none;
+    }
+} */
+
+ @media (min-width: 1024px) {
+    .large_tags{
+        display: flex;
+    }
+    .card_tags{
+        display: none !important;
+    }
+ }
 
