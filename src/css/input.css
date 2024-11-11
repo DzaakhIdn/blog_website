@@ -44,4 +44,10 @@
     .tags{
         @apply border border-cyan-800 text-slate-100 font-semibold py-2 px-3 rounded-md
     }
+    .popular_tag{
+        @apply border rounded-md py-4 px-3 flex justify-between items-center
+    }
+    .card_category{
+        @apply shadow-sm hover:shadow-lg bg-white rounded-md flex items-center gap-3 overflow-hidden cursor-pointer relative h-24
+    }
 }
