@@ -26,15 +26,248 @@
   <body>
     <nav id="navbar" class="nav_lg"></nav>
     <div class="breadcrumbs text-sm px-5 lg:px-8 mt-5">
-        <ul>
-          <li><a>Home</a></li>
-          <li class="text-slate-400">About Us</li>
-        </ul>
+      <ul>
+        <li><a>Home</a></li>
+        <li class="text-slate-400">About Us</li>
+      </ul>
     </div>
 
-    <header>
-        
+    <header class="px-5 lg:px-8 py-5">
+      <div class="about_me rounded-lg p-2">
+        <div class="about_profile bg-slate-100 flex md:p-3 md:flex-col gap-2">
+          <div
+            class="about_me_img w-[90px] h-[90px] md:w-full md:h-[250px] rounded-lg overflow-hidden"
+          >
+            <img
+              src="../../assets/card_img/card_header-1.jpg"
+              class="w-full h-full object-cover"
+              alt="About Me"
+            />
+          </div>
+          <div class="about_profile_text flex flex-col gap-2 md:p-3 justify-between">
+            <p
+              class="text-2xl md:text-3xl font-bold text-slate-700 self-start w-1/2 md:w-96 leading-4 mt-2"
+              style="font-family: 'Raleway', sans-serif"
+            >
+              Abdurrahman Dzakiy
+            </p>
+            <div class="about_social flex gap-2 items-center mb-2">
+              <p class="text-sm text-slate-500">Programer</p>
+            </div>
+          </div>
+        </div>
+        <p class="text-sm text-slate-500 mt-5">
+          Saya adalah Desainer UI/UX dari Klaten, Indonesia, yang sedang
+          menempuh sekolah SMA TI HSI-IDN. Saya senang mengubah masalah yang
+          rumit menjadi desain yang sederhana, indah dan intuitif. Tugas saya
+          adalah membangun situs web Anda sehingga fungsional dan ramah pengguna
+          tetapi pada saat yang sama menarik. Selain itu, saya menambahkan
+          sentuhan pribadi pada produk Anda dan memastikannya menarik dan mudah
+          digunakan. Tujuan saya adalah menyampaikan pesan dan identitas Anda
+          dengan cara yang paling kreatif. Saya membuat desain web untuk banyak
+          perusahaan merek terkenal.
+        </p>
+      </div>
     </header>
+
+    <section class="time flex justify-center items-center gap-5 px-5 lg:px-8 py-5">
+
+        <!-- Timeline -->
+        <div>
+          <!-- Item -->
+          <div class="flex gap-x-3">
+            <!-- Left Content -->
+            <div class="w-16 text-end">
+              <span class="text-xs text-gray-500">12:05PM</span>
+            </div>
+            <!-- End Left Content -->
+
+            <!-- Icon -->
+            <div
+              class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200"
+            >
+              <div
+                class="relative z-10 size-7 flex justify-center items-center"
+              >
+                <div class="size-2 rounded-full bg-gray-400"></div>
+              </div>
+            </div>
+            <!-- End Icon -->
+
+            <!-- Right Content -->
+            <div class="grow pt-0.5 pb-8">
+              <h3 class="flex gap-x-1.5 font-semibold text-gray-800">
+                <svg
+                  class="shrink-0 size-4 mt-1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+                  ></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" x2="8" y1="13" y2="13"></line>
+                  <line x1="16" x2="8" y1="17" y2="17"></line>
+                  <line x1="10" x2="8" y1="9" y2="9"></line>
+                </svg>
+                Created "Preline in React" task
+              </h3>
+              <p class="mt-1 text-sm text-gray-600">
+                Find more detailed insctructions here.
+              </p>
+              <button
+                type="button"
+                class="mt-1 -ms-1 p-1 inline-flex items-center gap-x-2 text-xs rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
+              >
+                <img
+                  class="shrink-0 size-4 rounded-full"
+                  src="https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8auto=format&fit=facearea&facepad=3&w=320&h=320&q=80"
+                  alt="Avatar"
+                />
+                James Collins
+              </button>
+            </div>
+            <!-- End Right Content -->
+          </div>
+          <!-- End Item -->
+
+          <!-- Item -->
+          <div class="flex gap-x-3">
+            <!-- Left Content -->
+            <div class="w-16 text-end">
+              <span class="text-xs text-gray-500">12:05PM</span>
+            </div>
+            <!-- End Left Content -->
+
+            <!-- Icon -->
+            <div
+              class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200"
+            >
+              <div
+                class="relative z-10 size-7 flex justify-center items-center"
+              >
+                <div class="size-2 rounded-full bg-gray-400"></div>
+              </div>
+            </div>
+            <!-- End Icon -->
+
+            <!-- Right Content -->
+            <div class="grow pt-0.5 pb-8">
+              <h3 class="flex gap-x-1.5 font-semibold text-gray-800">
+                Release v5.2.0 quick bug fix 🐞
+              </h3>
+              <button
+                type="button"
+                class="mt-1 -ms-1 p-1 inline-flex items-center gap-x-2 text-xs rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
+              >
+                <span
+                  class="flex shrink-0 justify-center items-center size-4 bg-white border border-gray-200 text-[10px] font-semibold uppercase text-gray-600 rounded-full"
+                >
+                  A
+                </span>
+                Alex Gregarov
+              </button>
+            </div>
+            <!-- End Right Content -->
+          </div>
+          <!-- End Item -->
+
+          <!-- Item -->
+          <div class="flex gap-x-3">
+            <!-- Left Content -->
+            <div class="w-16 text-end">
+              <span class="text-xs text-gray-500">12:05PM</span>
+            </div>
+            <!-- End Left Content -->
+
+            <!-- Icon -->
+            <div
+              class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200"
+            >
+              <div
+                class="relative z-10 size-7 flex justify-center items-center"
+              >
+                <div class="size-2 rounded-full bg-gray-400"></div>
+              </div>
+            </div>
+            <!-- End Icon -->
+
+            <!-- Right Content -->
+            <div class="grow pt-0.5 pb-8">
+              <h3 class="flex gap-x-1.5 font-semibold text-gray-800">
+                Marked "Install Charts" completed
+              </h3>
+              <p class="mt-1 text-sm text-gray-600">
+                Finally! You can check it out here.
+              </p>
+              <button
+                type="button"
+                class="mt-1 -ms-1 p-1 inline-flex items-center gap-x-2 text-xs rounded-lg border border-transparent text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
+              >
+                <img
+                  class="shrink-0 size-4 rounded-full"
+                  src="https://images.unsplash.com/photo-1659482633369-9fe69af50bfb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80"
+                  alt="Avatar"
+                />
+                James Collins
+              </button>
+            </div>
+            <!-- End Right Content -->
+          </div>
+          <!-- End Item -->
+
+          <!-- Item -->
+          <div class="flex gap-x-3">
+            <!-- Left Content -->
+            <div class="w-16 text-end">
+              <span class="text-xs text-gray-500">12:05PM</span>
+            </div>
+            <!-- End Left Content -->
+
+            <!-- Icon -->
+            <div
+              class="relative last:after:hidden after:absolute after:top-7 after:bottom-0 after:start-3.5 after:w-px after:-translate-x-[0.5px] after:bg-gray-200"
+            >
+              <div
+                class="relative z-10 size-7 flex justify-center items-center"
+              >
+                <div class="size-2 rounded-full bg-gray-400"></div>
+              </div>
+            </div>
+            <!-- End Icon -->
+
+            <!-- Right Content -->
+            <div class="grow pt-0.5 pb-8">
+              <h3 class="flex gap-x-1.5 font-semibold text-gray-800">
+                Take a break ⛳️
+              </h3>
+              <p class="mt-1 text-sm text-gray-600">Just chill for now... 😉</p>
+            </div>
+            <!-- End Right Content -->
+          </div>
+          <!-- End Item -->
+      </div>
+      <!-- End Timeline -->
+
+      <div class="map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.8018452284864!2d110.02029647420521!3d-7.704401676309689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aeb7f94f3e959%3A0x3bf58e4a48b40609!2sSMA%20TI%20HSI-IDN%20Purworejo!5e0!3m2!1sid!2sid!4v1731911249481!5m2!1sid!2sid"
+          width="100%"
+          height="400"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </section>
 
     <footer id="mobile_navigation" class="mobile_navigation"></footer>
     <!-- Tab and Large Footer -->

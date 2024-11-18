@@ -49,8 +49,6 @@ export function renderNavigation(selector) {
     // Menambahkan logika pemilihan untuk setiap tombol
     document.addEventListener("DOMContentLoaded", () => {
         const buttons = document.querySelectorAll(".nav-button");
-        
-        console.log("Current path:", window.location.pathname);
 
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
