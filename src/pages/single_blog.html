@@ -406,8 +406,77 @@
           </div>
         </div>
       </aside>
+      <div class="author_mobile space-y-3 mt-5 lg:hidden">
+        <div class="tags rounded-lg p-3">
+          <p class="font-semibold text-slate-700 text-base">Related Tags</p>
+          <div class="tags_container flex gap-2 flex-wrap">
+            <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
+              Adventure
+            </p>
+            <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
+              Mountains
+            </p>
+            <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
+              Traveling
+            </p>
+            <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
+              World
+            </p>
+          </div>
+        </div>
+        <div class="action flex gap-2 justify-between items-center">
+          <button
+            id="btn_share"
+            class="w-full flex gap-2 items-center justify-center bg-slate-200 rounded-xl py-3 px-3"
+          >
+            <i class="fa-regular fa-paper-plane text-slate-500"></i>
+            <p class="text-slate-500">Share</p>
+          </button>
+          <button
+            id="btn_comments"
+            class="w-full flex gap-2 items-center justify-center bg-slate-200 rounded-xl py-3 px-3"
+          >
+            <i class="fa-regular fa-comment-dots text-slate-500"></i>
+            <p class="text-slate-500">Comment</p>
+          </button>
+          <button
+            id="btn_mark"
+            class="w-full flex gap-2 items-center justify-center bg-slate-200 rounded-xl py-3 px-3"
+          >
+            <i class="fa-regular fa-bookmark text-slate-500"></i>
+            <p class="text-slate-500">Marked</p>
+          </button>
+        </div>
+      <div class="profile">
+        <div
+          class="profile_author flex w-full justify-between rounded-lg bg-slate-100 p-3"
+        >
+          <div class="profile flex gap-3">
+            <div
+              class="profile_author_img rounded-md w-[87px] h-[87px] bg-cover bg-center overflow-hidden"
+            >
+              <img
+                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                alt="Profile Author"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="flex flex-col gap-3">
+              <p class="font-semibold text-slate-700 text-lg">Bang Boo</p>
+              <div
+                id="btn_follow"
+                class="bg-[#F81539]/75 rounded-lg px-3 py-1 flex gap-2 items-center"
+              >
+                <i class="ph-bold ph-plus text-white text-[16px]"></i>
+                <p class="text-white text-[16px]">follow</p>
+              </div>
+            </div>
+          </div>
+          <p class="text-slate-500 text-[14px] self-start">12 posts</p>
+        </div>
+      </div>
+      </div>
     </main>
-
     <!-- Comments -->
     <section class="comments px-5 mt-7 lg:hidden ">
       <div class="comments_container">
@@ -494,11 +563,11 @@
         </form>
         <div class="md:flex md:items-start justify-between gap-5">
           <div class="rate bg-slate-100 rounded-lg p-3 w-full lg:w-2/3">
-            <div class="flex justify-between items-center">
-              <p class="font-semibold text-slate-700 text-lg md:text-xl">
+            <div class="flex flex-col lg:flex-row justify-between items-center">
+              <p class="font-semibold self-start lg:self-center text-slate-700 text-lg md:text-xl">
                 Rate this post
               </p>
-              <div class="rate_container flex justify-between items-center gap-3">
+              <div class="rate_container self-start lg:self-center flex justify-between items-center gap-3">
                 <button
                   class="rating-btn flex items-center space-x-2 text-[#FC5C65] rounded-lg px-3 py-2 transition-all"
                   data-rating="Bad"
