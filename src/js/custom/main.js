@@ -49,7 +49,6 @@ $(document).ready(function(){
         prevArrow: '#prev_tags',
         nextArrow: '#next_tags'
     });
-
     function checkArrow(currentSlides, totalSlides){
         if(currentSlides == 0){
             $('#prev_tags').prop('disabled', true).addClass('hidden')
@@ -82,4 +81,5 @@ $(document).ready(function(){
         $('.carrousel_post').slick('slickPrev')
     })
 })
+
 

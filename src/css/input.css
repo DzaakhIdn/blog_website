@@ -50,4 +50,7 @@
     .card_category{
         @apply shadow-sm hover:shadow-lg bg-white rounded-md flex items-center gap-3 overflow-hidden cursor-pointer relative h-24
     }
+    .rate_btn{
+        @apply w-auto h-10 p-2 flex items-center gap-2
+    }
 }

@@ -81,5 +81,14 @@ slick-dots li.slick-active button:before {
     .card_tags{
         display: none !important;
     }
+    .right_footer{
+        flex-direction: column;
+    }
+ }
+
+ @media (min-width: 1440px) {
+    .right_footer{
+        flex-direction: row;
+    }
  }
 
