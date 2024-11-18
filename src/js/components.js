@@ -49,6 +49,8 @@ export function renderNavigation(selector) {
     // Menambahkan logika pemilihan untuk setiap tombol
     document.addEventListener("DOMContentLoaded", () => {
         const buttons = document.querySelectorAll(".nav-button");
+        
+        console.log("Current path:", window.location.pathname);
 
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
@@ -60,6 +62,22 @@ export function renderNavigation(selector) {
                 button.querySelector("span").classList.remove("hidden");
             });
         });
+        
+        const grayScalePages = [
+            "/src/pages/about-us.html",
+            "/src/pages/single_blog.html",
+            "/src/pages/about_author.html"
+        ];
+        
+
+        console.log("Is grayscale page:", grayScalePages.includes(window.location.pathname));
+        
+        if(grayScalePages.includes(window.location.pathname)){
+            buttons.forEach((btn) => {
+                btn.classList.add("grayscale");
+                btn.classList.add("opacity-50");
+            });
+        }
     });
 }
 

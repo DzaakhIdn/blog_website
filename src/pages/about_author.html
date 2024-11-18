@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About</title>
+    <title>About Author</title>
     <!-- CSS -->
     <link rel="stylesheet" href="../css/output.css" />
     <link rel="stylesheet" href="../assets/slick/slick.css" type="text/css" />
@@ -26,15 +26,20 @@
   <body>
     <!-- Navbar -->
     <nav id="navbar" class="nav_lg"></nav>
-    <div class="breadcrumbs text-sm px-5 lg:px-8 mt-5">
+    <div class="breadcrumbs text-sm px-5 lg:px-10 mt-5">
         <ul>
-        <li><a>Home</a></li>
+        <li><a href="./index.html">Home</a></li>
+        <li><a>Everest Bagus Banget Bjir</a></li>
         <li class="text-slate-400">Writer</li>
       </ul>
     </div>
 
-    <header class="px-5 lg:px-8 mt-5">
-      <div class="flex bg-slate-100 rounded-xl p-3 gap-5">
+    <header class="px-5 lg:px-10 mt-5">
+      <div class="flex flex-col bg-slate-100 rounded-xl p-3 gap-5">
+        <!-- Profile -->
+        <div class="profile_banner hidden md:block">
+          <img src="../../assets/card_img/category_4.jpg" alt="author" class="w-full h-[200px] object-cover rounded-xl" />
+        </div>
         <div class="profile flex w-full gap-3">
           <div class="profile_img min-w-[75px]">
             <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="author" class="w-[75px] h-[75px] object-cover rounded-lg" />
@@ -66,196 +71,235 @@
       </div>
     </header>
 
-    <section class="px-5 lg:px-8 mt-5">
+    <section class="px-5 lg:px-10 mt-5">
       <p class="text-lg  font-semibold text-slate-700">Lastest Posts</p>
-      <div class="posts_container">
+      <div class="posts_container grid grid-cols-1 lg:grid-cols-4 gap-5">
+        <!-- Card Post -->
         <div
-          class="card_post bg-white p-3 shadow-md flex flex-col rounded-md border mt-3 mb-3 hover:shadow-lg hover:cursor-pointer"
+          class="card_post bg-white p-3 shadow-md flex flex-col md:flex-row lg:flex-col rounded-md border hover:shadow-lg hover:cursor-pointer"
         >
-          <div class="img_card w-full h-[186px] rounded-md mb-2">
+          <div class="img_card w-full md:w-1/3 lg:w-full h-[186px] rounded-md mb-2 md:mb-0 lg:mb-2">
             <img src="../../assets/card_img/category_4.jpg" alt="" class="rounded-md w-full h-full object-cover" />
           </div>
-          <div class="card_title mb-2">
-            <p class="font-bold text-lg text-slate-800">
-              Everest Bagus Banget Bjir
-            </p>
-            <p class="text-slate-500 text-[14px]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
-              non.
-            </p>
-          </div>
-          <div
-            class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2"
-          >
-            <div class="avatar_info flex w-full items-center gap-2">
-              <div class="avatar">
-                <div class="w-10 rounded-lg">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt="Tailwind-CSS-Avatar-component"
-                  />
+          <div class="card_content flex flex-col w-full md:w-2/3 lg:w-full justify-between md:pl-4 lg:pl-0">
+            <div class="card_title mb-2">
+              <p class="font-bold text-lg text-slate-800">
+                Everest Bagus Banget Bjir
+              </p>
+              <p class="text-slate-500 text-[14px]">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
+                non.
+              </p>
+            </div>
+            <div class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2">
+              <div class="avatar_info flex w-full items-center gap-2">
+                <div class="avatar">
+                  <div class="w-10 rounded-lg">
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                      alt="Tailwind-CSS-Avatar-component"
+                    />
+                  </div>
+                </div>
+                <div class="header">
+                  <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
+                  <p class="text-[12px] text-slate-700">July 14, 2024</p>
                 </div>
               </div>
-              <div class="header">
-                <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
-                <p class="text-[12px] text-slate-700">July 14, 2024</p>
+              <div class="save_icon w-10 h-10 grid place-items-center">
+                <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
               </div>
-            </div>
-            <div class="save_icon w-10 h-10 grid place-items-center">
-              <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
             </div>
           </div>
         </div>
         <div
-          class="card_post bg-white p-3 shadow-md flex flex-col rounded-md border mt-3 mb-3 hover:shadow-lg hover:cursor-pointer"
+          class="card_post bg-white p-3 shadow-md flex flex-col md:flex-row lg:flex-col rounded-md border hover:shadow-lg hover:cursor-pointer"
         >
-          <div class="img_card w-full h-[186px] rounded-md mb-2">
+          <div class="img_card w-full md:w-1/3 lg:w-full h-[186px] rounded-md mb-2 md:mb-0 lg:mb-2">
             <img src="../../assets/card_img/category_4.jpg" alt="" class="rounded-md w-full h-full object-cover" />
           </div>
-          <div class="card_title mb-2">
-            <p class="font-bold text-lg text-slate-800">
-              Everest Bagus Banget Bjir
-            </p>
-            <p class="text-slate-500 text-[14px]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
-              non.
-            </p>
-          </div>
-          <div
-            class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2"
-          >
-            <div class="avatar_info flex w-full items-center gap-2">
-              <div class="avatar">
-                <div class="w-10 rounded-lg">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt="Tailwind-CSS-Avatar-component"
-                  />
+          <div class="card_content flex flex-col w-full md:w-2/3 lg:w-full justify-between md:pl-4 lg:pl-0">
+            <div class="card_title mb-2">
+              <p class="font-bold text-lg text-slate-800">
+                Everest Bagus Banget Bjir
+              </p>
+              <p class="text-slate-500 text-[14px]">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
+                non.
+              </p>
+            </div>
+            <div class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2">
+              <div class="avatar_info flex w-full items-center gap-2">
+                <div class="avatar">
+                  <div class="w-10 rounded-lg">
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                      alt="Tailwind-CSS-Avatar-component"
+                    />
+                  </div>
+                </div>
+                <div class="header">
+                  <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
+                  <p class="text-[12px] text-slate-700">July 14, 2024</p>
                 </div>
               </div>
-              <div class="header">
-                <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
-                <p class="text-[12px] text-slate-700">July 14, 2024</p>
+              <div class="save_icon w-10 h-10 grid place-items-center">
+                <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
               </div>
-            </div>
-            <div class="save_icon w-10 h-10 grid place-items-center">
-              <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
             </div>
           </div>
         </div>
         <div
-          class="card_post bg-white p-3 shadow-md flex flex-col rounded-md border mt-3 mb-3 hover:shadow-lg hover:cursor-pointer"
+          class="card_post bg-white p-3 shadow-md flex flex-col md:flex-row lg:flex-col rounded-md border hover:shadow-lg hover:cursor-pointer"
         >
-          <div class="img_card w-full h-[186px] rounded-md mb-2">
+          <div class="img_card w-full md:w-1/3 lg:w-full h-[186px] rounded-md mb-2 md:mb-0 lg:mb-2">
             <img src="../../assets/card_img/category_4.jpg" alt="" class="rounded-md w-full h-full object-cover" />
           </div>
-          <div class="card_title mb-2">
-            <p class="font-bold text-lg text-slate-800">
-              Everest Bagus Banget Bjir
-            </p>
-            <p class="text-slate-500 text-[14px]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
-              non.
-            </p>
-          </div>
-          <div
-            class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2"
-          >
-            <div class="avatar_info flex w-full items-center gap-2">
-              <div class="avatar">
-                <div class="w-10 rounded-lg">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt="Tailwind-CSS-Avatar-component"
-                  />
+          <div class="card_content flex flex-col w-full md:w-2/3 lg:w-full justify-between md:pl-4 lg:pl-0">
+            <div class="card_title mb-2">
+              <p class="font-bold text-lg text-slate-800">
+                Everest Bagus Banget Bjir
+              </p>
+              <p class="text-slate-500 text-[14px]">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
+                non.
+              </p>
+            </div>
+            <div class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2">
+              <div class="avatar_info flex w-full items-center gap-2">
+                <div class="avatar">
+                  <div class="w-10 rounded-lg">
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                      alt="Tailwind-CSS-Avatar-component"
+                    />
+                  </div>
+                </div>
+                <div class="header">
+                  <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
+                  <p class="text-[12px] text-slate-700">July 14, 2024</p>
                 </div>
               </div>
-              <div class="header">
-                <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
-                <p class="text-[12px] text-slate-700">July 14, 2024</p>
+              <div class="save_icon w-10 h-10 grid place-items-center">
+                <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
               </div>
-            </div>
-            <div class="save_icon w-10 h-10 grid place-items-center">
-              <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
             </div>
           </div>
         </div>
         <div
-          class="card_post bg-white p-3 shadow-md flex flex-col rounded-md border mt-3 mb-3 hover:shadow-lg hover:cursor-pointer"
+          class="card_post bg-white p-3 shadow-md flex flex-col md:flex-row lg:flex-col rounded-md border hover:shadow-lg hover:cursor-pointer"
         >
-          <div class="img_card w-full h-[186px] rounded-md mb-2">
+          <div class="img_card w-full md:w-1/3 lg:w-full h-[186px] rounded-md mb-2 md:mb-0 lg:mb-2">
             <img src="../../assets/card_img/category_4.jpg" alt="" class="rounded-md w-full h-full object-cover" />
           </div>
-          <div class="card_title mb-2">
-            <p class="font-bold text-lg text-slate-800">
-              Everest Bagus Banget Bjir
-            </p>
-            <p class="text-slate-500 text-[14px]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
-              non.
-            </p>
-          </div>
-          <div
-            class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2"
-          >
-            <div class="avatar_info flex w-full items-center gap-2">
-              <div class="avatar">
-                <div class="w-10 rounded-lg">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt="Tailwind-CSS-Avatar-component"
-                  />
+          <div class="card_content flex flex-col w-full md:w-2/3 lg:w-full justify-between md:pl-4 lg:pl-0">
+            <div class="card_title mb-2">
+              <p class="font-bold text-lg text-slate-800">
+                Everest Bagus Banget Bjir
+              </p>
+              <p class="text-slate-500 text-[14px]">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
+                non.
+              </p>
+            </div>
+            <div class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2">
+              <div class="avatar_info flex w-full items-center gap-2">
+                <div class="avatar">
+                  <div class="w-10 rounded-lg">
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                      alt="Tailwind-CSS-Avatar-component"
+                    />
+                  </div>
+                </div>
+                <div class="header">
+                  <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
+                  <p class="text-[12px] text-slate-700">July 14, 2024</p>
                 </div>
               </div>
-              <div class="header">
-                <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
-                <p class="text-[12px] text-slate-700">July 14, 2024</p>
+              <div class="save_icon w-10 h-10 grid place-items-center">
+                <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
               </div>
-            </div>
-            <div class="save_icon w-10 h-10 grid place-items-center">
-              <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
             </div>
           </div>
         </div>
         <div
-          class="card_post bg-white p-3 shadow-md flex flex-col rounded-md border mt-3 mb-3 hover:shadow-lg hover:cursor-pointer"
+          class="card_post bg-white p-3 shadow-md flex flex-col md:flex-row lg:flex-col rounded-md border hover:shadow-lg hover:cursor-pointer"
         >
-          <div class="img_card w-full h-[186px] rounded-md mb-2">
+          <div class="img_card w-full md:w-1/3 lg:w-full h-[186px] rounded-md mb-2 md:mb-0 lg:mb-2">
             <img src="../../assets/card_img/category_4.jpg" alt="" class="rounded-md w-full h-full object-cover" />
           </div>
-          <div class="card_title mb-2">
-            <p class="font-bold text-lg text-slate-800">
-              Everest Bagus Banget Bjir
-            </p>
-            <p class="text-slate-500 text-[14px]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
-              non.
-            </p>
-          </div>
-          <div
-            class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2"
-          >
-            <div class="avatar_info flex w-full items-center gap-2">
-              <div class="avatar">
-                <div class="w-10 rounded-lg">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt="Tailwind-CSS-Avatar-component"
-                  />
+          <div class="card_content flex flex-col w-full md:w-2/3 lg:w-full justify-between md:pl-4 lg:pl-0">
+            <div class="card_title mb-2">
+              <p class="font-bold text-lg text-slate-800">
+                Everest Bagus Banget Bjir
+              </p>
+              <p class="text-slate-500 text-[14px]">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
+                non.
+              </p>
+            </div>
+            <div class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2">
+              <div class="avatar_info flex w-full items-center gap-2">
+                <div class="avatar">
+                  <div class="w-10 rounded-lg">
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                      alt="Tailwind-CSS-Avatar-component"
+                    />
+                  </div>
+                </div>
+                <div class="header">
+                  <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
+                  <p class="text-[12px] text-slate-700">July 14, 2024</p>
                 </div>
               </div>
-              <div class="header">
-                <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
-                <p class="text-[12px] text-slate-700">July 14, 2024</p>
+              <div class="save_icon w-10 h-10 grid place-items-center">
+                <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
               </div>
             </div>
-            <div class="save_icon w-10 h-10 grid place-items-center">
-              <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
+          </div>
+        </div>
+        <div
+          class="card_post bg-white p-3 shadow-md flex flex-col md:flex-row lg:flex-col rounded-md border hover:shadow-lg hover:cursor-pointer"
+        >
+          <div class="img_card w-full md:w-1/3 lg:w-full h-[186px] rounded-md mb-2 md:mb-0 lg:mb-2">
+            <img src="../../assets/card_img/category_4.jpg" alt="" class="rounded-md w-full h-full object-cover" />
+          </div>
+          <div class="card_content flex flex-col w-full md:w-2/3 lg:w-full justify-between md:pl-4 lg:pl-0">
+            <div class="card_title mb-2">
+              <p class="font-bold text-lg text-slate-800">
+                Everest Bagus Banget Bjir
+              </p>
+              <p class="text-slate-500 text-[14px]">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
+                non.
+              </p>
+            </div>
+            <div class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2">
+              <div class="avatar_info flex w-full items-center gap-2">
+                <div class="avatar">
+                  <div class="w-10 rounded-lg">
+                    <img
+                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                      alt="Tailwind-CSS-Avatar-component"
+                    />
+                  </div>
+                </div>
+                <div class="header">
+                  <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
+                  <p class="text-[12px] text-slate-700">July 14, 2024</p>
+                </div>
+              </div>
+              <div class="save_icon w-10 h-10 grid place-items-center">
+                <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Pagination -->
       <div class="flex items-center gap-x-1 mt-5" aria-label="Pagination">
         <button type="button" class="min-h-[38px] min-w-[38px] py-2 px-2.5 inline-flex jusify-center items-center gap-x-2 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10" aria-label="Previous">
           <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

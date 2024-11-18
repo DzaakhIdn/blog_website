@@ -37,7 +37,7 @@
     <!-- Main Content -->
     <main class="main_content px-5 lg:px-8 mt-5 lg:flex lg:gap-7 ">
       <div class="main_content_container flex flex-col gap-5 lg:max-w-[70%]">
-        <h1 class="text-2xl lg:text-4xl text-slate-700 font-bold">
+        <h1 class="text-2xl lg:text-4xl text-slate-700 font-bold" style="font-family: 'Raleway';"> 
           Everest Bagus Banget Bjir <br>
           <span class="text-slate-500">Kalian Harus Kesana Sih</span>
         </h1>
@@ -295,7 +295,7 @@
             >
               <div class="profile flex gap-3">
                 <div
-                  class="profile_author_img rounded-md w-[87px] h-[87px] bg-cover bg-center overflow-hidden"
+                  class="profile_author_img hover:cursor-pointer  rounded-md w-[87px] h-[87px] bg-cover bg-center overflow-hidden"
                 >
                   <img
                     src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
@@ -304,7 +304,7 @@
                   />
                 </div>
                 <div class="flex flex-col gap-3">
-                  <p class="font-semibold text-slate-700 text-lg">Bang Boo</p>
+                  <a href="./about_author.html" class="font-semibold text-slate-700 text-lg">Bang Boo</a>
                   <div
                     id="btn_follow"
                     class="bg-[#F81539]/75 rounded-lg px-3 py-1 flex gap-2 items-center"
@@ -453,7 +453,7 @@
         >
           <div class="profile flex gap-3">
             <div
-              class="profile_author_img rounded-md w-[87px] h-[87px] bg-cover bg-center overflow-hidden"
+              class="profile_author_img hover:cursor-pointer rounded-md w-[87px] h-[87px] bg-cover bg-center overflow-hidden"
             >
               <img
                 src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
@@ -462,7 +462,7 @@
               />
             </div>
             <div class="flex flex-col gap-3">
-              <p class="font-semibold text-slate-700 text-lg">Bang Boo</p>
+              <a href="./about_author.html" class="font-semibold text-slate-700 text-lg">Bang Boo</a>
               <div
                 id="btn_follow"
                 class="bg-[#F81539]/75 rounded-lg px-3 py-1 flex gap-2 items-center"
@@ -875,6 +875,14 @@
               },
             },
           ],
+        });
+      });
+
+      const profileAuthor = document.querySelectorAll(".profile_author_img");
+
+      profileAuthor.forEach((author) => {
+        author.addEventListener("click", () => {
+          window.location.href = "./about_author.html";
         });
       });
     </script>
