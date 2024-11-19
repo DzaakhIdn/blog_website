@@ -1,77 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rating Component</title>
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-crossorigin="anonymous"
-referrerpolicy="no-referrer"
-/>
-<script defer src="main.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Component</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 </head>
 <body class="flex items-center justify-center h-screen bg-gray-100">
-    <div id="rating-component" class="flex flex-col items-center p-6 bg-white shadow-md rounded-lg space-y-4">
-        <span class="text-gray-700 font-semibold">Rate The Usefulness Of The Article</span>
-        <div id="rating-icons" class="flex space-x-4">
-            <!-- Tombol Rating -->
-            <button class="rating-btn flex items-center space-x-2 text-red-500 border rounded-lg px-4 py-2 transition-all" data-rating="Bad" data-color="bg-red-100">
-                <i class="fa-regular fa-face-angry text-2xl"></i>
-                <span class="rating-label hidden">Bad</span>
-            </button>
-            <button class="rating-btn flex items-center space-x-2 text-yellow-500 border rounded-lg px-4 py-2 transition-all" data-rating="Not Good" data-color="bg-yellow-100">
-                <i class="fa-regular fa-face-meh text-2xl"></i>
-                <span class="rating-label hidden">meh</span>
-            </button>
-            <button class="rating-btn flex items-center space-x-2 text-yellow-400 border rounded-lg px-4 py-2 transition-all" data-rating="Neutral" data-color="bg-yellow-50">
-                <i class="fa-regular fa-face-laugh text-2xl"></i>
-                <span class="rating-label hidden">Neutral</span>
-            </button>
-            <button class="rating-btn flex items-center space-x-2 text-blue-500 border rounded-lg px-4 py-2 transition-all" data-rating="Good" data-color="bg-blue-100">
-                <i class="fa-regular fa-face-grin-hearts text-2xl"></i>
-                <span class="rating-label hidden">Good</span>
-            </button>
-            <button class="rating-btn flex items-center space-x-2 text-green-500 border rounded-lg px-4 py-2 transition-all" data-rating="Excellent" data-color="bg-green-100">
-                <i class="fa-regular fa-face-grin-stars text-2xl"></i>
-                <span class="rating-label hidden">Excellent</span>
-            </button>
+
+    <!-- File Upload Component -->
+    <div class="w-64 p-4 bg-white border-2 border-dashed border-gray-300 rounded-lg shadow-md text-center">
+        <!-- Folder Icon -->
+        <div class="flex justify-center text-gray-500 mb-3">
+            <i class="fas fa-folder fa-5x"></i>
         </div>
+
+        <!-- Select Button -->
+        <label for="file-upload" class="block">
+            <div class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md cursor-pointer hover:bg-gray-300">
+                <i class="fas fa-plus mr-2"></i>Select
+            </div>
+        </label>
+
+        <!-- Hidden Input -->
+        <input id="file-upload" type="file" class="hidden" />
+
+        <!-- Text -->
+        <p class="mt-2 text-sm text-gray-500">No file selected</p>
     </div>
     <script>
-        // Ambil semua tombol rating
-const ratingButtons = document.querySelectorAll(".rating-btn");
-
-// Event listener untuk setiap tombol
-ratingButtons.forEach(button => {
-    const ratingLabel = button.querySelector(".rating-label");
-
-    // Saat tombol diklik
-    button.addEventListener("click", () => {
-        // Reset semua tombol ke keadaan default
-        ratingButtons.forEach(btn => {
-            const label = btn.querySelector(".rating-label");
-            const colorClass = btn.getAttribute("data-color");
-
-            // Hapus styling aktif
-            btn.classList.remove(colorClass, "text-white");
-            btn.classList.add("text-gray-700", "border");
-            btn.classList.remove("px-6", "py-3"); // Reset padding
-
-            // Sembunyikan label
-            label.classList.add("hidden");
-        });
-
-        // Tampilkan label dan tambahkan styling aktif pada tombol yang diklik
-        const bgColorClass = button.getAttribute("data-color");
-        ratingLabel.classList.remove("hidden"); // Tampilkan label
-        button.classList.add(bgColorClass, "text-white", "px-6", "py-3");
-        button.classList.remove("text-gray-700", "border");
-    });
-});
-    </script>
+      const fileInput = document.getElementById('file-upload');
+      const placeholderText = document.querySelector('.mt-2');
+  
+      fileInput.addEventListener('change', function () {
+          if (fileInput.files.length > 0) {
+              placeholderText.textContent = fileInput.files[0].name;
+          } else {
+              placeholderText.textContent = 'No file selected';
+          }
+      });
+  </script>  
 </body>
 </html>

@@ -70,12 +70,11 @@
       </div>
     </header>
 
-    <section class="time flex justify-center items-center gap-5 px-5 lg:px-8 py-5">
-
-        <!-- Timeline -->
-        <div>
-          <!-- Item -->
-          <div class="flex gap-x-3">
+    <section class="time flex flex-col md:flex-row justify-center lg:justify-between items-center gap-5 px-5 lg:px-8 py-5">
+      <!-- Timeline -->
+      <div>
+        <!-- Item -->
+        <div class="flex gap-x-3">
             <!-- Left Content -->
             <div class="w-16 text-end">
               <span class="text-xs text-gray-500">12:05PM</span>
@@ -133,10 +132,7 @@
                 />
                 James Collins
               </button>
-            </div>
-            <!-- End Right Content -->
-          </div>
-          <!-- End Item -->
+            </div>#
 
           <!-- Item -->
           <div class="flex gap-x-3">
@@ -256,16 +252,67 @@
       </div>
       <!-- End Timeline -->
 
-      <div class="map">
+      <div class="map rounded-lg overflow-hidden shadow-lg border-2 border-slate-100 hover:border-slate-200 transition-all duration-300 hover:shadow-xl md:rounded-none md:rounded-tr-lg md:rounded-br-lg">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.8018452284864!2d110.02029647420521!3d-7.704401676309689!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aeb7f94f3e959%3A0x3bf58e4a48b40609!2sSMA%20TI%20HSI-IDN%20Purworejo!5e0!3m2!1sid!2sid!4v1731911249481!5m2!1sid!2sid"
           width="100%"
           height="400"
+          class="grayscale hover:grayscale-0 transition-all duration-500"
           style="border: 0"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
         ></iframe>
+      </div>
+    </section>
+
+    <section class="sosmed flex flex-col justify-center items-center gap-8 px-5 mt-5 md:px-8 py-10 bg-slate-50">
+      <div class="text-center">
+        <h2 class="font-semibold text-[20px] inline-flex items-center before:w-2 before:h-2 before:rounded-full before:mr-2 before:bg-orange-500">
+          Connect With Me
+        </h2>
+        <p class="text-slate-500 text-sm mt-2">Let's connect and collaborate together!</p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-6">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/abdurrahman_dzakiy/" 
+           target="_blank" 
+           class="group flex items-center gap-3 px-5 py-3 bg-white rounded-lg shadow-sm border border-slate-100 hover:border-orange-200 hover:bg-orange-50 transition-all duration-300">
+          <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 text-white">
+            <i class="fa-brands fa-instagram text-lg"></i>
+          </div>
+          <div class="text-left">
+            <p class="text-sm font-medium text-slate-700 group-hover:text-orange-500">Instagram</p>
+            <p class="text-xs text-slate-500">@abdurrahman_dzakiy</p>
+          </div>
+        </a>
+
+        <!-- Facebook -->
+        <a href="#" 
+           target="_blank" 
+           class="group flex items-center gap-3 px-5 py-3 bg-white rounded-lg shadow-sm border border-slate-100 hover:border-blue-200 hover:bg-blue-50 transition-all duration-300">
+          <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-b from-blue-600 to-blue-700 text-white">
+            <i class="fa-brands fa-facebook-f text-lg"></i>
+          </div>
+          <div class="text-left">
+            <p class="text-sm font-medium text-slate-700 group-hover:text-blue-600">Facebook</p>
+            <p class="text-xs text-slate-500">Abdurrahman Dzakiy</p>
+          </div>
+        </a>
+
+        <!-- Twitter/X -->
+        <a href="#" 
+           target="_blank" 
+           class="group flex items-center gap-3 px-5 py-3 bg-white rounded-lg shadow-sm border border-slate-100 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300">
+          <div class="w-10 h-10 flex items-center justify-center rounded-full bg-black text-white">
+            <i class="fa-brands fa-x-twitter text-lg"></i>
+          </div>
+          <div class="text-left">
+            <p class="text-sm font-medium text-slate-700 group-hover:text-slate-900">Twitter</p>
+            <p class="text-xs text-slate-500">@dzakiy_dev</p>
+          </div>
+        </a>
       </div>
     </section>
 

@@ -52,12 +52,29 @@ export function renderNavigation(selector) {
 
         buttons.forEach((button) => {
             button.addEventListener("click", () => {
-                buttons.forEach((btn) => {
-                    btn.classList.remove("selected");
-                    btn.querySelector("span").classList.add("hidden");
-                });
-                button.classList.add("selected");
-                button.querySelector("span").classList.remove("hidden");
+              const label = button.getAttribute("data-label");
+              switch(label){
+                case "Home":
+                  window.location.href = "/";
+                  button.classList.add("selected");
+                  button.querySelector("span").classList.remove("hidden");
+                  break;
+                case "Save":
+                  window.location.href = "/src/pages/bookmark.html";
+                  button.classList.add("selected");
+                  button.querySelector("span").classList.remove("hidden");
+                  break;
+                case "Profile":
+                  window.location.href = "/src/pages/profile.html";
+                  button.classList.add("selected");
+                  button.querySelector("span").classList.remove("hidden");
+                  break;
+                case "More":
+                  window.location.href = "/src/pages/more.html";
+                  button.classList.add("selected");
+                  button.querySelector("span").classList.remove("hidden");
+                  break;
+              }
             });
         });
         
@@ -87,7 +104,7 @@ export function renderNavbar(selector){
   container.innerHTML = `
   <!-- lg navbar -->
     <div class="nav hidden lg:flex lg:items-center">
-      <a href="" class="title text-2xl font-extrabold">Blog.my</a>
+      <a href="/" class="title text-2xl font-extrabold">Blog.my</a>
       <ul class="menu menu-horizontal px-1">
         <li>
           <details>
@@ -107,8 +124,8 @@ export function renderNavbar(selector){
             </ul>
           </details>
         </li>
-        <li><a>Contact Us</a></li>
-        <li><a>About Us</a></li>
+        <li><a href="/src/pages/contact-us.html">Contact Us</a></li>
+        <li><a href="/src/pages/about-us.html">About Us</a></li>
       </ul>
     </div>
     <div class="top_mobile_container">
@@ -344,8 +361,8 @@ export function renderNavbar(selector){
             </ul>
           </div>
         </li>
-        <li><a class="sb_option" href="#"> Contact Us </a></li>
-        <li><a class="sb_option" href="#"> About Us </a></li>
+        <li><a class="sb_option" href="/src/pages/contact-us.html"> Contact Us </a></li>
+        <li><a class="sb_option" href="/src/pages/about-us.html"> About Us </a></li>
       </ul>
     </div>
   `
@@ -356,7 +373,7 @@ export function renderFooter(selector) {
   if (!container) return;
 
   container.innerHTML = `
-    <div class="lg:flex w-full hidden">
+    <div class="md:flex w-full hidden">
         <div
           class="left_footer flex-1 px-10 py-5 rounded-tr-xl rounded-br-xl bg-slate-200"
         >
@@ -367,7 +384,7 @@ export function renderFooter(selector) {
               <!-- Mega News -->
               <div class="mega_news space-y-2">
                 <p
-                  class="font-semibold text-[20px] before:w-1 before:h-1 before:rounded-sm before:mr-2 before:bg-orange-500 before:content-['-'] before:text-orange-500"
+                  class="title_footer font-semibold text-[20px] "
                   style="font-family: 'Montserrat Alternates'"
                 >
                   Mega news
@@ -381,7 +398,7 @@ export function renderFooter(selector) {
               <!-- Newsletter -->
               <div class="news_letters space-y-2">
                 <p
-                  class="font-semibold text-[20px] before:w-1 before:h-1 before:rounded-sm before:mr-2 before:bg-orange-500 before:content-['-'] before:text-orange-500"
+                  class="title_footer font-semibold text-[20px] "
                   style="font-family: 'Montserrat Alternates'"
                 >
                   Newsletters
@@ -405,7 +422,7 @@ export function renderFooter(selector) {
               <!-- Categories -->
               <div class="categories space-y-3">
                 <p
-                  class="font-semibold text-[20px] before:w-1 before:h-1 before:rounded-sm before:mr-2 before:bg-orange-500 before:content-['-'] before:text-orange-500"
+                  class="title_footer font-semibold text-[20px] "
                   style="font-family: 'Montserrat Alternates'"
                 >
                   Categories
@@ -455,7 +472,7 @@ export function renderFooter(selector) {
           <!-- Comments Section -->
           <div class="comments_section w-[300px]">
             <p
-              class="font-semibold text-[20px] mb-4 before:w-1 before:h-1 before:rounded-sm before:mr-2 before:bg-orange-500 before:content-['-'] before:text-orange-500"
+              class="title_footer font-semibold text-[20px] mb-4 "
               style="font-family: 'Montserrat Alternates'"
             >
               Comments
@@ -475,7 +492,7 @@ export function renderFooter(selector) {
           <!-- Instagram Feed Section -->
           <div class="sosmed_user w-[320px]">
             <p
-              class="font-semibold text-[20px] mb-4 before:w-1 before:h-1 before:rounded-sm before:mr-2 before:bg-orange-500 before:content-['-'] before:text-orange-500"
+              class="title_footer font-semibold text-[20px] mb-4 "
               style="font-family: 'Montserrat Alternates'"
             >
               Follow on <br />

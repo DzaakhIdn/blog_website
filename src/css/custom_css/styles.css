@@ -64,6 +64,35 @@ slick-dots li.slick-active button:before {
     gap: 0.5rem !important; 
 }
 
+.title_footer{ position: relative; }
+
+.mega_news .title_footer,
+.news_letters .title_footer,
+.sosmed_footer .title_footer{
+    z-index: 2;
+}
+
+.title_footer::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #f97316;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0.8;
+}
+#editor{
+    width: 100%;
+    height: 377px;
+    background-color: #f1f5f9;
+    border-radius: 12px;
+    padding: 10px;
+}
+
 
 /* @media (min-width: 425px) {
     #next_tags,
@@ -83,6 +112,9 @@ slick-dots li.slick-active button:before {
     }
     .right_footer{
         flex-direction: column;
+    }
+    #editor{
+        height: 295px;
     }
  }
 
