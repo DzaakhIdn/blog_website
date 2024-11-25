@@ -20,3 +20,7 @@ class Connection
         }
     }
 }
+
+$pg = $_GET['pg'] ?? '';
+$ac = $_GET['ac'] ?? '';
+

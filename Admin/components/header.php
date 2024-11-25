@@ -1,3 +1,9 @@
+<?php
+require_once __DIR__ . '/../Classes/init.php';
+
+$username = $_SESSION['username'];
+// $avatar = $_SESSION['avatar'];
+?>
 <header class="header">
     <div class="container-fluid">
         <div class="row">
@@ -56,7 +62,7 @@
                             <li>
                                 <a href="#0">
                                     <div class="image">
-                                        <img src="assets/images/lead/lead-1.png" alt="" />
+                                        <img src="./../assets/images/lead/lead-1.png" alt="" />
                                     </div>
                                     <div class="content">
                                         <h6>
@@ -94,7 +100,7 @@
                             <li>
                                 <a href="#0">
                                     <div class="image">
-                                        <img src="assets/images/lead/lead-5.png" alt="" />
+                                        <img src="./../assets/images/lead/lead-5.png" alt="" />
                                     </div>
                                     <div class="content">
                                         <h6>Jacob Jones</h6>
@@ -106,7 +112,7 @@
                             <li>
                                 <a href="#0">
                                     <div class="image">
-                                        <img src="assets/images/lead/lead-3.png" alt="" />
+                                        <img src="./../assets/images/lead/lead-3.png" alt="" />
                                     </div>
                                     <div class="content">
                                         <h6>John Doe</h6>
@@ -118,7 +124,7 @@
                             <li>
                                 <a href="#0">
                                     <div class="image">
-                                        <img src="assets/images/lead/lead-2.png" alt="" />
+                                        <img src="./../assets/images/lead/lead-2.png" alt="" />
                                     </div>
                                     <div class="content">
                                         <h6>Anee Lee</h6>
@@ -137,10 +143,10 @@
                             <div class="profile-info">
                                 <div class="info">
                                     <div class="image">
-                                        <img src="assets/images/profile/profile-image.png" alt="" />
+                                        <img src="./../assets/images/profile/profile-image.png" alt="" />
                                     </div>
                                     <div>
-                                        <h6 class="fw-500">Adam Joe</h6>
+                                        <h6 class="fw-500"><?= $username ?></h6>
                                         <p>Admin</p>
                                     </div>
                                 </div>
@@ -150,7 +156,7 @@
                             <li>
                                 <div class="author-info flex items-center !p-1">
                                     <div class="image">
-                                        <img src="assets/images/profile/profile-image.png" alt="image">
+                                        <img src="./../assets/images/profile/profile-image.png" alt="image">
                                     </div>
                                     <div class="content">
                                         <h4 class="text-sm">Adam Joe</h4>

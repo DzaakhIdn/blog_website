@@ -40,24 +40,25 @@ class Model extends Connection
 
         return $this->convert_data($result);
     }
+    
+    public function update_data($id, $datas, $table, $column){
+        $key = array_keys($datas);
+        $val = array_values($datas);
 
-    /**
-     * Memperbarui data yang sudah ada
-     * @param int $id ID data yang akan diupdate
-     * @param array $data Data baru yang akan diupdate
-     * @param string $table Nama tabel
-     * @return bool True jika berhasil, False jika gagal
-     */
-    public function update_data(int $id, array $data, string $table) {
-        try {
-            $updates = [];
-            foreach ($data as $key => $value) {
-                $updates[] = "{$key} = ?";
+        $query = "UPDATE $table SET ";
+
+        for($i = 0; $i < count($key); $i++){
+            $query .= $key[$i] . " = '" . $val[$i] . "'";
+            if($i != count($key) - 1){
+                $query .= " , ";
             }
-            $sql = "UPDATE {$table} SET " . implode(', ', $updates) . " WHERE id = ?";
-            
-            return true;
-        } catch (Exception $e) {
+        }
+
+        $query .= " WHERE {$column} = $id";
+        $result = mysqli_query($this->db, $query);
+        if($result){
+            return $datas;
+        } else {
             return false;
         }
     }
@@ -68,12 +69,14 @@ class Model extends Connection
      * @param string $table Nama tabel
      * @return array|null Data yang ditemukan atau null jika tidak ada
      */
-    public function find_data(int $id, string $table) {
-        try {
-            $sql = "SELECT * FROM {$table} WHERE id = ? LIMIT 1";
-            return []; // Kembalikan hasil query
-        } catch (Exception $e) {
-            return null;
+    public function find_data($id, $table, $column){
+        $query = "SELECT * FROM $table WHERE {$column} = $id";
+        $result = mysqli_query($this->db, $query);
+        $data = $this->convert_data($result);
+        if($result->num_rows > 0){
+            return $data;
+        } else {
+            echo "ga ada data dengan id $id ";
         }
     }
 
@@ -97,13 +100,10 @@ class Model extends Connection
      * @param string $table Nama tabel
      * @return bool True jika berhasil, False jika gagal
      */
-    public function delete_data(int $id, string $table) {
-        try {
-            $sql = "DELETE FROM {$table} WHERE id = ?";
-            return true;
-        } catch (Exception $e) {
-            return false;
-        }
+    public function delete_data($id, $table, $column){
+        $query = "DELETE FROM $table WHERE {$column} = $id";
+        $result = mysqli_query($this->db, $query);
+        return $result;
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/../Classes/init.php';
 
 $category = new Category();
@@ -28,7 +29,7 @@ $categories = $category->all_paginate($offset, $limit);
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="shortcut icon" href="./../assets/images/favicon.svg" type="image/x-icon" />
-  <title>Blank Page | PlainAdmin Demo</title>
+  <title>Category | PlainAdmin Demo</title>
 
   <!-- ========== All CSS files linkup ========= -->
   <link rel="stylesheet" href="./../assets/css/bootstrap.min.css" />
@@ -65,7 +66,7 @@ $categories = $category->all_paginate($offset, $limit);
           <div class="row align-items-center">
             <div class="col-md-6">
               <div class="title">
-                <h2>Category</h2>
+                <h2>Tag</h2>
               </div>
             </div>
             <!-- end col -->
@@ -77,7 +78,7 @@ $categories = $category->all_paginate($offset, $limit);
                       <a href="#0">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                      Category
+                      Tag
                     </li>
                   </ol>
                 </nav>
@@ -93,22 +94,22 @@ $categories = $category->all_paginate($offset, $limit);
             <div class="card-style mb-30">
               <div class="d-flex justify-content-between align-items-center mb-20">
                 <div>
-                  <h6 class="mb-10">Data Kategori</h6>
-                  <p class="text-sm">Berikut adalah data kategori yang ada</p>
+                  <h6 class="mb-10">Data Tag</h6>
+                  <p class="text-sm">Berikut adalah data tag yang ada</p>
                 </div>
                 <div class="d-flex gap-2 align-items-center">
-                  <a href="add_category.php" class="btn btn-primary">
+                  <a href="index.php?pg=category" class="btn btn-primary">
                     <i class="fa-solid fa-plus"></i>
                   </a>
                   <form action="" method="get">
-                    <input type="text" id="search-input" name="keyword" class="form-control " placeholder="Cari Kategori">
+                    <input type="text" id="search-input" name="keyword" class="form-control " placeholder="Cari Tag">
                   </form>
                 </div>
               </div>
               <div id="bungkus-table" class="table-wrapper table-responsive">
                 <?php if (empty($categories)) : ?>
-                  <div class="d-flex justify-content-center m-5">
-                    <div class="pesan">
+                  <div class="d-flex justify-content-center align-items-center min-vh-50 m-5">
+                    <div class="pesan text-center">
                       <img src="../assets/icons/no-data.gif" alt="" width="100">
                       <p>Data tidak ditemukan</p>
                     </div>
@@ -116,43 +117,41 @@ $categories = $category->all_paginate($offset, $limit);
                 <?php else : ?>
                   <table class="table">
                     <thead>
-                    <tr>
-                      <th>
-                        <h6>#</h6>
-                      </th>
-                      <th>
-                        <h6>Nama Kategori</h6>
-                      </th>
-                      <th>
-                        <h6>Attachment</h6>
-                      </th>
-                      <th>
-                        <h6>Action</h6>
-                      </th>
-                    </tr>
-                    <!-- end table row-->
-                  </thead>
-                  <tbody>
-                    <?php foreach ($categories as $cat): ?>
                       <tr>
-                        <td>
-                          <?= $no++ ?>
-                        </td>
-                        <td class="min-width">
-                          <p><?= $cat['name_category'] ?></p>
-                        </td>
-                        <td class="min-width">
-                          <div class="image">
-                            <img src="../../public/img/category_img/<?= $cat['category_img'] ?>" width="100" class="img-thumbnail rounded shadow-sm" alt="" />
-                          </div>
-                        </td>
-                        <td>
-                          <a href="#" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
-                          <a href="#" class="btn btn-success"><i class="fa-solid fa-pencil"></i></a>
-                        </td>
+                        <th>
+                          <h6>#</h6>
+                        </th>
+                        <th>
+                          <h6>Nama Tag</h6>
+                        </th>
+                        <th>
+                          <h6>Attach</h6>
+                        </th>
+                        <th>
+                          <h6>Action</h6>
+                        </th>
                       </tr>
-                      <!-- end table row -->
-                    <?php endforeach; ?>
+                      <!-- end table row-->
+                    </thead>
+                    <tbody>
+                      <?php foreach ($categories as $cat): ?>
+                        <tr>
+                          <td>
+                            <?= $no++ ?>
+                          </td>
+                          <td class="min-width">
+                            <p><?= $cat['name_category'] ?></p>
+                          </td>
+                          <td class="min-width">
+                            <p><img src="../../public/img/category_img/<?= $cat['category_img'] ?>" class="img-thumbnail rounded shadow-sm" width="150" alt=""></p>
+                          </td>
+                          <td>
+                            <button href="#" data-id="<?= $cat['category_id'] ?>" class="hapus btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                            <a href="index.php?pg=category&id=<?= $cat['category_id'] ?>" class="btn btn-success"><i class="fa-solid fa-pencil"></i></a>
+                          </td>
+                        </tr>
+                        <!-- end table row -->
+                      <?php endforeach; ?>
                     </tbody>
                   </table>
                 <?php endif; ?>
@@ -206,11 +205,65 @@ $categories = $category->all_paginate($offset, $limit);
   <script src="./../assets/js/world-merc.js"></script>
   <script src="./../assets/js/polyfill.js"></script>
   <script src="./../assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="text/javascript">
     $(document).ready(function() {
       $('#search-input').on('keyup', function() {
         $('#bungkus-table').load(`../search/search_category.php?keyword=` + $('#search-input').val());
       });
+
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+
+      $(document).on('click', '.hapus', function() {
+        var id = $(this).data('id');
+        console.log(id);
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: './../services/delete_category.php',
+              method: 'GET',
+              data: {
+                id: id
+              },
+              success: function(response) {
+                Toast.fire({
+                  icon: "success",
+                  title: "Data deleted successfully"
+                });
+                setTimeout(function() {
+                  window.location.href = "./index-category.php";
+                }, 2200);
+              },
+              error: function(xhr, status, error) {
+                console.error(error);
+                Toast.fire({
+                  icon: "error",
+                  title: "Failed to delete data"
+                });
+              }
+            });
+          }
+        });
+      });
+
     });
   </script>
 </body>
