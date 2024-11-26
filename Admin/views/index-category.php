@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . '/../Classes/init.php';
+require_once __DIR__ . '/../DB/connections.php';
 
 $category = new Category();
 
@@ -98,7 +99,7 @@ $categories = $category->all_paginate($offset, $limit);
                   <p class="text-sm">Berikut adalah data tag yang ada</p>
                 </div>
                 <div class="d-flex gap-2 align-items-center">
-                  <a href="index.php?pg=category" class="btn btn-primary">
+                  <a href="index.php?pg=tags" class="btn btn-primary">
                     <i class="fa-solid fa-plus"></i>
                   </a>
                   <form action="" method="get">
@@ -115,7 +116,7 @@ $categories = $category->all_paginate($offset, $limit);
                     </div>
                   </div>
                 <?php else : ?>
-                  <table class="table">
+                  <table class="table" id="table_id">
                     <thead>
                       <tr>
                         <th>
@@ -208,10 +209,11 @@ $categories = $category->all_paginate($offset, $limit);
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="text/javascript">
     $(document).ready(function() {
+    
       $('#search-input').on('keyup', function() {
         $('#bungkus-table').load(`../search/search_category.php?keyword=` + $('#search-input').val());
       });
-
+      
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",

@@ -120,7 +120,6 @@ class Category extends Model
         $upload_path = "/var/www/html/blog-web/public/img/category_img/";
 
         try {
-            // Ambil data lama dari database
             $current_data = parent::find_data($id, $this->table, $this->primary_key);
             if (!$current_data) {
                 return [
@@ -133,7 +132,6 @@ class Category extends Model
                 'name_category' => $post_data['name_category'],
             ];
 
-            // Proses file jika ada
             if ($file_data && isset($file_data["category_img"])) {
                 $nama_file = $file_data["category_img"]["name"];
                 $file_size = $file_data["category_img"]["size"];
@@ -156,7 +154,6 @@ class Category extends Model
                     ];
                 }
 
-                // Generate nama file baru
                 $nama_file_baru = random_int(1000, 9999) . "_" . time() . "." . $file_extension;
 
                 if (!file_exists($upload_path)) {
@@ -178,7 +175,7 @@ class Category extends Model
                 }
             }
 
-            // Simpan data ke database
+
             $result = parent::update_data($id, $data_to_save, $this->table, $this->primary_key);
 
             if ($result) {
@@ -189,7 +186,6 @@ class Category extends Model
                 ];
             }
 
-            // Jika gagal menyimpan, hapus file yang baru di-upload
             if (isset($data_to_save['category_img']) && file_exists($upload_path . $data_to_save['category_img'])) {
                 unlink($upload_path . $data_to_save['category_img']);
             }

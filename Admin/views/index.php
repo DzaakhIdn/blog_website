@@ -3,11 +3,12 @@ session_start();
 require_once __DIR__ . '/../Classes/Model.php';
 require_once __DIR__ . '/../DB/connections.php';
 
-if(isset($_SESSION["id_user"])){
+if (isset($_SESSION["id_user"])) {
   $user = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM users WHERE id_user = '$_SESSION[id_user]'"));
 ?>
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,8 +16,7 @@ if(isset($_SESSION["id_user"])){
     <link
       rel="shortcut icon"
       href="./../assets/images/favicon.svg"
-      type="image/x-icon"
-    />
+      type="image/x-icon" />
     <title>Blog.my | Dashboard 🤫</title>
 
     <!-- ========== All CSS files linkup ========= -->
@@ -26,8 +26,11 @@ if(isset($_SESSION["id_user"])){
     <link rel="stylesheet" href="./../assets/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="./../assets/css/fullcalendar.css" />
     <link rel="stylesheet" href="./../assets/css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
+
   <body>
     <!-- ======== Preloader =========== -->
     <div id="preloader">
@@ -72,12 +75,26 @@ if(isset($_SESSION["id_user"])){
 
     <script>
       // ======== jvectormap activation
-      var markers = [
-        { name: "Egypt", coords: [26.8206, 30.8025] },
-        { name: "Russia", coords: [61.524, 105.3188] },
-        { name: "Canada", coords: [56.1304, -106.3468] },
-        { name: "Greenland", coords: [71.7069, -42.6043] },
-        { name: "Brazil", coords: [-14.235, -51.9253] },
+      var markers = [{
+          name: "Egypt",
+          coords: [26.8206, 30.8025]
+        },
+        {
+          name: "Russia",
+          coords: [61.524, 105.3188]
+        },
+        {
+          name: "Canada",
+          coords: [56.1304, -106.3468]
+        },
+        {
+          name: "Greenland",
+          coords: [71.7069, -42.6043]
+        },
+        {
+          name: "Brazil",
+          coords: [-14.235, -51.9253]
+        },
       ];
 
       var jvm = new jsVectorMap({
@@ -107,8 +124,12 @@ if(isset($_SESSION["id_user"])){
         }),
         markers: markers,
         markerStyle: {
-          initial: { fill: "#4A6CF7" },
-          selected: { fill: "#ff5050" },
+          initial: {
+            fill: "#4A6CF7"
+          },
+          selected: {
+            fill: "#ff5050"
+          },
         },
         markerLabelStyle: {
           initial: {
@@ -118,7 +139,7 @@ if(isset($_SESSION["id_user"])){
         },
       });
       // ====== calendar activation
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener("DOMContentLoaded", function() {
         var calendarMiniEl = document.getElementById("calendar-mini");
         var calendarMini = new FullCalendar.Calendar(calendarMiniEl, {
           initialView: "dayGridMonth",
@@ -148,31 +169,29 @@ if(isset($_SESSION["id_user"])){
             "Nov",
             "Dec",
           ],
-          datasets: [
-            {
-              label: "",
-              backgroundColor: "transparent",
-              borderColor: "#365CF5",
-              data: [
-                600, 800, 750, 880, 940, 880, 900, 770, 920, 890, 976, 1100,
-              ],
-              pointBackgroundColor: "transparent",
-              pointHoverBackgroundColor: "#365CF5",
-              pointBorderColor: "transparent",
-              pointHoverBorderColor: "#fff",
-              pointHoverBorderWidth: 5,
-              borderWidth: 5,
-              pointRadius: 8,
-              pointHoverRadius: 8,
-              cubicInterpolationMode: "monotone", // Add this line for curved line
-            },
-          ],
+          datasets: [{
+            label: "",
+            backgroundColor: "transparent",
+            borderColor: "#365CF5",
+            data: [
+              600, 800, 750, 880, 940, 880, 900, 770, 920, 890, 976, 1100,
+            ],
+            pointBackgroundColor: "transparent",
+            pointHoverBackgroundColor: "#365CF5",
+            pointBorderColor: "transparent",
+            pointHoverBorderColor: "#fff",
+            pointHoverBorderWidth: 5,
+            borderWidth: 5,
+            pointRadius: 8,
+            pointHoverRadius: 8,
+            cubicInterpolationMode: "monotone", // Add this line for curved line
+          }, ],
         },
         options: {
           plugins: {
             tooltip: {
               callbacks: {
-                labelColor: function (context) {
+                labelColor: function(context) {
                   return {
                     backgroundColor: "#ffffff",
                     color: "#171717",
@@ -264,27 +283,25 @@ if(isset($_SESSION["id_user"])){
             "Nov",
             "Dec",
           ],
-          datasets: [
-            {
-              label: "",
-              backgroundColor: "#365CF5",
-              borderRadius: 30,
-              barThickness: 6,
-              maxBarThickness: 8,
-              data: [
-                600, 700, 1000, 700, 650, 800, 690, 740, 720, 1120, 876, 900,
-              ],
-            },
-          ],
+          datasets: [{
+            label: "",
+            backgroundColor: "#365CF5",
+            borderRadius: 30,
+            barThickness: 6,
+            maxBarThickness: 8,
+            data: [
+              600, 700, 1000, 700, 650, 800, 690, 740, 720, 1120, 876, 900,
+            ],
+          }, ],
         },
         options: {
           plugins: {
             tooltip: {
               callbacks: {
-                titleColor: function (context) {
+                titleColor: function(context) {
                   return "#8F92A1";
                 },
-                label: function (context) {
+                label: function(context) {
                   let label = context.dataset.label || "";
 
                   if (label) {
@@ -387,8 +404,7 @@ if(isset($_SESSION["id_user"])){
             "Nov",
             "Dec",
           ],
-          datasets: [
-            {
+          datasets: [{
               label: "Revenue",
               backgroundColor: "transparent",
               borderColor: "#365CF5",
@@ -518,8 +534,7 @@ if(isset($_SESSION["id_user"])){
         type: "bar",
         data: {
           labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-          datasets: [
-            {
+          datasets: [{
               label: "",
               backgroundColor: "#365CF5",
               borderColor: "transparent",
@@ -606,7 +621,8 @@ if(isset($_SESSION["id_user"])){
       // =========== chart four end
     </script>
   </body>
-</html>
+
+  </html>
 <?php
 } else {
   header("Location: ./auth-page.php");
