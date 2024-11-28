@@ -1,7 +1,6 @@
 <?php
-require_once __DIR__ . '/../Classes/init.php';
-
 if (isset($_SESSION["id_user"])) {
+
     $user = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM users WHERE id_user = '$_SESSION[id_user]'"));
 
     $username = $user['username'];
@@ -175,7 +174,7 @@ if (isset($_SESSION["id_user"])) {
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="#0">
+                                <a href="?pg=profile">
                                     <i class="lni lni-user"></i> View Profile
                                 </a>
                             </li>
@@ -188,11 +187,11 @@ if (isset($_SESSION["id_user"])) {
                                 <a href="#0"> <i class="lni lni-inbox"></i> Messages </a>
                             </li>
                             <li>
-                                <a href="#0"> <i class="lni lni-cog"></i> Settings </a>
+                                <a href="?pg=edit-profile"> <i class="lni lni-cog"></i> Settings </a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a href="#0"> <i class="lni lni-exit"></i> Sign Out </a>
+                                <a href="" class="logout"><i class="lni lni-exit"></i> Sign Out </a>
                             </li>
                         </ul>
                     </div>
@@ -202,3 +201,25 @@ if (isset($_SESSION["id_user"])) {
         </div>
     </div>
 </header>
+<script src="./../assets/js/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+$(document).ready(function() {
+    $(document).on('click', '.logout', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, logout!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "./../views/auth-page.php";
+            }
+        });
+    });
+});
+</script>

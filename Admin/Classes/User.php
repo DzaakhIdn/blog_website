@@ -139,6 +139,12 @@ class User extends Model
         $result = mysqli_query($this->db, $sql);
 
         try {
+            if (!$result) {
+                return [
+                    'status' => false,
+                    'message' => 'Terjadi kesalahan: ' . mysqli_error($this->db)
+                ];
+            }
             if ($result) {
                 $user = mysqli_fetch_assoc($result);
                 $_SESSION['id_user'] = $user['id_user'];
@@ -203,5 +209,14 @@ class User extends Model
                 'message' => 'Email tidak ditemukan'
             ];
         }
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        return [
+            'status' => true,
+            'message' => 'Logout Berhasil'
+        ];
     }
 }

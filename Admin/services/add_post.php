@@ -2,10 +2,27 @@
 require_once __DIR__ . '/../Classes/init.php';
 
 $category = new Category();
+$tag = new Tag();
 
 $categories = $category->all();
+$tags = $tag->all();
+
+if (isset($_POST["submit"])) {
+    $post = new Post();
+    $result = $post->create($_POST, $_FILES);
+}
 
 ?>
+<style>
+    .select2-container,
+    .select2-selection {
+        width: 100% !important;
+    }
+
+    .selection {
+        width: 100% !important;
+    }
+</style>
 <div class="container-fluid">
     <!-- ========== title-wrapper start ========== -->
     <div class="title-wrapper pt-30">
@@ -39,14 +56,14 @@ $categories = $category->all();
         <div class="row">
             <div class="col-12">
                 <div class="card-style mb-30">
-                    <form action="" id="editor-form" method="post">
+                    <form action="" id="editor-form" method="post" enctype="multipart/form-data">
                         <div class="input-style-1">
                             <h6 class="mb-10">Judul Artikel</h6>
                             <input type="text" placeholder="Judul Artikel" name="title" />
                         </div>
                         <div class="input-style-1">
                             <h6 class="mb-10">Gambar Artikel</h6>
-                            <input class="form-control" type="file" name="post_img" id="postImage" accept="image/*">
+                            <input class="form-control" type="file" name="image_url" id="postImage" accept="image/*">
                         </div>
                         <div class="select-style-1">
                             <h6 class="mb-10">Kategori Artikel</h6>
@@ -59,7 +76,15 @@ $categories = $category->all();
                                 </select>
                             </div>
                         </div>
-                        <div class="title d-flex justify-content-between align-items-center">
+                        <div class="select-style-1">
+                            <label for="multiple-select-custom-field">Pilih Tag</label>
+                            <select name="tags[]" multiple="multiple" id="multiple-select-custom-field" data-placeholder="Pilih Tag">
+                                <?php foreach ($tags as $tag) : ?>
+                                    <option value="<?= $tag['tags_id']; ?>"><?= $tag['name_tag']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="title d-flex justify-content-between align-items-center mt-10">
                             <h6 class="mb-30">Tulis Artikel</h6>
                         </div>
                         <div id="quill-toolbar">
@@ -109,7 +134,8 @@ $categories = $category->all();
                         <input type="hidden" name="content" id="content">
                         <div class="d-flex justify-content-end mt-30 gap-3">
                             <a href="index-post.php" class="main-btn light-btn btn-hover">Gak Jadi</a>
-                            <button type="submit" name="submit" class="main-btn primary-btn btn-hover " name="submit">Create Post</button>
+                            <button type="submit" class="main-btn primary-btn btn-hover" name="submit">Create Post
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -120,6 +146,8 @@ $categories = $category->all();
     <!-- ========== form-editor-wrapper end ========== -->
 </div>
 <script src="./../assets/js/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const editor = new Quill("#quill-editor", {
@@ -130,10 +158,49 @@ $categories = $category->all();
             theme: "snow",
         });
 
-        $("#editor-form").on("submit", function(e) {
-            const content = editor.root.innerHTML;
-            $("#content").val(content);
-            e.preventDefault();
+        document.getElementById("editor-form").addEventListener("submit", function(event) {
+            const quillContent = editor.root.innerHTML;
+            document.getElementById("content").value = quillContent;
         });
+
+        $('#multiple-select-custom-field').select2({
+            theme: "classic",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            allowClear: true,
+            closeOnSelect: false,
+            tokenSeparators: [',', ' '],
+            tags: true
+        });
+
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+            }
+        });
+
+        <?php if (isset($result)): ?>
+            <?php if (!$result['status']): ?>
+                Toast.fire({
+                    icon: "error",
+                    title: "<?php echo $result['message']; ?>"
+                });
+            <?php else: ?>
+                Toast.fire({
+                    icon: "success",
+                    title: "<?php echo $result['message']; ?>"
+                });
+                // setTimeout(function() {
+                //     window.location.href = "./index-post.php";
+                // }, 2200);
+            <?php endif; ?>
+        <?php endif; ?>
     });
 </script>
