@@ -95,6 +95,13 @@ class Post extends Model
         $tags = $_POST["tags"] ? $_POST["tags"] : [];
         $post_id = $this->db->insert_id;
 
+        // var_dump($post_id);
+        // var_dump($tags);
+        // if (!is_string($tags)) {
+        //     error_log("Tags bukan string, melainkan: " . gettype($tags));
+        // }
+        // die();
+
         if (!$post_id) {
             return ['status' => false, 'message' => 'Gagal menyimpan artikel'];
         }
@@ -103,13 +110,11 @@ class Post extends Model
 
         foreach ($tags as $tag) {
             $tag = trim($tag);
-            if (!is_string($tag) || empty($tag)) {
-                continue;
-            }
-
             if (ctype_digit($tag)) {
+                $tag_ids[] = (int)$tag; // Konversi ke integer untuk menghindari SQL Injection
                 continue;
             }
+            
             $sql_check = "SELECT tags_id FROM tags WHERE name_tag = '" . $tag . "'";
             $result_check = mysqli_query($this->db, $sql_check);
             $exiting_tag = mysqli_fetch_assoc($result_check);
@@ -124,13 +129,19 @@ class Post extends Model
         }
 
         foreach ($tag_ids as $tag_id) {
-            $insert_sql = "INSERT INTO pivot_post_tags (post_id_pivot, tag_id_pivot) VALUES ($post_id, $tag_id)";
-            $result_insert = mysqli_query($this->db, $insert_sql);
+            $check_pivot = "SELECT * FROM pivot_post_tags WHERE post_id_pivot = $post_id AND tag_id_pivot = $tag_id";
+            $result_check = mysqli_query($this->db, $check_pivot);
+
+            if (mysqli_num_rows($result_check) === 0) {
+                $insert_sql = "INSERT INTO `pivot_post_tags` (`post_id_pivot`, `tag_id_pivot`) VALUES ('$post_id', '$tag_id');";
+                $result_insert = mysqli_query($this->db, $insert_sql);
+            }
+
+            if($result_insert === false) {
+                return ['status' => false, 'message' => 'Gagal menyimpan artikel'];
+            }
         }
 
-        if (!$result_insert) {
-            return ['status' => false, 'message' => 'Gagal menyimpan artikel'];
-        }
 
         if ($result) {
             return ['status' => true, 'message' => 'Artikel berhasil ditambahkan', 'data' => $result];

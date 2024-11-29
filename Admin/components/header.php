@@ -151,7 +151,11 @@ if (isset($_SESSION["id_user"])) {
                             <div class="profile-info">
                                 <div class="info">
                                     <div class="image">
-                                        <img src="<?php echo isset($profile) ? "../../public/img/profile/$profile" : "./../assets/images/profile/no-profile.png"; ?>" alt="" />
+                                        <img
+                                            src="<?php echo isset($profile) ? "../../public/img/profile/$profile" : "./../assets/images/profile/no-profile.png"; ?>"
+                                            alt="Profile Avatar"
+                                            class="img-fluid"
+                                            style="width: 100%; height: 100%; object-fit: cover;" />
                                     </div>
                                     <div>
                                         <h6 class="fw-500"><?= $username ?></h6>
@@ -204,22 +208,22 @@ if (isset($_SESSION["id_user"])) {
 <script src="./../assets/js/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-$(document).ready(function() {
-    $(document).on('click', '.logout', function(e) {
-        e.preventDefault();
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, logout!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "./../views/auth-page.php";
-            }
+    $(document).ready(function() {
+        $(document).on('click', '.logout', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, logout!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "./../views/auth-page.php";
+                }
+            });
         });
     });
-});
 </script>
