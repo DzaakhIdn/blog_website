@@ -1,17 +1,21 @@
 <?php
 require_once __DIR__ . '/../Classes/init.php';
 
+$id = $_GET['id'];
+$posts = new Post();
 $category = new Category();
 $tag = new Tag();
 
 $categories = $category->all();
 $tags = $tag->all();
-
+$post_id = $posts->find($id);
+$tags_id = $posts->find_tag($id);
+$tags_name = array_column($tags_id, 'name_tag');
+// var_dump($tags_id);
+// die();
 if (isset($_POST["submit"])) {
-    $post = new Post();
-    $result = $post->create($_POST, $_FILES);
+    $result = $posts->update($id, $_POST, $_FILES);
 }
-
 ?>
 <style>
     .select2-container,
@@ -59,7 +63,7 @@ if (isset($_POST["submit"])) {
                     <form action="" id="editor-form" method="post" enctype="multipart/form-data">
                         <div class="input-style-1">
                             <h6 class="mb-10">Judul Artikel</h6>
-                            <input type="text" placeholder="Judul Artikel" name="title" />
+                            <input type="text" placeholder="Judul Artikel" name="title" value="<?= $post_id[0]['title']; ?>" />
                         </div>
                         <div class="input-style-1">
                             <h6 class="mb-10">Gambar Artikel</h6>
@@ -71,22 +75,23 @@ if (isset($_POST["submit"])) {
                             </div>
                             <input class="form-control" type="file" name="image_url" id="postImage" accept="image/*" onchange="previewImage(this)">
                         </div>
+
                         <div class="select-style-1">
                             <h6 class="mb-10">Kategori Artikel</h6>
                             <div class="select-position">
                                 <select class="light-bg" name="id_category">
                                     <option value="">Pilih Kategori</option>
                                     <?php foreach ($categories as $category) : ?>
-                                        <option value="<?= $category['category_id']; ?>"><?= $category['name_category']; ?></option>
+                                        <option value="<?= $category['category_id']; ?>" <?= $post_id[0]['id_category'] == $category['category_id'] ? 'selected' : ''; ?>><?= $category['name_category']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
                         <div class="select-style-1">
                             <label for="multiple-select-custom-field">Pilih Tag</label>
-                            <select name="tags[]" multiple="multiple" id="multiple-select-custom-field" data-placeholder="Pilih Tag">
+                            <select name="tags[]" multiple="multiple" id="multiple-select-custom-field" data-placeholder="Pilih Tag" style="width: 100%">
                                 <?php foreach ($tags as $tag) : ?>
-                                    <option value="<?= $tag['tags_id']; ?>"><?= $tag['name_tag']; ?></option>
+                                    <option value="<?= $tag['tags_id']; ?>" <?= in_array($tag['name_tag'], $tags_name) ? 'selected' : ''; ?>><?= $tag['name_tag']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -136,11 +141,13 @@ if (isset($_POST["submit"])) {
                                 <button class="ql-clean"></button>
                             </span>
                         </div>
-                        <div id="quill-editor"></div>
+                        <div id="quill-editor">
+                            <?= htmlspecialchars_decode($post_id[0]['content']) ?>
+                        </div>
                         <input type="hidden" name="content" id="content">
                         <div class="d-flex justify-content-end mt-30 gap-3">
                             <a href="index-post.php" class="main-btn light-btn btn-hover">Gak Jadi</a>
-                            <button type="submit" class="main-btn primary-btn btn-hover" name="submit">Create Post
+                            <button type="submit" class="main-btn primary-btn btn-hover" name="submit">Update Post
                             </button>
                         </div>
                     </form>
@@ -180,16 +187,20 @@ if (isset($_POST["submit"])) {
         });
 
         function previewImage(input) {
-            const preview = document.getElementById('preview');
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
+        const preview = document.getElementById('preview');
+        const imagePreview = document.getElementById('preview-image');
 
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                imagePreview.classList.remove('d-none');
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
 
         const Toast = Swal.mixin({

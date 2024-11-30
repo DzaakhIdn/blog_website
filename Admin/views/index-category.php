@@ -159,18 +159,45 @@ $categories = $category->all_paginate($offset, $limit);
                 <!-- end table -->
                 <nav aria-label="Page navigation">
                   <ul class="pagination justify-content-end mt-4">
+                    <!-- Tombol Previous -->
                     <li class="page-item <?= ($pageActive == 1) ? 'disabled' : '' ?>">
                       <a class="page-link border-0 rounded-2 me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;" href="?page=<?= $prev ?>">
                         <i class="lni lni-chevron-left"></i>
                       </a>
                     </li>
 
-                    <?php for ($i = 1; $i <= $countPage; $i++): ?>
-                      <li class="page-item <?= ($pageActive == $i) ? 'active' : '' ?>">
-                        <a class="page-link border-0 rounded-2 me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;" href="?page=<?= $i ?>"><?= $i ?></a>
-                      </li>
-                    <?php endfor; ?>
+                    <?php
+                    // Menentukan range halaman yang ditampilkan
+                    $range = 2; // Jumlah halaman sebelum/sesudah halaman aktif
+                    $start = max(1, $pageActive - $range);
+                    $end = min($countPage, $pageActive + $range);
 
+                    // Tombol untuk halaman pertama jika tidak masuk dalam range
+                    if ($start > 1) {
+                      echo '<li class="page-item"><a class="page-link border-0 rounded-2 me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;" href="?page=1">1</a></li>';
+                      if ($start > 2) {
+                        echo '<li class="page-item disabled"><span class="page-link border-0 rounded-2 me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">...</span></li>';
+                      }
+                    }
+
+                    // Halaman dalam range
+                    for ($i = $start; $i <= $end; $i++) {
+                      $activeClass = ($pageActive == $i) ? 'active' : '';
+                      echo '<li class="page-item ' . $activeClass . '">
+                <a class="page-link border-0 rounded-2 me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;" href="?page=' . $i . '">' . $i . '</a>
+              </li>';
+                    }
+
+                    // Tombol untuk halaman terakhir jika tidak masuk dalam range
+                    if ($end < $countPage) {
+                      if ($end < $countPage - 1) {
+                        echo '<li class="page-item disabled"><span class="page-link border-0 rounded-2 me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">...</span></li>';
+                      }
+                      echo '<li class="page-item"><a class="page-link border-0 rounded-2 me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;" href="?page=' . $countPage . '">' . $countPage . '</a></li>';
+                    }
+                    ?>
+
+                    <!-- Tombol Next -->
                     <li class="page-item <?= ($pageActive == $countPage) ? 'disabled' : '' ?>">
                       <a class="page-link border-0 rounded-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;" href="?page=<?= $next ?>">
                         <i class="lni lni-chevron-right"></i>
@@ -178,6 +205,7 @@ $categories = $category->all_paginate($offset, $limit);
                     </li>
                   </ul>
                 </nav>
+
               </div>
             </div>
             <!-- end card -->
@@ -209,11 +237,11 @@ $categories = $category->all_paginate($offset, $limit);
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="text/javascript">
     $(document).ready(function() {
-    
+
       $('#search-input').on('keyup', function() {
         $('#bungkus-table').load(`../search/search_category.php?keyword=` + $('#search-input').val());
       });
-      
+
       const Toast = Swal.mixin({
         toast: true,
         position: "top-end",

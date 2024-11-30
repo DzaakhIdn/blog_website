@@ -12,7 +12,7 @@ if (!isset($_SESSION["id_user"])) {
   $avatar = $user['avatar'];
 }
 
-$limit = 3; // Data per page
+$limit = 6; // Data per page
 $pageActive = isset($_GET["page"]) ? (int)$_GET["page"] : 1; // Halaman yang aktif
 $length = count($post->all()); // Total data
 $countPage = ceil($length / $limit);
@@ -58,10 +58,6 @@ $posts = $post->all_paginate2($id, $offset, $limit);
     transition: opacity 0.3s ease;
   }
 
-  .image-container:hover .hover-options {
-    opacity: 1;
-  }
-
   .hover-options i {
     font-size: 1.5rem;
     cursor: pointer;
@@ -70,6 +66,14 @@ $posts = $post->all_paginate2($id, $offset, $limit);
 
   .hover-options i:hover {
     transform: scale(1.2);
+  }
+
+  .card_isi:hover .image-container .hover-options {
+    opacity: 1;
+  }
+
+  .card_isi:hover {
+    cursor: pointer;
   }
 </style>
 
@@ -139,7 +143,7 @@ $posts = $post->all_paginate2($id, $offset, $limit);
                 </a>
               </div>
             </div>
-            <div>
+            <div id="bungkus-post">
               <?php if (empty($posts)) : ?>
                 <div class="d-flex justify-content-center align-items-center min-vh-50 m-5">
                   <div class="pesan text-center">
@@ -154,7 +158,7 @@ $posts = $post->all_paginate2($id, $offset, $limit);
               <?php else : ?>
                 <div id="card_container" class="row g-3">
                   <?php foreach ($posts as $pos) : ?>
-                    <div class="col-lg-4">
+                    <div class="card_isi col-lg-4">
                       <div class="card p-3 shadow-sm border rounded">
                         <div class="image-container position-relative mb-3 overflow-hidden rounded">
                           <img
@@ -162,14 +166,14 @@ $posts = $post->all_paginate2($id, $offset, $limit);
                             alt=""
                             class="img-fluid rounded"
                             style="height: 12rem; object-fit: cover; width: 100%;" />
-                          <div class="hover-options position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center gap-3">
-                            <i class="fa-solid fa-eye text-white bg-primary py-2 px-3 rounded small"></i>
-                            <i class="fa-solid fa-pen-to-square text-white bg-success py-2 px-3 rounded small"></i>
-                            <i class="fa-solid fa-trash text-white bg-danger py-2 px-3 rounded small"></i>
+                          <div class="opsi hover-options position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center gap-3">
+                            <a class="fa-solid fa-eye text-white bg-primary py-2 px-3 rounded small"></a>
+                            <a href="index.php?pg=edit_post&id=<?= $pos['id_post'] ?>" class="fa-solid fa-pen-to-square text-white bg-success py-2 px-3 rounded small"></a>
+                            <button id="btn_hapus" data-id="<?= $pos['id_post'] ?>" class="btn fa-solid fa-trash text-white bg-danger py-2 px-3 rounded small"></button>
                           </div>
                         </div>
                         <div class="mb-3">
-                          <h5 class="fw-bold text-dark"><?= $pos['title'] ?></h5>
+                          <h5 class="fw -bold text-dark"><?= $pos['title'] ?></h5>
                           <div class="small" style="max-width: 250px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                             <?= htmlspecialchars_decode($pos['content']) ?>
                           </div>
@@ -199,6 +203,54 @@ $posts = $post->all_paginate2($id, $offset, $limit);
                 </div>
               <?php endif; ?>
             </div>
+            <nav aria-label="Page navigation" class="mt-10">
+              <ul class="pagination justify-content-end mt-4">
+                <!-- Tombol Previous -->
+                <li class="page-item <?= ($pageActive == 1) ? 'disabled' : '' ?>">
+                  <a class="page-link border-0 rounded-2 me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;" href="?page=<?= $prev ?>">
+                    <i class="lni lni-chevron-left"></i>
+                  </a>
+                </li>
+
+                <?php
+                // Menentukan range halaman yang ditampilkan
+                $range = 2; // Jumlah halaman sebelum/sesudah halaman aktif
+                $start = max(1, $pageActive - $range);
+                $end = min($countPage, $pageActive + $range);
+
+                // Tombol untuk halaman pertama jika tidak masuk dalam range
+                if ($start > 1) {
+                  echo '<li class="page-item"><a class="page-link border-0 rounded-2 me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;" href="?page=1">1</a></li>';
+                  if ($start > 2) {
+                    echo '<li class="page-item disabled"><span class="page-link border-0 rounded-2 me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">...</span></li>';
+                  }
+                }
+
+                // Halaman dalam range
+                for ($i = $start; $i <= $end; $i++) {
+                  $activeClass = ($pageActive == $i) ? 'active' : '';
+                  echo '<li class="page-item ' . $activeClass . '">
+                <a class="page-link border-0 rounded-2 me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;" href="?page=' . $i . '">' . $i . '</a>
+              </li>';
+                }
+
+                // Tombol untuk halaman terakhir jika tidak masuk dalam range
+                if ($end < $countPage) {
+                  if ($end < $countPage - 1) {
+                    echo '<li class="page-item disabled"><span class="page-link border-0 rounded-2 me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;">...</span></li>';
+                  }
+                  echo '<li class="page-item"><a class="page-link border-0 rounded-2 me-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;" href="?page=' . $countPage . '">' . $countPage . '</a></li>';
+                }
+                ?>
+
+                <!-- Tombol Next -->
+                <li class="page-item <?= ($pageActive == $countPage) ? 'disabled' : '' ?>">
+                  <a class="page-link border-0 rounded-2 shadow-sm d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;" href="?page=<?= $next ?>">
+                    <i class="lni lni-chevron-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
         <!-- end container -->
@@ -212,6 +264,7 @@ $posts = $post->all_paginate2($id, $offset, $limit);
   <!-- ======== main-wrapper end =========== -->
 
   <!-- ========= All Javascript files linkup ======== -->
+  <script src="./../assets/js/jquery-3.7.1.min.js"></script>
   <script src="./../assets/js/bootstrap.bundle.min.js"></script>
   <script src="./../assets/js/Chart.min.js"></script>
   <script src="./../assets/js/dynamic-pie-chart.js"></script>
@@ -221,6 +274,63 @@ $posts = $post->all_paginate2($id, $offset, $limit);
   <script src="./../assets/js/world-merc.js"></script>
   <script src="./../assets/js/polyfill.js"></script>
   <script src="./../assets/js/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script type="text/javascript">
+    $('#search-input').on('keyup', function() {
+      $('#bungkus-post').load(`../search/search_post.php?keyword=` + $('#search-input').val());
+    });
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+
+    $(document).on('click', '#btn_hapus', function() {
+        var id = $(this).data('id');
+        console.log(id);
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: './../services/delete_post.php',
+              method: 'GET',
+              data: {
+                id: id
+              },
+              success: function(response) {
+                Toast.fire({
+                  icon: "success",
+                  title: "Data deleted successfully"
+                });
+                setTimeout(function() {
+                  window.location.href = "./index-post.php";
+                }, 2200);
+              },
+              error: function(xhr, status, error) {
+                console.error(error);
+                Toast.fire({
+                  icon: "error",
+                  title: "Failed to delete data"
+                });
+              }
+            });
+          }
+        });
+      });
+  </script>
 </body>
 
 </html>

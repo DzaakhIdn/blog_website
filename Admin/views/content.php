@@ -40,6 +40,9 @@ switch ($pg) {
     case 'posts':
         include('./../services/add_post.php');
         break;
+    case 'edit_post':
+        include('./../services/edit_post.php');
+        break;
     default:
         include('./../404.html');
         break;

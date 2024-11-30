@@ -68,24 +68,6 @@ if (!isset($_SESSION["id_user"])) {
                     <h5 class="fw-bold mb-1"><?= $name ?></h5>
                     <p class="text-muted mb-4"><?= $email ?></p>
                 </div>
-                <!-- About Post -->
-                <div class="d-flex align-items-center justify-content-center p-4 bg-light rounded shadow">
-                    <ul class="list-unstyled d-flex align-items-center gap-4 m-0">
-                        <!-- Post Section -->
-                        <li class="text-center">
-                            <h4 class="mb-1 fw-bold text-primary">20</h4>
-                            <p class="mb-0 text-muted">Posts</p>
-                        </li>
-                        <!-- Divider -->
-                        <div class="vr" style="height: 40px; border: 1px solid #ddd;"></div>
-                        <!-- Total Views Section -->
-                        <li class="text-center">
-                            <h4 class="mb-1 fw-bold text-primary">20</h4>
-                            <p class="mb-0 text-muted">Total Views</p>
-                        </li>
-                    </ul>
-                </div>
-
                 <!-- About Section -->
                 <div class="profile-info p-4">
                     <h1 class="fw-bold mb-3">Bio</h1>
