@@ -107,13 +107,7 @@ export function renderNavbar(selector){
       <a href="/" class="title text-2xl font-extrabold">Blog.my</a>
       <ul class="menu menu-horizontal px-1">
         <li>
-          <details>
-            <summary>Categories</summary>
-            <ul class="bg-base-100 rounded-t-none p-2">
-              <li><a>Link 1</a></li>
-              <li><a>Link 2</a></li>
-            </ul>
-          </details>
+          <a href="/src/pages/categories.html">Category</a>
         </li>
         <li>
           <details>
