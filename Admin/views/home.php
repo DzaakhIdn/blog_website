@@ -2,7 +2,16 @@
 require_once __DIR__ . '/../DB/connections.php';
 require_once __DIR__ . '/../Classes/init.php';
 
-$username = $_SESSION['username'];
+if (!isset($_SESSION["id_user"])) {
+  die("Anda harus login untuk mengakses halaman ini");
+} else {
+  $user = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM users WHERE id_user = '$_SESSION[id_user]'"));
+  $id = $user['id_user'];
+  $avatar = $user['avatar'];
+}
+
+$post = new Post();
+$posts = $post->all_paginate2($id);
 ?>
 <div class="container-fluid">
           <!-- ========== title-wrapper start ========== -->
@@ -41,7 +50,7 @@ $username = $_SESSION['username'];
                 </div>
                 <div class="content">
                   <h6 class="mb-10">Total Post</h6>
-                  <h3 class="text-bold mb-10">$74,567</h3>
+                  <h3 class="text-bold mb-10"><?= count($posts) ?></h3>
                 </div>
               </div>
               <!-- End Icon Cart -->
@@ -63,7 +72,7 @@ $username = $_SESSION['username'];
           </div>
           <!-- End Row -->
           <div class="row">
-            
+
           </div>
         </div>
         <!-- end container -->
