@@ -6,7 +6,6 @@ $tag = new Tag();
 
 $categories = $category->all();
 $tags = $tag->all();
-
 if (isset($_POST["submit"])) {
     $post = new Post();
     $result = $post->create($_POST, $_FILES);

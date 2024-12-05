@@ -99,7 +99,7 @@ $categories = $category->all_paginate($offset, $limit);
                   <p class="text-sm">Berikut adalah data tag yang ada</p>
                 </div>
                 <div class="d-flex gap-2 align-items-center">
-                  <a href="index.php?pg=tags" class="btn btn-primary">
+                  <a href="index.php?pg=category" class="btn btn-primary">
                     <i class="fa-solid fa-plus"></i>
                   </a>
                   <form action="" method="get">

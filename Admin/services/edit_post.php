@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../Classes/init.php';
-
 $id = $_GET['id'];
 $posts = new Post();
 $category = new Category();

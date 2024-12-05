@@ -319,4 +319,101 @@ class Post extends Model
 
         return ['status' => true, 'message' => 'Artikel berhasil diperbarui'];
     }
+
+    public function filter_data($id_user = null, $newwst = null, $views = null)
+    {
+        // Validasi parameter
+        $allowed_sort_columns = ['created_at', 'views', 'updated_at']; // Contoh kolom yang diizinkan
+        $allowed_views = ['ASC', 'DESC'];
+
+        // Pastikan `$newwst` valid
+        if ($newwst !== null && !in_array($newwst, $allowed_sort_columns)) {
+            $newwst = null;
+        }
+
+        // Pastikan `$views` valid
+        if ($views !== null && !in_array($views, $allowed_views)) {
+            $views = null;
+        }
+
+        // Query dasar
+        $query = "SELECT 
+            blog_posts.*, 
+            categories.name_category,
+            users.username,
+            users.avatar
+        FROM 
+            blog_posts
+        JOIN 
+            users 
+        ON 
+            blog_posts.user_id = users.id_user 
+        JOIN 
+            categories 
+        ON 
+            blog_posts.id_category = categories.category_id";
+
+        if ($id_user != null) {
+            $query .= " WHERE blog_posts.user_id = $id_user";
+        }
+
+        // Tambahkan pengurutan jika diperlukan
+        if ($newwst !== null) {
+            $query .= " ORDER BY $newwst";
+            if ($views !== null) {
+                $query .= " $views";
+            }
+        }
+
+        $query .= " LIMIT 5";
+
+        $result = mysqli_query($this->db, $query);
+
+        // Periksa jika query gagal
+        if (!$result) {
+            die("Query gagal: " . mysqli_error($this->db));
+        }
+
+        return parent::convert_data($result);
+    }
+
+    public function singgle_post($id_post)
+    {
+        $sql = "SELECT
+    blog_posts.id_post,
+    blog_posts.content,
+    blog_posts.image_url,
+    blog_posts.title,
+    blog_posts.views,
+    blog_posts.created_at,
+    blog_posts.updated_at,
+    categories.name_category,
+    blog_posts.user_id,
+    users.username,
+    users.avatar,
+    GROUP_CONCAT(tags.name_tag SEPARATOR ', ') AS tags
+FROM
+    blog_posts
+JOIN categories ON blog_posts.id_category = categories.category_id
+JOIN users ON blog_posts.user_id = users.id_user
+JOIN pivot_post_tags ON pivot_post_tags.post_id_pivot = blog_posts.id_post
+JOIN tags ON pivot_post_tags.tag_id_pivot = tags.tags_id
+WHERE
+    blog_posts.id_post = '$id_post'
+GROUP BY
+    blog_posts.id_post";
+        $result = $this->db->query($sql)->fetch_assoc();
+        return $result;
+    }
+
+    function count_views($id)
+    {
+        $sql = "SELECT SUM(blog_posts.views) AS total_views
+FROM blog_posts
+JOIN users ON blog_posts.user_id = users.id_user
+WHERE users.id_user = $id;";
+        $result = mysqli_query($this->db, $sql);
+        $result = $result->fetch_assoc();
+        return $result;
+    }
 }

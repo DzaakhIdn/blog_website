@@ -3,7 +3,8 @@ require_once __DIR__ . '/../DB/connections.php';
 require_once __DIR__ . '/../Classes/init.php';
 
 if (!isset($_SESSION["id_user"])) {
-  die("Anda harus login untuk mengakses halaman ini");
+  header("Location: ./../no_permession.html");
+  exit();
 } else {
   $user = mysqli_fetch_array(mysqli_query($conn, "SELECT * FROM users WHERE id_user = '$_SESSION[id_user]'"));
   $id = $user['id_user'];
@@ -12,6 +13,10 @@ if (!isset($_SESSION["id_user"])) {
 
 $post = new Post();
 $posts = $post->all_paginate2($id);
+$posts_new = $post->filter_data($id, 'created_at', 'DESC');
+$posts_popular = $post->filter_data($id, 'views', 'DESC');
+$views = $post->count_views($id);
+$no = 0;
 ?>
 <div class="container-fluid">
   <!-- ========== title-wrapper start ========== -->
@@ -63,75 +68,65 @@ $posts = $post->all_paginate2($id);
         </div>
         <div class="content">
           <h6 class="mb-10">Total Views</h6>
+          <h3 class="text-bold mb-10"><?= $views['total_views'] ?></h3>
+        </div>
+      </div>
+      <!-- End Icon Cart -->
+    </div>
+    <?php if ($user['role'] == 'admin') : ?>
+    <!-- End Col -->
+    <div class="col-xl-3 col-lg-4 col-sm-6">
+      <div class="icon-card mb-30">
+        <div class="icon orange">
+        <i class="fa-solid fa-tags"></i>
+        </div>
+        <div class="content">
+          <h6 class="mb-10">Total Tag</h6>
+          <h3 class="text-bold mb-10">100</h3>
+        </div>
+      </div>
+      <!-- End Icon Cart -->
+    </div>
+    <!-- End Col -->
+    <div class="col-xl-3 col-lg-4 col-sm-6">
+      <div class="icon-card mb-30">
+        <div class="icon purple">
+        <i class="fa-solid fa-layer-group"></i>
+        </div>
+        <div class="content">
+          <h6 class="mb-10">Total Kategori</h6>
           <h3 class="text-bold mb-10">$74,567</h3>
         </div>
       </div>
       <!-- End Icon Cart -->
     </div>
     <!-- End Col -->
-    <div class="row mb-4">
-      <div class="col-md-3">
-        <div class="card shadow-sm text-center p-3">
-          <h5>Total Artikel</h5>
-          <h3>25</h3>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card shadow-sm text-center p-3">
-          <h5>Total Kategori</h5>
-          <h3>10</h3>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card shadow-sm text-center p-3">
-          <h5>Total Tag</h5>
-          <h3>30</h3>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="card shadow-sm text-center p-3">
-          <h5>View Artikel</h5>
-          <h3>1000</h3>
-        </div>
-      </div>
-    </div>
-
+     <?php endif; ?>
     <!-- Artikel Terbaru & Shortcut -->
     <div class="row mb-4">
       <!-- Artikel Terbaru -->
       <div class="col-md-8">
         <h5>Artikel Terbaru</h5>
-        <ul class="list-group">
+        <ul class="list-group mt-2">
+          <?php foreach ($posts_new as $post) : ?>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <div>
-              <strong>Judul Artikel 1</strong>
-              <p class="mb-0">Kategori: Lifestyle</p>
+              <strong><?= $post['title'] ?></strong>
+              <p class="mb-0">Kategori: <?= $post['name_category'] ?></p>
             </div>
-            <span>12 Nov 2024</span>
+            <span><?= date('d M Y', strtotime($post['created_at'])) ?></span>
           </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <strong>Judul Artikel 2</strong>
-              <p class="mb-0">Kategori: Teknologi</p>
-            </div>
-            <span>10 Nov 2024</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <strong>Judul Artikel 3</strong>
-              <p class="mb-0">Kategori: Pendidikan</p>
-            </div>
-            <span>8 Nov 2024</span>
-          </li>
+          <?php endforeach; ?>
         </ul>
       </div>
       <!-- Shortcut -->
       <div class="col-md-4">
-        <h5>Shortcut</h5>
-        <div class="d-grid gap-3">
-          <a href="#" class="btn btn-primary">Buat Artikel Baru</a>
-          <a href="#" class="btn btn-outline-secondary">Kelola Kategori</a>
-          <a href="#" class="btn btn-outline-secondary">Kelola Tag</a>
+        <h5>Tambah Artikel</h5>
+        <div class="d-flex justify-content-center align-items-center w-100 h-100 py-3">
+          <a href="#" class="btn d-flex align-items-center justify-content-center" style="width: 100%; height: 100%; background-color: #f8f9fa; border: 2px dashed #dee2e6;">
+            <i class="fas fa-plus fa-lg text-secondary"></i>
+            <span class="d-none">Buat Artikel Baru</span>
+          </a>
         </div>
       </div>
     </div>
@@ -151,24 +146,15 @@ $posts = $post->all_paginate2($id);
               </tr>
             </thead>
             <tbody>
+              <?php foreach ($posts_popular as $post) : ?>
+                <?php $no++ ?>
               <tr>
-                <td>1</td>
-                <td>Judul Artikel A</td>
-                <td>Teknologi</td>
-                <td>500</td>
+                <td><?= $no ?></td>
+                <td><?= $post['title'] ?></td>
+                <td><?= $post['name_category'] ?></td>
+                <td><?= $post['views'] ?></td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td>Judul Artikel B</td>
-                <td>Pendidikan</td>
-                <td>300</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Judul Artikel C</td>
-                <td>Lifestyle</td>
-                <td>200</td>
-              </tr>
+              <?php endforeach; ?>
             </tbody>
           </table>
         </div>

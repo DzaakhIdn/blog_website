@@ -63,7 +63,7 @@ class User extends Model
 
                 $nama_file_baru = random_int(1000, 9999) . "_" . time() . "." . $avatar_extension;
 
-                if(!file_exists($upload_path)) {
+                if (!file_exists($upload_path)) {
                     mkdir($upload_path, 0777, true);
                 }
 
@@ -119,15 +119,15 @@ class User extends Model
             ];
         }
 
-        $email = $datas['email'];
-        $password = $datas['password'];
-        $username = $datas['username'];
-        $notelp = $datas['phone'];
+        $email = mysqli_real_escape_string($this->db, $datas['email']);
+        $password = mysqli_real_escape_string($this->db, $datas['password']);
+        $username = mysqli_real_escape_string($this->db, $datas['username']);
+        $notelp = mysqli_real_escape_string($this->db, $datas['phone']);
 
         $sql = "SELECT * FROM $this->table WHERE email = '$email'";
         $result = mysqli_query($this->db, $sql);
 
-        if ($result->num_rows > 0) {
+        if (mysqli_num_rows($result) > 0) {
             return [
                 'status' => false,
                 'message' => 'Email sudah terdaftar'
@@ -146,8 +146,8 @@ class User extends Model
                 ];
             }
             if ($result) {
-                $user = mysqli_fetch_assoc($result);
-                $_SESSION['id_user'] = $user['id_user'];
+                $user = mysqli_insert_id($this->db);
+                $_SESSION['id_user'] = $user;
                 $_SESSION['username'] = $username;
                 $_SESSION['email'] = $email;
                 $_SESSION['phone'] = $notelp;

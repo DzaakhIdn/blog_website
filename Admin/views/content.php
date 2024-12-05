@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../Classes/init.php';
+
 if (!isset($_GET['pg'])) {
     $pg = '';
 }
@@ -18,6 +20,7 @@ switch ($pg) {
         include('./../services/signup.php');
         break;
     case 'category':
+
         if (!isset($_GET['id'])) {
             include('./../services/add_category.php');
         } else {

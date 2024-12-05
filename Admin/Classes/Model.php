@@ -96,4 +96,49 @@ class Model extends Connection
 
         return $this->convert_data($result);
     }
+
+    public function all_filter($id_user, $table, $newwst = null, $views = null)
+    {
+        // Validasi parameter
+        $allowed_sort_columns = ['created_at', 'views', 'updated_at']; // Contoh kolom yang diizinkan
+        $allowed_views = ['ASC', 'DESC'];
+
+        // Pastikan `$newwst` valid
+        if ($newwst !== null && !in_array($newwst, $allowed_sort_columns)) {
+            $newwst = null;
+        }
+
+        // Pastikan `$views` valid
+        if ($views !== null && !in_array($views, $allowed_views)) {
+            $views = null;
+        }
+
+        // Query dasar
+        $query = "SELECT * FROM $table WHERE user_id = '$id_user'";
+
+        // Tambahkan pengurutan jika diperlukan
+        if ($newwst !== null) {
+            $query .= " ORDER BY $newwst";
+            if ($views !== null) {
+                $query .= " $views";
+            }
+        }
+
+        $result = mysqli_query($this->db, $query);
+
+        // Periksa jika query gagal
+        if (!$result) {
+            die("Query gagal: " . mysqli_error($this->db));
+        }
+
+        return $this->convert_data($result);
+    }
+
+    public function cek_atmin()
+    {
+        $sql = "SELECT * FROM users WHERE id_user = 10 AND role = 'admin'";
+        $result = mysqli_query($this->db, $sql);
+
+        return $this->convert_data($result);
+    }
 }

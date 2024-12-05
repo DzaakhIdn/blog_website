@@ -173,7 +173,7 @@ $posts = $post->all_paginate2($id, $offset, $limit);
                           </div>
                         </div>
                         <div class="mb-3">
-                          <h5 class="fw -bold text-dark"><?= $pos['title'] ?></h5>
+                          <h5 class="fw -bold text-dark" style="max-width: 280px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;"><?= $pos['title'] ?></h5>
                           <div class="small" style="max-width: 250px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
                             <?= htmlspecialchars_decode($pos['content']) ?>
                           </div>

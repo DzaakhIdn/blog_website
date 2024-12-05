@@ -1,111 +1,60 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Single Blog</title>
-    <!-- CSS -->
-    <link rel="stylesheet" href="./../css/output.css" />
-    <link rel="stylesheet" href="./../css/custom_css/styles.css" />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
-    />
-    <link rel="stylesheet" href="./src/css/custom_css/styles.css" />
-    <!-- Icon -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav id="navbar" class="nav_lg"></nav>
+<?php
+require_once("./Admin/DB/connections.php");
+require_once("./Admin/Classes/init.php");
+$post = new Post();
+$id = $_GET['content'];
+$posts_id = $post->find(base64_decode($id));
+$posts = $post->singgle_post(base64_decode($id));
+$tags = $post->find_tag(base64_decode($id));
+$tags_name = array_column($tags, 'name_tag');
+$id_user = $posts['user_id'];
+$all_post = $post->all_paginate2($id_user); 
+$sql_add_Views = "UPDATE blog_posts SET views = views + 1 WHERE id_post = ".base64_decode($id);
+mysqli_query($conn, $sql_add_Views);
+$popular_post = $post->filter_data(null, 'views', 'DESC');
+$sql_random = "SELECT blog_posts.*, users.username, users.avatar FROM blog_posts JOIN users ON blog_posts.user_id = users.id_user ORDER BY RAND() LIMIT 4";
+$result_random = $conn->query($sql_random);
+$random_post = $result_random->fetch_all(MYSQLI_ASSOC);
+//var_dump($posts);
+?>
+<title>Blog | <?= $posts['title']; ?></title>
     <div class="breadcrumbs text-sm px-5 lg:px-8 mt-5">
       <ul>
         <li><a>Home</a></li>
         <li><a>Featured</a></li>
-        <li class="text-slate-400">Everest Bagus Banget Bjir</li>
+        <li class="text-slate-400"><?= $posts['title']; ?></li>
       </ul>
     </div>
 
     <!-- Main Content -->
     <main class="main_content px-5 lg:px-8 mt-5 lg:flex lg:gap-7 ">
       <div class="main_content_container flex flex-col gap-5 lg:max-w-[70%]">
-        <h1 class="text-2xl lg:text-[50px] text-slate-700 font-bold w-1/2" style="font-family: 'Raleway';"> 
-          Everest Bagus Banget Bjir Kalian Harus Kesana Sih
+        <h1 class="text-2xl lg:text-[50px] text-slate-700 font-bold w-3/4 leading-none" style="font-family: 'Raleway';"> 
+          <?= $posts['title']; ?>
         </h1>
         <div class="main_content_container_img rounded-xl overflow-hidden">
           <img
-            src="../../assets/card_img/card_1.jpg"
-            alt="Everest Bagus Banget Bjir"
+            src="./public/img/post_img/<?= $posts['image_url']; ?>"
+            alt="<?= $posts['title']; ?>"
             class="w-full h-full object-cover"
           />
         </div>
         <div class="post_status flex gap-2 justify-evenly items-center">
           <div class="uploaded_date flex gap-2 items-center">
             <i class="fa-regular fa-calendar text-slate-500"></i>
-            <p class="text-slate-500">July 14, 2024</p>
+            <p class="text-slate-500"><?= date('M d, Y', strtotime($posts['created_at'])) ?></p>
           </div>
           <div class="comments flex gap-2 items-center">
-            <i class="fa-regular fa-comment-dots text-slate-500"></i>
-            <p class="text-slate-500">10</p>
+          <i class="fa-solid fa-eye text-slate-500"></i>
+            <p class="text-slate-500"><?= $posts['views']; ?></p>
           </div>
           <div class="category flex gap-2 items-center">
             <i class="fa-solid fa-tags text-slate-500"></i>
-            <p class="text-slate-500">Adventure</p>
+            <p class="text-slate-500"><?= $posts['name_category']; ?></p>
           </div>
         </div>
         <div class="content">
-          <span class="font-bold"
-            >Gunung Everest: Puncak Tertinggi yang Jadi Impian Para
-            Pendaki!</span
-          >
-          <br /><br />
-          <p class="text-slate-700">
-            Gunung Everest itu nggak cuma puncak tertinggi di dunia—dia tuh
-            semacam ikon! Berada di ketinggian 8.848 meter, Everest selalu jadi
-            magnet buat para pendaki dan petualang yang punya jiwa berani.
-            Kebayang nggak, mendaki gunung ini bisa bikin kita ngerasa kayak ada
-            di ujung dunia? Di atas sana, kamu bakal disuguhi pemandangan yang
-            luar biasa: lembah-lembah dalam, gletser yang membeku, dan
-            puncak-puncak gunung lain yang gagah berdiri. Saat matahari terbit
-            atau terbenam, pemandangannya dijamin bikin melongo! <br /><br />
-          </p>
-          <div class="side_img rounded-xl overflow-hidden h-40">
-            <img src="../../assets/card_img/side_img.jpg" alt="Everest" />
-          </div>
-          <p class="text-slate-700 mt-5">
-            Selain itu, Everest punya makna spiritual yang kuat, lho. Bagi
-            masyarakat Sherpa yang tinggal di sekitar kaki gunung, Everest
-            disebut "Chomolungma," yang berarti "Dewi Bumi." Sebelum mendaki,
-            biasanya mereka melakukan ritual khusus buat menghormati gunung ini.
-            Kebayang nggak, gimana Everest dihormati bukan cuma sebagai tempat
-            petualangan, tapi juga sebagai simbol suci? <br /><br />
-            Nah, soal tantangan, Everest itu bukan main-main, bro! Jalur curam,
-            suhu minus, dan udara tipis jadi ujian super berat buat para
-            pendaki. Buat yang berhasil, mendaki Everest rasanya kayak menang
-            dari diri sendiri. Banyak pendaki yang harus latihan bertahun-tahun
-            dulu sebelum nekat mencoba. Kebayang kan, tantangan sekeras itu
-            bikin Everest makin diidam-idamkan sama banyak orang? <br /><br />
-            Nggak cuma buat pendaki, Everest juga jadi tujuan ilmuwan! Gunung
-            ini menyimpan banyak informasi soal perubahan iklim, lewat
-            gletsernya yang mencair perlahan. Setiap perubahan kecil di sini
-            bisa ngasih petunjuk penting buat kita tahu lebih banyak soal
-            pemanasan global. Plus, flora dan fauna di kaki gunung ini punya
-            keunikan tersendiri, lho! Sejak pertama kali ditaklukkan pada 1953
-            oleh Sir Edmund Hillary dan Tenzing Norgay, Everest terus jadi
-            tempat yang menginspirasi banyak orang buat nggak takut sama
-            tantangan. Buat kamu yang punya jiwa petualang, Everest adalah bukti
-            kalau alam itu keren banget dan layak buat dijelajahi! Jadi, siap
-            nggak buat punya mimpi besar? Gunung Everest bakal selalu ada di
-            sana, menantang kita yang berani buat mencoba!
-          </p>
+          <?= htmlspecialchars_decode($posts['content']); ?>
         </div>
         <div class="comments_lg px-5 mt-7 hidden lg:block">
           <div class="comments_container">
@@ -297,110 +246,53 @@
                   class="profile_author_img hover:cursor-pointer  rounded-md w-[87px] h-[87px] bg-cover bg-center overflow-hidden"
                 >
                   <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    src="<?= $posts['avatar'] ? "./public/img/profile/$posts[avatar]" : "./Admin/assets/images/profile/no-profile.png"; ?>"
                     alt="Profile Author"
                     class="w-full h-full object-cover"
                   />
                 </div>
                 <div class="flex flex-col gap-3">
-                  <a href="./about_author.html" class="font-semibold text-slate-700 text-lg">Bang Boo</a>
+                  <a href="./about_author.html" class="font-semibold text-slate-700 text-lg"><?= $posts['username'] ?></a>
                   <div
                     id="btn_follow"
                     class="bg-[#F81539]/75 rounded-lg px-3 py-1 flex gap-2 items-center"
                   >
                     <i class="ph-bold ph-plus text-white text-[16px]"></i>
-                    <p class="text-white text-[16px]">follow</p>
+                    <p class="text-white text-[16px]">view</p>
                   </div>
                 </div>
               </div>
-              <p class="text-slate-500 text-[14px] self-start">12 posts</p>
+              <p class="text-slate-500 text-[14px] self-start"><?= count($all_post) ?></p>
             </div>
           </div>
           <div class="tags_aside bg-slate-100 rounded-lg p-3">
             <p class="font-semibold text-slate-700 text-base">Related Tags</p>
             <div class="tags_container flex gap-2 flex-wrap">
-              <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
-                Adventure
-              </p>
-              <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
-                Mountains
-              </p>
-              <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
-                Traveling
-              </p>
-              <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
-                World
-              </p>
+              <?php foreach ($tags as $tag) : ?>
+                <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
+                  <?= $tag['name_tag'] ?>
+                </p>
+              <?php endforeach; ?>
             </div>
           </div>
           <div class="popular_aside bg-slate-100 rounded-lg p-3 space-y-5">
             <p class="font-semibold text-slate-700 text-base">Popular Post</p>
             <div class="popular_post flex flex-col gap-4">
-              <div class="card_popular flex gap-3 items-start">
+              <?php foreach ($popular_post as $post) : ?>
+              <div class="card_popular flex gap-3 items-start" onclick="window.location.href='?pg=post&content=<?= base64_encode($post['id_post']) ?>'" style="cursor: pointer;">
                 <div class="img_card rounded-md w-[87px] h-[87px] flex-shrink-0">
                   <img
-                    src="../../assets/card_img/card_1.jpg"
+                    src="./public/img/post_img/<?= $post['image_url']; ?>"
                     alt="Popular Post"
                     class="rounded-md w-full h-full object-cover"
                   />
                 </div>
                 <div class="card_title">
-                  <p class="font-semibold text-lg text-slate-800 line-clamp-1">Everest Bagus Banget Bjir</p>
-                  <p class="text-slate-500 text-[14px] line-clamp-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, non.</p>
+                  <p class="font-semibold text-lg text-slate-800 line-clamp-1"><?= $post['title'] ?></p>
+                  <div class="text-slate-500 text-[14px] line-clamp-2"><?= htmlspecialchars_decode($post['content']) ?></div>
                 </div>
               </div>
-              <div class="card_popular flex gap-3 items-start">
-                <div class="img_card rounded-md w-[87px] h-[87px] flex-shrink-0">
-                  <img
-                    src="../../assets/card_img/card_1.jpg"
-                    alt="Popular Post"
-                    class="rounded-md w-full h-full object-cover"
-                  />
-                </div>
-                <div class="card_title">
-                  <p class="font-semibold text-lg text-slate-800 line-clamp-1">Everest Bagus Banget Bjir</p>
-                  <p class="text-slate-500 text-[14px] line-clamp-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, non.</p>
-                </div>
-              </div>
-              <div class="card_popular flex gap-3 items-start">
-                <div class="img_card rounded-md w-[87px] h-[87px] flex-shrink-0">
-                  <img
-                    src="../../assets/card_img/card_1.jpg"
-                    alt="Popular Post"
-                    class="rounded-md w-full h-full object-cover"
-                  />
-                </div>
-                <div class="card_title">
-                  <p class="font-semibold text-lg text-slate-800 line-clamp-1">Everest Bagus Banget Bjir</p>
-                  <p class="text-slate-500 text-[14px] line-clamp-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, non.</p>
-                </div>
-              </div>
-              <div class="card_popular flex gap-3 items-start">
-                <div class="img_card rounded-md w-[87px] h-[87px] flex-shrink-0">
-                  <img
-                    src="../../assets/card_img/card_1.jpg"
-                    alt="Popular Post"
-                    class="rounded-md w-full h-full object-cover"
-                  />
-                </div>
-                <div class="card_title">
-                  <p class="font-semibold text-lg text-slate-800 line-clamp-1">Everest Bagus Banget Bjir</p>
-                  <p class="text-slate-500 text-[14px] line-clamp-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, non.</p>
-                </div>
-              </div>
-              <div class="card_popular flex gap-3 items-start">
-                <div class="img_card rounded-md w-[87px] h-[87px] flex-shrink-0">
-                  <img
-                    src="../../assets/card_img/card_1.jpg"
-                    alt="Popular Post"
-                    class="rounded-md w-full h-full object-cover"
-                  />
-                </div>
-                <div class="card_title">
-                  <p class="font-semibold text-lg text-slate-800 line-clamp-1">Everest Bagus Banget Bjir</p>
-                  <p class="text-slate-500 text-[14px] line-clamp-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, non.</p>
-                </div>
-              </div>
+              <?php endforeach; ?>
             </div>
           </div>
         </div>
@@ -409,18 +301,11 @@
         <div class="tags rounded-lg p-3">
           <p class="font-semibold text-slate-700 text-base">Related Tags</p>
           <div class="tags_container flex gap-2 flex-wrap">
-            <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
-              Adventure
-            </p>
-            <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
-              Mountains
-            </p>
-            <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
-              Traveling
-            </p>
-            <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
-              World
-            </p>
+            <?php foreach ($tags_name as $tag) : ?>
+              <p class="tag text-[13px] bg-slate-600 px-2 py-1 rounded-md text-white">
+                <?= $tag ?>
+              </p>
+            <?php endforeach; ?>
           </div>
         </div>
         <div class="action flex gap-2 justify-between items-center">
@@ -632,26 +517,24 @@
     </section>
 
     <section class="popular mt-8 lg:mt-12 px-5 lg:px-8 space-y-3">
-      <p class="font-semibold text-slate-700 text-2xl">Popular Post</p>
+      <p class="font-semibold text-slate-700 text-2xl">Recomendation Post</p>
       <div class="carrousel_post flex pb-6 overflow-hidden">
-        <div
-          class="card p-3 shadow-md flex flex-col border mt-3 mb-3 hover:shadow-lg hover:cursor-pointer"
-        >
+        <?php foreach ($random_post as $post) : ?>
+        <div class="card p-3 shadow-md flex flex-col border mt-3 mb-3 hover:shadow-lg hover:cursor-pointer">
           <div class="img_card rounded-md mb-2">
             <img
-              src="../../assets/card_img/card_1.jpg"
+              src="./public/img/post_img/<?= $post['image_url'] ?>"
               alt=""
               class="rounded-md"
             />
           </div>
           <div class="card_title mb-2">
-            <p class="font-bold text-lg text-slate-800">
-              Everest Bagus Banget Bjir
+            <p class="font-bold text-lg text-slate-800 truncate">
+              <?= $post['title'] ?>
             </p>
-            <p class="text-slate-500 text-[14px]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
-              non.
-            </p>
+            <div class="text-slate-500 text-[14px] line-clamp-2">
+              <?= htmlspecialchars_decode($post['content']) ?>
+            </div>
           </div>
           <div
             class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2"
@@ -660,14 +543,14 @@
               <div class="avatar">
                 <div class="w-10 rounded-lg">
                   <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    src="<?= $post['avatar'] ? "./public/img/profile/$post[avatar]" : "./Admin/assets/images/profile/no-profile.png"; ?>"
                     alt="Tailwind-CSS-Avatar-component"
                   />
                 </div>
               </div>
               <div class="header">
-                <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
-                <p class="text-[12px] text-slate-700">July 14, 2024</p>
+                <p class="font-bold text-[14px] text-slate-800"><?= $post['username'] ?></p>
+                <p class="text-[12px] text-slate-700"><?= date('M d, Y', strtotime($posts['created_at'])) ?></p>
               </div>
             </div>
             <div class="save_icon w-10 h-10 grid place-items-center">
@@ -675,155 +558,10 @@
             </div>
           </div>
         </div>
-        <div
-          class="card p-3 shadow-md flex flex-col gap-2 border mt-3 mb-3 hover:shadow-lg hover:cursor-pointer"
-        >
-          <div class="img_card rounded-md mb-2">
-            <img
-              src="../../assets/card_img/card_1.jpg"
-              alt=""
-              class="rounded-md"
-            />
-          </div>
-          <div class="card_title mb-2">
-            <p class="font-bold text-lg text-slate-800">
-              Everest Bagus Banget Bjir
-            </p>
-            <p class="text-slate-500 text-[14px]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
-              non.
-            </p>
-          </div>
-          <div
-            class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2"
-          >
-            <div class="avatar_info flex w-full items-center gap-2">
-              <div class="avatar">
-                <div class="w-10 rounded-lg">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt="Tailwind-CSS-Avatar-component"
-                  />
-                </div>
-              </div>
-              <div class="header">
-                <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
-                <p class="text-[12px] text-slate-700">July 14, 2024</p>
-              </div>
-            </div>
-            <div class="save_icon w-10 h-10 grid place-items-center">
-              <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
-            </div>
-          </div>
-        </div>
-        <div
-          class="card p-3 shadow-md flex flex-col gap-2 border mt-3 mb-3 hover:shadow-lg hover:cursor-pointer"
-        >
-          <div class="img_card rounded-md mb-2">
-            <img
-              src="../../assets/card_img/card_1.jpg"
-              alt=""
-              class="rounded-md"
-            />
-          </div>
-          <div class="card_title mb-2">
-            <p class="font-bold text-lg text-slate-800">
-              Everest Bagus Banget Bjir
-            </p>
-            <p class="text-slate-500 text-[14px]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
-              non.
-            </p>
-          </div>
-          <div
-            class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2"
-          >
-            <div class="avatar_info flex w-full items-center gap-2">
-              <div class="avatar">
-                <div class="w-10 rounded-lg">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt="Tailwind-CSS-Avatar-component"
-                  />
-                </div>
-              </div>
-              <div class="header">
-                <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
-                <p class="text-[12px] text-slate-700">July 14, 2024</p>
-              </div>
-            </div>
-            <div class="save_icon w-10 h-10 grid place-items-center">
-              <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
-            </div>
-          </div>
-        </div>
-        <div
-          class="card p-3 shadow-md flex flex-col gap-2 border mt-3 mb-3 hover:shadow-lg hover:cursor-pointer"
-        >
-          <div class="img_card rounded-md mb-2">
-            <img
-              src="../../assets/card_img/card_1.jpg"
-              alt=""
-              class="rounded-md"
-            />
-          </div>
-          <div class="card_title mb-2">
-            <p class="font-bold text-lg text-slate-800">
-              Everest Bagus Banget Bjir
-            </p>
-            <p class="text-slate-500 text-[14px]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
-              non.
-            </p>
-          </div>
-          <div
-            class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2"
-          >
-            <div class="avatar_info flex w-full items-center gap-2">
-              <div class="avatar">
-                <div class="w-10 rounded-lg">
-                  <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt="Tailwind-CSS-Avatar-component"
-                  />
-                </div>
-              </div>
-              <div class="header">
-                <p class="font-bold text-[14px] text-slate-800">Bang Boo</p>
-                <p class="text-[12px] text-slate-700">July 14, 2024</p>
-              </div>
-            </div>
-            <div class="save_icon w-10 h-10 grid place-items-center">
-              <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
-            </div>
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
     </section>
 
-    <!-- Mobile Navigation -->
-    <footer id="mobile_navigation" class="mobile_navigation"></footer>
-    <!-- Tab and Large Footer -->
-    <footer id="lg_footer" class="lg_footer py-5 my-5 w-full"></footer>
-
-    <!-- ModuleScripts -->
-    <script src="../../node_modules/preline/dist/preline.js"></script>
-    <script src="./../js/jquery-3.7.1.min.js"></script>
-    <script
-      type="text/javascript"
-      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-    ></script>
-    <!-- Script -->
-    <script type="module">
-      import { renderNavigation } from "../js/components.js";
-      renderNavigation("#mobile_navigation");
-
-      import { renderNavbar } from "../js/components.js";
-      renderNavbar("#navbar");
-
-      import { renderFooter } from "../js/components.js";
-      renderFooter("#lg_footer");
-    </script>
     <script>
       const ratingButtons = document.querySelectorAll(".rating-btn");
 
@@ -885,5 +623,3 @@
         });
       });
     </script>
-  </body>
-</html>
