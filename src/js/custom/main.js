@@ -26,6 +26,8 @@ $(document).ready(function(){
             }
         ]
     });
+    
+    
 
     $('.slider').slick({
         slidesToShow: 1,
@@ -35,51 +37,6 @@ $(document).ready(function(){
         prevArrow: '#btn_left',
         nextArrow: '#btn_right'
     });
-    $('.mobile_tags').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 4500
-    });
-
-    $('.large_tags').slick({
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        infinite: false,
-        prevArrow: '#prev_tags',
-        nextArrow: '#next_tags'
-    });
-    function checkArrow(currentSlides, totalSlides){
-        if(currentSlides == 0){
-            $('#prev_tags').prop('disabled', true).addClass('hidden')
-            $('.penutup_kiri').prop('disabled', true).addClass('hidden')
-        }else{
-            $('#prev_tags').prop('disabled', false).removeClass('hidden')
-            $('.penutup_kiri').prop('disabled', false).removeClass('hidden')
-        }
-
-        if(currentSlides == totalSlides - 1){
-            $('#next_tags').prop('disabled', true).addClass('hidden')
-            $('.penutup_kanan').prop('disabled', true).addClass('hidden')
-        }else{
-            $('#next_tags').prop('disabled', false).removeClass('hidden')
-            $('.penutup_kanan').prop('disabled', false).removeClass('hidden')
-        }
-    }
-
-    $('.large_tags').on('afterChange', function(event, slick, currentSlides){
-        const totalSlides = slick.slideCount;
-        checkArrow(currentSlides, totalSlides)
-    });
-
-    checkArrow(0, $('.large_tags').slick('getSlick').slideCount);
-
-    $('#btn_next').on("click", function(){
-        $('.carrousel_post').slick('slickNext')
-    })
-    $('#btn_prev').on("click", function(){
-        $('.carrousel_post').slick('slickPrev')
-    })
 })
 
 

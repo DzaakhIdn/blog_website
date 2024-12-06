@@ -3,7 +3,8 @@ require_once('./Admin/DB/connections.php');
 require_once('./Admin/Classes/init.php');
 
 $post = new Post();
-$posts = $post->filter_data(null, 'views', 'DESC');
+$posts = $post->filter_data(null, 'views', 'DESC', 5);
+$newest = $post->filter_data(null, 'created_at', 'DESC', 8);
 ?>
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
@@ -30,7 +31,11 @@ $posts = $post->filter_data(null, 'views', 'DESC');
     crossorigin="anonymous"
     referrerpolicy="no-referrer" />
 </head>
-
+<style>
+  .carrousel_author .slick-slide {
+    margin: 0 10px;
+}
+</style>
 <body>
   <?php include('./src/componenet/navbar_lg.php') ?>
 
@@ -52,6 +57,60 @@ $posts = $post->filter_data(null, 'views', 'DESC');
   <!-- Script -->
   <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
+      $('.carrousel_author').slick({
+        infinite: true,
+        slidesToShow: 4, // Default untuk layar besar (lg)
+        slidesToScroll: 1,
+        autoplay: false,
+        responsive: [{
+                breakpoint: 1024, // Untuk layar medium (md)
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    autoplay: false
+                }
+            },
+            {
+                breakpoint: 768, // Untuk layar kecil (sm)
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    autoplay: true,
+                    autoplaySpeed: 4000
+                }
+            }
+        ]
+    });
+
+    $('#carrousel_popular').slick({
+        infinite: true,
+        slidesToShow: 8, // Default untuk layar besar (lg)
+        slidesToScroll: 1,
+        autoplay: false,
+        responsive: [{
+                breakpoint: 1024, // Untuk layar medium (md)
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    autoplay: false
+                }
+            },
+            {
+                breakpoint: 768, // Untuk layar kecil (sm)
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    autoplay: true,
+                    autoplaySpeed: 4000
+                }
+            }
+        ]
+    });
+
       const buttons = document.querySelectorAll(".nav-button");
 
       buttons.forEach((button) => {

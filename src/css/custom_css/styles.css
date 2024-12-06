@@ -15,10 +15,10 @@
     align-items: center;
     border-radius: 12px;
 }
-.carrousel_post .slick-slide {
+/* .slick-slide {
     margin: 0 10px;
-}
-.large_tags .slick-slide {
+} */
+.carrousel_post .slick-slide {
     margin: 0 10px;
 }
 .large_tags{

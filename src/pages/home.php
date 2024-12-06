@@ -1,3 +1,4 @@
+<?php require_once("./Admin/Classes/init.php") ?>
 <header class="grid grid-cols-1 lg:grid-cols-3 gap-5 w-full h-auto mt-10 px-10">
     <!-- Slider container - left side (span 2 columns) -->
     <div class="lg:col-span-2 flex flex-col gap-5">
@@ -156,29 +157,34 @@
             </div>
         </div>
     </div>
-    <div class="carrousel_post pb-6 overflow-hidden">
+    <div class="carrousel_author pb-6 overflow-hidden">
+        <?php 
+        $author = new User();
+        $top_user = $author->top_user();
+        foreach ($top_user as $user) {
+        ?>
         <div
-            class="card_profile p-6 shadow-lg rounded-lg border bg-white flex flex-col items-center justify-center text-center w-full max-w-[300px] mx-auto">
+            class="card_profile p-6 shadow-lg rounded-lg border bg-white flex flex-col items-center justify-center text-center w-full mx-auto">
             <!-- Foto Profil -->
             <div class="avatar w-24 h-24 rounded-full overflow-hidden mb-4">
                 <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    src="<?= $user["avatar"] ? "./public/img/profile/$user[avatar]" : "./Admin/assets/images/profile/no-profile.png"; ?>"
                     alt="Profile Photo"
                     class="w-full h-full object-cover" />
             </div>
 
             <!-- Nama Profil -->
-            <h2 class="font-bold text-lg text-slate-800">John Doe</h2>
-            <p class="text-slate-500 text-sm mb-4">Content Creator & Blogger</p>
+            <h2 class="font-bold text-lg text-slate-800"><?= $user["username"] ?></h2>
+            <p class="text-slate-500 text-sm mb-4"><?= $user["job"] ?? "" ?></p>
 
             <!-- Statistik -->
             <div class="stats w-full flex justify-around border-t border-b py-4">
                 <div class="stat">
-                    <p class="font-bold text-lg text-slate-800">42</p>
+                    <p class="font-bold text-lg text-slate-800"><?= $user["total_posts"] ?></p>
                     <p class="text-slate-500 text-sm">Postingan</p>
                 </div>
                 <div class="stat">
-                    <p class="font-bold text-lg text-slate-800">128</p>
+                    <p class="font-bold text-lg text-slate-800"><?= $user["total_views"] ?></p>
                     <p class="text-slate-500 text-sm">Viewers</p>
                 </div>
             </div>
@@ -191,108 +197,7 @@
                 </button>
             </div>
         </div>
-        <div
-            class="card_profile p-6 shadow-lg rounded-lg border bg-white flex flex-col items-center justify-center text-center w-full max-w-[300px] mx-auto">
-            <!-- Foto Profil -->
-            <div class="avatar w-24 h-24 rounded-full overflow-hidden mb-4">
-                <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt="Profile Photo"
-                    class="w-full h-full object-cover" />
-            </div>
-
-            <!-- Nama Profil -->
-            <h2 class="font-bold text-lg text-slate-800">John Doe</h2>
-            <p class="text-slate-500 text-sm mb-4">Content Creator & Blogger</p>
-
-            <!-- Statistik -->
-            <div class="stats w-full flex justify-around border-t border-b py-4">
-                <div class="stat">
-                    <p class="font-bold text-lg text-slate-800">42</p>
-                    <p class="text-slate-500 text-sm">Postingan</p>
-                </div>
-                <div class="stat">
-                    <p class="font-bold text-lg text-slate-800">128</p>
-                    <p class="text-slate-500 text-sm">Viewers</p>
-                </div>
-            </div>
-
-            <!-- Tombol Aksi -->
-            <div class="actions mt-4 w-full">
-                <button
-                    class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md font-medium">
-                    Lihat Profil
-                </button>
-            </div>
-        </div>
-        <div
-            class="card_profile p-6 shadow-lg rounded-lg border bg-white flex flex-col items-center justify-center text-center w-full max-w-[300px] mx-auto">
-            <!-- Foto Profil -->
-            <div class="avatar w-24 h-24 rounded-full overflow-hidden mb-4">
-                <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt="Profile Photo"
-                    class="w-full h-full object-cover" />
-            </div>
-
-            <!-- Nama Profil -->
-            <h2 class="font-bold text-lg text-slate-800">John Doe</h2>
-            <p class="text-slate-500 text-sm mb-4">Content Creator & Blogger</p>
-
-            <!-- Statistik -->
-            <div class="stats w-full flex justify-around border-t border-b py-4">
-                <div class="stat">
-                    <p class="font-bold text-lg text-slate-800">42</p>
-                    <p class="text-slate-500 text-sm">Postingan</p>
-                </div>
-                <div class="stat">
-                    <p class="font-bold text-lg text-slate-800">128</p>
-                    <p class="text-slate-500 text-sm">Viewers</p>
-                </div>
-            </div>
-
-            <!-- Tombol Aksi -->
-            <div class="actions mt-4 w-full">
-                <button
-                    class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md font-medium">
-                    Lihat Profil
-                </button>
-            </div>
-        </div>
-        <div
-            class="card_profile p-6 shadow-lg rounded-lg border bg-white flex flex-col items-center justify-center text-center w-full max-w-[300px] mx-auto">
-            <!-- Foto Profil -->
-            <div class="avatar w-24 h-24 rounded-full overflow-hidden mb-4">
-                <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt="Profile Photo"
-                    class="w-full h-full object-cover" />
-            </div>
-
-            <!-- Nama Profil -->
-            <h2 class="font-bold text-lg text-slate-800">John Doe</h2>
-            <p class="text-slate-500 text-sm mb-4">Content Creator & Blogger</p>
-
-            <!-- Statistik -->
-            <div class="stats w-full flex justify-around border-t border-b py-4">
-                <div class="stat">
-                    <p class="font-bold text-lg text-slate-800">42</p>
-                    <p class="text-slate-500 text-sm">Postingan</p>
-                </div>
-                <div class="stat">
-                    <p class="font-bold text-lg text-slate-800">128</p>
-                    <p class="text-slate-500 text-sm">Viewers</p>
-                </div>
-            </div>
-
-            <!-- Tombol Aksi -->
-            <div class="actions mt-4 w-full">
-                <button
-                    class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md font-medium">
-                    Lihat Profil
-                </button>
-            </div>
-        </div>
+        <?php } ?>
     </div>
     <div
         class="penutup_card absolute right-0 top-16 w-[171px] h-[380px] hidden md:block lg:hidden"
@@ -456,6 +361,66 @@
                 <h3 class="font-semibold text-lg lg:text-xl">Traveling</h3>
                 <p class="text-sm opacity-75">125 articles</p>
             </div>
+
         </div>
     </div>
+    <div class="w-full flex justify-center">
+        <a href="?pg=category" class="btn mt-5 flex py-2 px-4 gap-2 items-center bg-blue-400 hover:bg-blue-500 text-white justify-center">View All</a>
+    </div>
 </section>
+
+<!-- Newest Post -->
+<section class="popular_post mt-5 relative p-5 md:px-10">
+    <div class="judul_category mb-5">
+        <p
+            class="font-bold text-2xl lg:text-4xl text-slate-800 text-center mb-2"
+            style="font-family: 'Montserrat Alternates'">
+            Newest Post
+        </p>
+        <p class="text-slate-500 text-center text-[14px]">
+            Postingan terbaru dari kami
+        </p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5 pb-6 overflow-hidden">
+        <?php foreach ($newest as $post) : ?>
+            <div class="card p-3 shadow-md flex flex-col border mt-3 mb-3 hover:shadow-lg hover:cursor-pointer" onclick="window.location.href='?pg=post&content=<?= base64_encode($post['id_post']) ?>'">
+                <div class="img_card rounded-md mb-2 lg:h-[160px] overflow-hidden">
+                    <img
+                        src="./public/img/post_img/<?= $post['image_url']; ?>"
+                        alt="Card Image"
+                        class="rounded-md w-full h-full object-cover" />
+                </div>
+                <div class="card_title mb-2">
+                    <p class="font-bold text-lg text-slate-800 truncate">
+                        <?= $post["title"] ?>
+                    </p>
+                    <div class="text-slate-500 text-[14px] line-clamp-3">
+                        <?= htmlspecialchars_decode($post["content"]) ?>
+                    </div>
+                </div>
+                <div class="profile_info flex items-center justify-between w-full bg-[#F5F5F5] rounded-md p-2">
+                    <div class="avatar_info flex w-full items-center gap-2">
+                        <div class="avatar">
+                            <div class="w-10 rounded-lg">
+                                <img
+                                    src="<?= $post["avatar"] ? "./public/img/profile/$post[avatar]" : "./Admin/assets/images/profile/no-profile.png"; ?>"
+                                    alt="Tailwind-CSS-Avatar-component" />
+                            </div>
+                        </div>
+                        <div class="header">
+                            <p class="font-bold text-[14px] text-slate-800"><?= $post["username"] ?></p>
+                            <p class="text-[12px] text-slate-700"><?= date('M d, Y', strtotime($post['created_at'])) ?></p>
+                        </div>
+                    </div>
+                    <div class="save_icon w-10 h-10 grid place-items-center">
+                        <i class="ph-bold ph-bookmark-simple text-slate-400 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</section>
+<script src="./src/js/jquery-3.7.1.min.js"></script>
+<script>
+    
+</script>

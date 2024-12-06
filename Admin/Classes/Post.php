@@ -320,7 +320,7 @@ class Post extends Model
         return ['status' => true, 'message' => 'Artikel berhasil diperbarui'];
     }
 
-    public function filter_data($id_user = null, $newwst = null, $views = null)
+    public function filter_data($id_user = null, $newwst = null, $views = null, $limit = null)
     {
         // Validasi parameter
         $allowed_sort_columns = ['created_at', 'views', 'updated_at']; // Contoh kolom yang diizinkan
@@ -365,7 +365,9 @@ class Post extends Model
             }
         }
 
-        $query .= " LIMIT 5";
+        if ($limit !== null) {
+            $query .= " LIMIT $limit";
+        }
 
         $result = mysqli_query($this->db, $query);
 

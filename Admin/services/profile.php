@@ -11,6 +11,7 @@ if (!isset($_SESSION["id_user"])) {
     $bio = $user['bio'];
     $profile = $user['avatar'];
     $gender = $user['gender'];
+    $job = $user['job'];
 }
 ?>
 <div class="container-fluid">
@@ -87,6 +88,10 @@ if (!isset($_SESSION["id_user"])) {
                                     <div class="input-style-1">
                                         <label>Username</label>
                                         <input type="text" placeholder="username" value="<?= $username ?>" />
+                                    </div>
+                                    <div class="input-style-1">
+                                        <label>Job</label>
+                                        <input type="text" placeholder="Job" value="<?= $job ?>" />
                                     </div>
                                     <div class="select-style-1">
                                         <label>Gender</label>

@@ -36,6 +36,7 @@ class User extends Model
                 'bio' => $post_data['bio'],
                 'address' => $post_data['address'],
                 'gender' => $post_data['gender'],
+                'job' => $post_data['job']
             ];
 
             if (!empty($file_data['avatar'])) {
@@ -218,5 +219,22 @@ class User extends Model
             'status' => true,
             'message' => 'Logout Berhasil'
         ];
+    }
+
+    public function top_user(){
+        $sql = "SELECT
+    users.*,
+    SUM(blog_posts.views) AS total_views,
+    COUNT(blog_posts.id_post) AS total_posts
+FROM
+    users
+LEFT JOIN blog_posts ON users.id_user = blog_posts.user_id
+GROUP BY
+    users.id_user
+ORDER BY
+    total_posts
+DESC";
+        $result = $this->db->query($sql);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 }

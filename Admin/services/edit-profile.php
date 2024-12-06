@@ -11,6 +11,7 @@ if (isset($_SESSION["id_user"])) {
     $bio = $user['bio'];
     $profile = $user['avatar'];
     $gender = $user['gender'];
+    $job = $user['job'];
 }
 if (isset($_POST["submit"])) {
     $user = new User();
@@ -92,6 +93,12 @@ if (isset($_POST["submit"])) {
                         <div class="input-style-1">
                             <label>Full Name</label>
                             <input type="text" name="username" placeholder="Full Name" value="<?= $name ?>" />
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="input-style-1">
+                            <label>Job</label>
+                            <input type="text" name="job" placeholder="Job" value="<?= $job ?>" />
                         </div>
                     </div>
                     <div class="col-12">

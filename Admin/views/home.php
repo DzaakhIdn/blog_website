@@ -68,7 +68,7 @@ $no = 0;
         </div>
         <div class="content">
           <h6 class="mb-10">Total Views</h6>
-          <h3 class="text-bold mb-10"><?= $views['total_views'] ?></h3>
+          <h3 class="text-bold mb-10"><?= $views['total_views'] != null ? $views['total_views'] : 0 ?></h3>
         </div>
       </div>
       <!-- End Icon Cart -->

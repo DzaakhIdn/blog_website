@@ -11,7 +11,7 @@ $id_user = $posts['user_id'];
 $all_post = $post->all_paginate2($id_user); 
 $sql_add_Views = "UPDATE blog_posts SET views = views + 1 WHERE id_post = ".base64_decode($id);
 mysqli_query($conn, $sql_add_Views);
-$popular_post = $post->filter_data(null, 'views', 'DESC');
+$popular_post = $post->filter_data(null, 'views', 'DESC', 4);
 $sql_random = "SELECT blog_posts.*, users.username, users.avatar FROM blog_posts JOIN users ON blog_posts.user_id = users.id_user ORDER BY RAND() LIMIT 4";
 $result_random = $conn->query($sql_random);
 $random_post = $result_random->fetch_all(MYSQLI_ASSOC);
@@ -262,7 +262,7 @@ $random_post = $result_random->fetch_all(MYSQLI_ASSOC);
                   </div>
                 </div>
               </div>
-              <p class="text-slate-500 text-[14px] self-start"><?= count($all_post) ?></p>
+              <p class="text-slate-500 text-[14px] self-start"><?= count($all_post) ?> Post</p>
             </div>
           </div>
           <div class="tags_aside bg-slate-100 rounded-lg p-3">
@@ -340,13 +340,13 @@ $random_post = $result_random->fetch_all(MYSQLI_ASSOC);
               class="profile_author_img hover:cursor-pointer rounded-md w-[87px] h-[87px] bg-cover bg-center overflow-hidden"
             >
               <img
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                src="<?= $posts['avatar'] ? "./public/img/profile/$posts[avatar]" : "./Admin/assets/images/profile/no-profile.png"; ?>"
                 alt="Profile Author"
                 class="w-full h-full object-cover"
               />
             </div>
             <div class="flex flex-col gap-3">
-              <a href="./about_author.html" class="font-semibold text-slate-700 text-lg">Bang Boo</a>
+              <a href="./about_author.html" class="font-semibold text-slate-700 text-lg"><?= $posts['username'] ?></a>
               <div
                 id="btn_follow"
                 class="bg-[#F81539]/75 rounded-lg px-3 py-1 flex gap-2 items-center"
@@ -356,7 +356,7 @@ $random_post = $result_random->fetch_all(MYSQLI_ASSOC);
               </div>
             </div>
           </div>
-          <p class="text-slate-500 text-[14px] self-start">12 posts</p>
+          <p class="text-slate-500 text-[14px] self-start"><?= count($all_post) ?> Post</p>
         </div>
       </div>
       </div>
