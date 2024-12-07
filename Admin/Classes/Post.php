@@ -95,7 +95,7 @@ class Post extends Model
             $image_path = $upload_dir . $image_name;
 
             if (file_put_contents($image_path, $image)) {
-                $artikel_konten = str_replace($match[0], '<img src="../../public/img/post_img/' . $image_name . '" alt="Image">', $artikel_konten);
+                $artikel_konten = str_replace($match[0], '<img src="./public/img/post_img/' . $image_name . '" alt="'. $image_name .'">', $artikel_konten);
             } else {
                 return ['status' => false, 'message' => 'Gagal menyimpan gambar'];
             }
@@ -179,7 +179,8 @@ class Post extends Model
         $sql = "SELECT 
         blog_posts.id_post, 
         blog_posts.content, 
-        blog_posts.image_url, 
+        blog_posts.image_url,
+        blog_posts.created_at, 
         blog_posts.title, 
         categories.name_category, 
         blog_posts.user_id, 
@@ -322,21 +323,17 @@ class Post extends Model
 
     public function filter_data($id_user = null, $newwst = null, $views = null, $limit = null)
     {
-        // Validasi parameter
-        $allowed_sort_columns = ['created_at', 'views', 'updated_at']; // Contoh kolom yang diizinkan
+        $allowed_sort_columns = ['created_at', 'views', 'updated_at'];
         $allowed_views = ['ASC', 'DESC'];
 
-        // Pastikan `$newwst` valid
         if ($newwst !== null && !in_array($newwst, $allowed_sort_columns)) {
             $newwst = null;
         }
 
-        // Pastikan `$views` valid
         if ($views !== null && !in_array($views, $allowed_views)) {
             $views = null;
         }
 
-        // Query dasar
         $query = "SELECT 
             blog_posts.*, 
             categories.name_category,
@@ -357,7 +354,6 @@ class Post extends Model
             $query .= " WHERE blog_posts.user_id = $id_user";
         }
 
-        // Tambahkan pengurutan jika diperlukan
         if ($newwst !== null) {
             $query .= " ORDER BY $newwst";
             if ($views !== null) {
@@ -371,7 +367,6 @@ class Post extends Model
 
         $result = mysqli_query($this->db, $query);
 
-        // Periksa jika query gagal
         if (!$result) {
             die("Query gagal: " . mysqli_error($this->db));
         }
@@ -382,13 +377,7 @@ class Post extends Model
     public function singgle_post($id_post)
     {
         $sql = "SELECT
-    blog_posts.id_post,
-    blog_posts.content,
-    blog_posts.image_url,
-    blog_posts.title,
-    blog_posts.views,
-    blog_posts.created_at,
-    blog_posts.updated_at,
+    blog_posts.*,
     categories.name_category,
     blog_posts.user_id,
     users.username,

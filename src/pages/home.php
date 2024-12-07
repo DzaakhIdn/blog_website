@@ -191,7 +191,8 @@
 
             <!-- Tombol Aksi -->
             <div class="actions mt-4 w-full">
-                <button
+                <button 
+                    onclick="window.location.href='?pg=about-author&user_id=<?= base64_encode($user['id_user']) ?>'"
                     class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md font-medium">
                     Lihat Profil
                 </button>
@@ -241,7 +242,7 @@
                     <p class="font-bold text-lg text-slate-800 truncate">
                         <?= $post["title"] ?>
                     </p>
-                    <div class="text-slate-500 text-[14px] line-clamp-3">
+                    <div class="text-slate-500 text-[14px] line-clamp-2">
                         <?= htmlspecialchars_decode($post["content"]) ?>
                     </div>
                 </div>
@@ -288,17 +289,21 @@
             Popular Category
         </p>
         <p class="text-slate-500 text-center text-[14px]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-            quos.
+            Kategori populer dari kami
         </p>
     </div>
     <div
         class="popular_category_container grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <?php
+        $popular_category = new Category();
+        $categories = $popular_category->category_views(4);
+        foreach ($categories as $category) {
+        ?>
         <div class="card_category group">
             <!-- Image container -->
             <img
-                src="./assets/card_img/category_1.jpg"
-                alt=""
+                src="./public/img/category_img/<?= $category["category_img"] ?>"
+                alt="<?= $category["category_name"] ?>"
                 class="w-14 h-14 left-5 rounded-full object-cover absolute group-hover:w-full group-hover:h-full group-hover:left-0 group-hover:scale-110 transition-all duration-500 ease-in-out" />
             <!-- Overlay untuk background gelap -->
             <div
@@ -307,62 +312,11 @@
             <!-- Content -->
             <div
                 class="category_content relative z-10 text-slate-800 group-hover:text-white transition-colors duration-500 ml-24">
-                <h3 class="font-semibold text-lg lg:text-xl">Gaming</h3>
-                <p class="text-sm opacity-75">125 articles</p>
+                <h3 class="font-semibold text-lg lg:text-xl"><?= $category["category_name"] ?></h3>
+                <p class="text-sm opacity-75"><?= $category["total_articles"] ?> articles</p>
             </div>
         </div>
-        <div class="card_category group">
-            <!-- Image container -->
-            <img
-                src="./assets/card_img/category_2.jpg"
-                alt=""
-                class="w-14 h-14 left-5 rounded-full object-cover absolute group-hover:w-full group-hover:h-full group-hover:left-0 group-hover:scale-110 transition-all duration-500 ease-in-out" />
-            <!-- Overlay untuk background gelap -->
-            <div
-                class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
-
-            <!-- Content -->
-            <div
-                class="category_content relative z-10 text-slate-800 group-hover:text-white transition-colors duration-500 ml-24">
-                <h3 class="font-semibold text-lg lg:text-xl">Dunia Coding</h3>
-                <p class="text-sm opacity-75">125 articles</p>
-            </div>
-        </div>
-        <div class="card_category group">
-            <!-- Image container -->
-            <img
-                src="./assets/card_img/category_3.jpg"
-                alt=""
-                class="w-14 h-14 left-5 rounded-full object-cover absolute group-hover:w-full group-hover:h-full group-hover:left-0 group-hover:scale-110 transition-all duration-500 ease-in-out" />
-            <!-- Overlay untuk background gelap -->
-            <div
-                class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
-
-            <!-- Content -->
-            <div
-                class="category_content relative z-10 text-slate-800 group-hover:text-white transition-colors duration-500 ml-24">
-                <h3 class="font-semibold text-lg lg:text-xl">Technology</h3>
-                <p class="text-sm opacity-75">125 articles</p>
-            </div>
-        </div>
-        <div class="card_category group">
-            <!-- Image container -->
-            <img
-                src="./assets/card_img/category_4.jpg"
-                alt=""
-                class="w-14 h-14 left-5 rounded-full object-cover absolute group-hover:w-full group-hover:h-full group-hover:left-0 group-hover:scale-110 transition-all duration-500 ease-in-out" />
-            <!-- Overlay untuk background gelap -->
-            <div
-                class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
-
-            <!-- Content -->
-            <div
-                class="category_content relative z-10 text-slate-800 group-hover:text-white transition-colors duration-500 ml-24">
-                <h3 class="font-semibold text-lg lg:text-xl">Traveling</h3>
-                <p class="text-sm opacity-75">125 articles</p>
-            </div>
-
-        </div>
+        <?php } ?>
     </div>
     <div class="w-full flex justify-center">
         <a href="?pg=category" class="btn mt-5 flex py-2 px-4 gap-2 items-center bg-blue-400 hover:bg-blue-500 text-white justify-center">View All</a>
@@ -394,7 +348,7 @@
                     <p class="font-bold text-lg text-slate-800 truncate">
                         <?= $post["title"] ?>
                     </p>
-                    <div class="text-slate-500 text-[14px] line-clamp-3">
+                    <div class="text-slate-500 text-[14px] line-clamp-2">
                         <?= htmlspecialchars_decode($post["content"]) ?>
                     </div>
                 </div>
@@ -421,6 +375,3 @@
     </div>
 </section>
 <script src="./src/js/jquery-3.7.1.min.js"></script>
-<script>
-    
-</script>

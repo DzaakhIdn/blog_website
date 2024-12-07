@@ -10,4 +10,8 @@ switch ($pg) {
         break;
     case 'post' :
         include('./src/pages/single_blog.php');
+        break;
+    case 'about-author' :
+        include('./src/pages/about_author.php');
+        break;
 }

@@ -206,4 +206,28 @@ class Category extends Model
     {
         return parent::delete_data($id, $this->table, $this->primary_key);
     }
+
+    public function category_views($limit = null)
+    {
+        $sqlLimit = '';
+        if ($limit !== null) {
+            $sqlLimit = "LIMIT $limit";
+        }
+        $sql = "SELECT
+    categories.name_category AS category_name,
+    categories.category_img AS category_img,
+    COUNT(blog_posts.id_post) AS total_articles
+    FROM
+    categories
+    LEFT JOIN blog_posts ON categories.category_id = blog_posts.id_category
+    GROUP BY
+    categories.category_id,
+    categories.name_category
+    ORDER BY
+    total_articles
+    DESC $sqlLimit";
+
+        $result = mysqli_query($this->db, $sql);
+        return parent::convert_data($result);
+    }
 }

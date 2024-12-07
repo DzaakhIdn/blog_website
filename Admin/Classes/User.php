@@ -15,10 +15,12 @@ class User extends Model
         return parent::find_data($id, $this->table, $this->primary_key);
     }
 
+
     public function update_profile($id, $post_data, $file_data = null)
     {
         $allowed_extension = ["jpg", "jpeg", "gif", "svg", "png", "webp", "avif"];
         $upload_path = "/var/www/html/blog-web/public/img/profile/";
+        $upload_path_banner = "/var/www/html/blog-web/public/img/banner/";
 
         try {
             $current_data = parent::find_data($id, $this->table, $this->primary_key);
@@ -39,52 +41,70 @@ class User extends Model
                 'job' => $post_data['job']
             ];
 
-            if (!empty($file_data['avatar'])) {
-                $avatar = $file_data['avatar'];
-                $avatar_name = $avatar['name'];
-                $avatar_tmp = $avatar['tmp_name'];
-                $avatar_type = $avatar['type'];
-                $avatar_size = $avatar['size'];
+            if (isset($file_data['avatar'])) {
+                $data_to_save['avatar'] = parent::handleFileUpload($file_data['avatar'], $upload_path, $allowed_extension, $current_data['avatar'] ?? null);
+            }
 
-                $avatar_extension = pathinfo($avatar_name, PATHINFO_EXTENSION);
+            if (isset($file_data['banner'])) {
+                $data_to_save['banner'] = parent::handleFileUpload($file_data['banner'], $upload_path_banner, $allowed_extension, $current_data['banner'] ?? null);
+            }
 
-                if (!in_array($avatar_extension, $allowed_extension)) {
-                    return [
-                        'status' => false,
-                        'message' => 'Format file tidak diizinkan'
-                    ];
-                }
-
-                if ($avatar_size > 3000000) {
-                    return [
-                        'status' => false,
-                        'message' => 'Ukuran file tidak boleh lebih dari 3MB'
-                    ];
-                }
-
-                $nama_file_baru = random_int(1000, 9999) . "_" . time() . "." . $avatar_extension;
-
-                if (!file_exists($upload_path)) {
-                    mkdir($upload_path, 0777, true);
-                }
-
-                if (!move_uploaded_file($avatar_tmp, $upload_path . $nama_file_baru)) {
-                    return [
-                        'status' => false,
-                        'message' => 'Gagal mengupload file!'
-                    ];
-                }
-
-                $data_to_save['avatar'] = $nama_file_baru;
-
-
-                if (!empty($current_data['avatar']) && file_exists($upload_path . $current_data['avatar'])) {
-                    unlink($upload_path . $current_data['avatar']);
+            if ($file_data['error'] !== UPLOAD_ERR_OK) {
+                switch ($file_data['error']) {
+                    case UPLOAD_ERR_INI_SIZE:
+                    case UPLOAD_ERR_FORM_SIZE:
+                        throw new Exception('Ukuran file terlalu besar');
+                    case UPLOAD_ERR_PARTIAL:
+                        throw new Exception('File hanya terupload sebagian');
+                    case UPLOAD_ERR_NO_FILE:
+                        throw new Exception('Tidak ada file yang diupload');
+                    case UPLOAD_ERR_NO_TMP_DIR:
+                        throw new Exception('Direktori sementara hilang');
+                    case UPLOAD_ERR_CANT_WRITE:
+                        throw new Exception('Gagal menulis file ke disk');
+                    default:
+                        throw new Exception('Kesalahan tidak diketahui');
                 }
             }
 
 
+            if (!file_exists($upload_path)) {
+                throw new Exception('Path upload tidak ditemukan: ' . $upload_path);
+            }
+
+            if (!move_uploaded_file($file_data['banner']['tmp_name'], $upload_path . 'test_file.jpg')) {
+                throw new Exception('Gagal memindahkan file: ' . error_get_last()['message']);
+            }
+
+
             $result = parent::update_data($id, $data_to_save, $this->table, $this->primary_key);
+
+            if ($file_data['error'] !== UPLOAD_ERR_OK) {
+                switch ($file_data['error']) {
+                    case UPLOAD_ERR_INI_SIZE:
+                    case UPLOAD_ERR_FORM_SIZE:
+                        throw new Exception('Ukuran file terlalu besar');
+                    case UPLOAD_ERR_PARTIAL:
+                        throw new Exception('File hanya terupload sebagian');
+                    case UPLOAD_ERR_NO_FILE:
+                        throw new Exception('Tidak ada file yang diupload');
+                    case UPLOAD_ERR_NO_TMP_DIR:
+                        throw new Exception('Direktori sementara hilang');
+                    case UPLOAD_ERR_CANT_WRITE:
+                        throw new Exception('Gagal menulis file ke disk');
+                    default:
+                        throw new Exception('Kesalahan tidak diketahui');
+                }
+            }
+
+
+            if (!file_exists($upload_path)) {
+                throw new Exception('Path upload tidak ditemukan: ' . $upload_path);
+            }
+
+            if (!move_uploaded_file($file_data['banner']['tmp_name'], $upload_path . 'test_file.jpg')) {
+                throw new Exception('Gagal memindahkan file: ' . error_get_last()['message']);
+            }
 
             if ($result) {
                 return [
@@ -92,6 +112,10 @@ class User extends Model
                     'message' => 'User berhasil diubah',
                     'data' => $result
                 ];
+            }
+
+            if (isset($data_to_save['banner']) && file_exists($upload_path_banner . $data_to_save['banner'])) {
+                unlink($upload_path_banner . $data_to_save['banner']);
             }
 
             if (isset($data_to_save['avatar']) && file_exists($upload_path . $data_to_save['avatar'])) {
@@ -221,7 +245,8 @@ class User extends Model
         ];
     }
 
-    public function top_user(){
+    public function top_user()
+    {
         $sql = "SELECT
     users.*,
     SUM(blog_posts.views) AS total_views,

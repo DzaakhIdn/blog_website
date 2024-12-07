@@ -14,8 +14,11 @@ if (isset($_SESSION["id_user"])) {
     $job = $user['job'];
 }
 if (isset($_POST["submit"])) {
+    // var_dump($_POST);
+    // var_dump($_FILES);
+    // die();
     $user = new User();
-    if (!empty($_FILES["avatar"]["name"])) {
+    if (!empty($_FILES)) {
         $result = $user->update_profile($_SESSION["id_user"], $_POST, $_FILES);
     } else {
         $result = $user->update_profile($_SESSION["id_user"], $_POST);
@@ -89,6 +92,12 @@ if (isset($_POST["submit"])) {
                     <h6>My Profile</h6>
                 </div>
                 <div class="row">
+                    <div class="col-12">
+                        <div class="input-style-1">
+                            <label>Banner</label>
+                            <input type="file" name="banner">
+                        </div>
+                    </div>
                     <div class="col-12">
                         <div class="input-style-1">
                             <label>Full Name</label>
