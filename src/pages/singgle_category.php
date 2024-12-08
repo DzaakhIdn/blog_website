@@ -18,7 +18,7 @@ $categories_id = $category->post_cagtegory(base64_decode($id));
     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     <?php foreach ($categories_id as $post) : ?>
     <!-- Card Category -->
-    <div class="card p-3 shadow-md flex flex-col border mt-3 mb-3 hover:shadow-lg hover:cursor-pointer" onclick="window.location.href='?pg=post&content=<?= base64_encode($post['id_post']) ?>'">
+    <div class="card p-3 shadow-md flex flex-col border hover:shadow-lg hover:cursor-pointer" onclick="window.location.href='?pg=post&content=<?= base64_encode($post['id_post']) ?>'">
                 <div class="img_card rounded-md mb-2 lg:h-[160px] overflow-hidden">
                     <img
                         src="./public/img/post_img/<?= $post['image_url']; ?>"

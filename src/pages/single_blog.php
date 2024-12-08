@@ -317,7 +317,7 @@ $random_post = mysqli_fetch_all($result_random, MYSQLI_ASSOC);
               class="w-full h-full object-cover" />
           </div>
           <div class="flex flex-col gap-3">
-            <a href="?pg=about-author&user_id=<?= base64_encode($posts['id_user']) ?>" class="font-semibold text-slate-700 text-lg"><?= $posts['username'] ?></a>
+            <a href="?pg=about-author&user_id=<?= base64_encode($id_user) ?>" class="font-semibold text-slate-700 text-lg"><?= $posts['username'] ?></a>
             <div
               id="btn_follow"
               class="bg-[#F81539]/75 rounded-lg px-3 py-1 flex gap-2 items-center">

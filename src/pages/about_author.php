@@ -33,10 +33,6 @@ $views = $posts->count_views(base64_decode($id));
       <div class="flex flex-col w-full">
         <div class="profile_name flex justify-between items-center w-full">
           <p class="text-base font-medium text-slate-700"><?= $users[0]['username']; ?></p>
-          <button class="btn_follow flex gap-2 items-center justify-center bg-[#F81539]/75 text-white rounded-lg px-3 py-2">
-            <i class="fa-solid fa-plus"></i>
-            <p class="text-sm font-medium text-white">Follow</p>
-          </button>
         </div>
         <p class="text-sm text-slate-500"><?= $users[0]['bio']; ?></p>
         <div class="profile_info flex gap-5 items-center mt-2">
