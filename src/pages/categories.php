@@ -16,7 +16,9 @@
      foreach ($categories as $category) {
      ?>
     <div
-      class="card_category h-[250px] relative rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer">
+      class="card_category h-[250px] relative rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+      onclick="window.location.href='?pg=singgle_category&category=<?= base64_encode($category['category_id']) ?>'"
+      >
       <img
         src="./public/img/category_img/<?= $category["category_img"] ?>"
         alt="Category Image"

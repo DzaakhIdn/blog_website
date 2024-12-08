@@ -12,6 +12,7 @@ if (!isset($_SESSION["id_user"])) {
     $profile = $user['avatar'];
     $gender = $user['gender'];
     $job = $user['job'];
+    $banner = $user['banner'];
 }
 ?>
 <div class="container-fluid">
@@ -48,7 +49,12 @@ if (!isset($_SESSION["id_user"])) {
             <div class="profile-wrapper mb-30 border rounded shadow">
                 <!-- Cover Image -->
                 <div class="position-relative profile-cover overflow-hidden rounded-top">
-                    <img src="./../assets/images/profile/profile-cover.jpg" alt="cover-image" class="w-100 img-fluid">
+                    <img
+                        src="<?= isset($banner) ? "../../public/img/banner/$banner" : "./../assets/images/profile/profile-cover.jpg"; ?>"
+                        alt="cover-image"
+                        class="w-100 img-fluid"
+                        style="max-height: 300px; object-fit: cover;">
+
                     <!-- Edit Icon for Cover -->
                     <div class="position-absolute top-0 end-0 m-3">
                         <a href="?pg=edit-profile" class="btn btn-light d-grid place-items-center py-2 px-2 shadow" title="Edit Cover Photo">
@@ -56,6 +62,7 @@ if (!isset($_SESSION["id_user"])) {
                         </a>
                     </div>
                 </div>
+
                 <!-- Profile Photo -->
                 <div class="position-relative text-center" style="margin-top: -60px;">
                     <div class="d-inline-block">
@@ -146,6 +153,6 @@ if (!isset($_SESSION["id_user"])) {
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
         <!-- end col -->
     </div>

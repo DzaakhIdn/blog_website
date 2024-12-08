@@ -25,12 +25,11 @@ class Tag extends Model
                 'data' => $result
             ];
         }
-
     }
 
     public function all()
     {
-        return parent::all_data($this->table) ;
+        return parent::all_data($this->table);
     }
 
     public function find($id)
@@ -46,12 +45,12 @@ class Tag extends Model
     public function search($keyword, $start = null, $limit = null)
     {
         $queryLimit = '';
-        if($start !== null && $limit !== null){
+        if ($start !== null && $limit !== null) {
             $queryLimit = " LIMIT $start, $limit";
         }
         $keyword = "WHERE name_tag LIKE '%$keyword%' $queryLimit";
         return parent::search_data($keyword, $this->table);
-    }   
+    }
 
     public function edit($id, $datas)
     {
@@ -98,5 +97,24 @@ class Tag extends Model
                 'message' => 'Tag gagal dihapus'
             ];
         }
+    }
+
+    public function popular_tag()
+    {
+        $sql = "SELECT
+    tags.name_tag AS nama_tag,
+    COUNT(pivot_post_tags.post_id_pivot) AS total_articles
+FROM
+    tags
+LEFT JOIN pivot_post_tags ON tags.tags_id = pivot_post_tags.tag_id_pivot
+LEFT JOIN blog_posts ON pivot_post_tags.post_id_pivot = blog_posts.id_post
+GROUP BY
+    tags.name_tag
+ORDER BY
+    total_articles
+DESC
+LIMIT 4";
+ $result = mysqli_query($this->db, $sql);
+        return parent::convert_data($result);
     }
 }

@@ -15,7 +15,7 @@ if (isset($_SESSION["id_user"])) {
 }
 if (isset($_POST["submit"])) {
     // var_dump($_POST);
-    // var_dump($_FILES);
+    //  var_dump($_FILES['banner']);
     // die();
     $user = new User();
     if (!empty($_FILES)) {

@@ -27,7 +27,7 @@ class User extends Model
             if (!$current_data) {
                 return [
                     'status' => false,
-                    'message' => 'Data kategori tidak ditemukan'
+                    'message' => 'Data pengguna tidak ditemukan'
                 ];
             }
 
@@ -41,90 +41,100 @@ class User extends Model
                 'job' => $post_data['job']
             ];
 
-            if (isset($file_data['avatar'])) {
-                $data_to_save['avatar'] = parent::handleFileUpload($file_data['avatar'], $upload_path, $allowed_extension, $current_data['avatar'] ?? null);
-            }
+            // Proses Avatar
+            if (!empty($file_data['avatar']['tmp_name'])) {
+                $avatar = $file_data['avatar'];
+                $avatar_extension = strtolower(pathinfo($avatar['name'], PATHINFO_EXTENSION));
 
-            if (isset($file_data['banner'])) {
-                $data_to_save['banner'] = parent::handleFileUpload($file_data['banner'], $upload_path_banner, $allowed_extension, $current_data['banner'] ?? null);
-            }
+                if (!in_array($avatar_extension, $allowed_extension)) {
+                    return [
+                        'status' => false,
+                        'message' => 'Format file avatar tidak diizinkan'
+                    ];
+                }
 
-            if ($file_data['error'] !== UPLOAD_ERR_OK) {
-                switch ($file_data['error']) {
-                    case UPLOAD_ERR_INI_SIZE:
-                    case UPLOAD_ERR_FORM_SIZE:
-                        throw new Exception('Ukuran file terlalu besar');
-                    case UPLOAD_ERR_PARTIAL:
-                        throw new Exception('File hanya terupload sebagian');
-                    case UPLOAD_ERR_NO_FILE:
-                        throw new Exception('Tidak ada file yang diupload');
-                    case UPLOAD_ERR_NO_TMP_DIR:
-                        throw new Exception('Direktori sementara hilang');
-                    case UPLOAD_ERR_CANT_WRITE:
-                        throw new Exception('Gagal menulis file ke disk');
-                    default:
-                        throw new Exception('Kesalahan tidak diketahui');
+                if ($avatar['size'] > 3000000) {
+                    return [
+                        'status' => false,
+                        'message' => 'Ukuran file avatar tidak boleh lebih dari 3MB'
+                    ];
+                }
+
+                $new_avatar_name = random_int(1000, 9999) . "_" . time() . "." . $avatar_extension;
+
+                if (!file_exists($upload_path)) {
+                    mkdir($upload_path, 0777, true);
+                }
+
+                if (!move_uploaded_file($avatar['tmp_name'], $upload_path . $new_avatar_name)) {
+                    return [
+                        'status' => false,
+                        'message' => 'Gagal mengupload avatar'
+                    ];
+                }
+
+                $data_to_save['avatar'] = $new_avatar_name;
+
+                // Hapus avatar lama jika ada
+                if (!empty($current_data['avatar']) && file_exists($upload_path . $current_data['avatar'])) {
+                    unlink($upload_path . $current_data['avatar']);
                 }
             }
 
+            // Proses Banner
+            if (!empty($file_data['banner']['tmp_name'])) {
+                $banner = $file_data['banner'];
+                $banner_extension = strtolower(pathinfo($banner['name'], PATHINFO_EXTENSION));
 
-            if (!file_exists($upload_path)) {
-                throw new Exception('Path upload tidak ditemukan: ' . $upload_path);
+                if (!in_array($banner_extension, $allowed_extension)) {
+                    return [
+                        'status' => false,
+                        'message' => 'Format file banner tidak diizinkan'
+                    ];
+                }
+
+                if ($banner['size'] > 3000000) {
+                    return [
+                        'status' => false,
+                        'message' => 'Ukuran file banner tidak boleh lebih dari 3MB'
+                    ];
+                }
+
+                $new_banner_name = random_int(1000, 9999) . "_" . time() . "." . $banner_extension;
+
+                if (!file_exists($upload_path_banner)) {
+                    mkdir($upload_path_banner, 0777, true);
+                }
+
+                if (!move_uploaded_file($banner['tmp_name'], $upload_path_banner . $new_banner_name)) {
+                    return [
+                        'status' => false,
+                        'message' => 'Gagal mengupload banner'
+                    ];
+                }
+
+                $data_to_save['banner'] = $new_banner_name;
+
+                // Hapus banner lama jika ada
+                if (!empty($current_data['banner']) && file_exists($upload_path_banner . $current_data['banner'])) {
+                    unlink($upload_path_banner . $current_data['banner']);
+                }
             }
 
-            if (!move_uploaded_file($file_data['banner']['tmp_name'], $upload_path . 'test_file.jpg')) {
-                throw new Exception('Gagal memindahkan file: ' . error_get_last()['message']);
-            }
-
-
+            // Update data pengguna
             $result = parent::update_data($id, $data_to_save, $this->table, $this->primary_key);
-
-            if ($file_data['error'] !== UPLOAD_ERR_OK) {
-                switch ($file_data['error']) {
-                    case UPLOAD_ERR_INI_SIZE:
-                    case UPLOAD_ERR_FORM_SIZE:
-                        throw new Exception('Ukuran file terlalu besar');
-                    case UPLOAD_ERR_PARTIAL:
-                        throw new Exception('File hanya terupload sebagian');
-                    case UPLOAD_ERR_NO_FILE:
-                        throw new Exception('Tidak ada file yang diupload');
-                    case UPLOAD_ERR_NO_TMP_DIR:
-                        throw new Exception('Direktori sementara hilang');
-                    case UPLOAD_ERR_CANT_WRITE:
-                        throw new Exception('Gagal menulis file ke disk');
-                    default:
-                        throw new Exception('Kesalahan tidak diketahui');
-                }
-            }
-
-
-            if (!file_exists($upload_path)) {
-                throw new Exception('Path upload tidak ditemukan: ' . $upload_path);
-            }
-
-            if (!move_uploaded_file($file_data['banner']['tmp_name'], $upload_path . 'test_file.jpg')) {
-                throw new Exception('Gagal memindahkan file: ' . error_get_last()['message']);
-            }
 
             if ($result) {
                 return [
                     'status' => true,
-                    'message' => 'User berhasil diubah',
+                    'message' => 'Profil pengguna berhasil diperbarui',
                     'data' => $result
                 ];
             }
 
-            if (isset($data_to_save['banner']) && file_exists($upload_path_banner . $data_to_save['banner'])) {
-                unlink($upload_path_banner . $data_to_save['banner']);
-            }
-
-            if (isset($data_to_save['avatar']) && file_exists($upload_path . $data_to_save['avatar'])) {
-                unlink($upload_path . $data_to_save['avatar']);
-            }
-
             return [
                 'status' => false,
-                'message' => 'Gagal menyimpan data user'
+                'message' => 'Gagal memperbarui profil pengguna'
             ];
         } catch (Exception $e) {
             return [
@@ -133,6 +143,7 @@ class User extends Model
             ];
         }
     }
+
 
     public function register($datas)
     {

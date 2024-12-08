@@ -376,22 +376,22 @@ class Post extends Model
 
     public function singgle_post($id_post)
     {
-        $sql = "SELECT
+     $sql = "SELECT
     blog_posts.*,
     categories.name_category,
     blog_posts.user_id,
     users.username,
     users.avatar,
     GROUP_CONCAT(tags.name_tag SEPARATOR ', ') AS tags
-FROM
+    FROM
     blog_posts
-JOIN categories ON blog_posts.id_category = categories.category_id
-JOIN users ON blog_posts.user_id = users.id_user
-JOIN pivot_post_tags ON pivot_post_tags.post_id_pivot = blog_posts.id_post
-JOIN tags ON pivot_post_tags.tag_id_pivot = tags.tags_id
-WHERE
+    JOIN categories ON blog_posts.id_category = categories.category_id
+    JOIN users ON blog_posts.user_id = users.id_user
+    JOIN pivot_post_tags ON pivot_post_tags.post_id_pivot = blog_posts.id_post
+    JOIN tags ON pivot_post_tags.tag_id_pivot = tags.tags_id
+    WHERE
     blog_posts.id_post = '$id_post'
-GROUP BY
+    GROUP BY
     blog_posts.id_post";
         $result = $this->db->query($sql)->fetch_assoc();
         return $result;
@@ -400,11 +400,27 @@ GROUP BY
     function count_views($id)
     {
         $sql = "SELECT SUM(blog_posts.views) AS total_views
-FROM blog_posts
-JOIN users ON blog_posts.user_id = users.id_user
-WHERE users.id_user = $id;";
+    FROM blog_posts
+    JOIN users ON blog_posts.user_id = users.id_user
+    WHERE users.id_user = $id;";
         $result = mysqli_query($this->db, $sql);
         $result = $result->fetch_assoc();
         return $result;
+    }
+
+    public function post_cagtegory($id_category)
+    {
+        $sql = "SELECT 
+        blog_posts.*,
+        users.username,
+        users.avatar,
+        categories.name_category
+        FROM
+        categories
+        JOIN blog_posts ON categories.category_id = blog_posts.id_category
+        JOIN users ON blog_posts.user_id = users.id_user
+        WHERE id_category = $id_category";
+        $result = mysqli_query($this->db, $sql);
+        return parent::convert_data($result);
     }
 }

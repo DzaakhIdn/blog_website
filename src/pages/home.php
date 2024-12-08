@@ -77,66 +77,24 @@
             Popular Tags
         </p>
         <div class="leader_board rounded-md flex flex-col gap-4 mt-5">
+            <?php
+            $tag = new Tag();
+            $tags = $tag->popular_tag();
+            foreach ($tags as $tag) {
+            ?>
             <div class="popular_tag">
                 <div class="tag">
-                    <p class="font-bold text-lg text-slate-800">#dika20detik</p>
+                    <p class="font-bold text-lg text-slate-800">#<?= $tag['nama_tag'] ?></p>
                 </div>
                 <div class="">
                     <p
                         class="text-slate-400 text-lg font-semibold"
                         style="font-family: 'Montserrat Alternates'">
-                        100k
+                        <?= $tag['total_articles'] ?> Post
                     </p>
                 </div>
             </div>
-            <div class="popular_tag border-green-300">
-                <div class="">
-                    <p class="font-bold text-lg text-slate-800">#bogorberencana</p>
-                </div>
-                <div class="">
-                    <p
-                        class="text-slate-400 text-lg font-semibold"
-                        style="font-family: 'Montserrat Alternates'">
-                        40k
-                    </p>
-                </div>
-            </div>
-            <div class="popular_tag border-pink-300">
-                <div class="">
-                    <p class="font-bold text-lg text-slate-800">#awasadalwan</p>
-                </div>
-                <div class="">
-                    <p
-                        class="text-slate-400 text-lg font-semibold"
-                        style="font-family: 'Montserrat Alternates'">
-                        45k
-                    </p>
-                </div>
-            </div>
-            <div class="popular_tag border-orange-300">
-                <div class="">
-                    <p class="font-bold text-lg text-slate-800">#awasadalwan</p>
-                </div>
-                <div class="">
-                    <p
-                        class="text-slate-400 text-lg font-semibold"
-                        style="font-family: 'Montserrat Alternates'">
-                        45k
-                    </p>
-                </div>
-            </div>
-            <div class="popular_tag border-blue-300">
-                <div class="">
-                    <p class="font-bold text-lg text-slate-800">#awasadalwan</p>
-                </div>
-                <div class="">
-                    <p
-                        class="text-slate-400 text-lg font-semibold"
-                        style="font-family: 'Montserrat Alternates'">
-                        45k
-                    </p>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </aside>
 </header>
@@ -299,7 +257,7 @@
         $categories = $popular_category->category_views(4);
         foreach ($categories as $category) {
         ?>
-        <div class="card_category group">
+        <div class="card_category group" onclick="window.location.href='?pg=singgle_category&category=<?= base64_encode($category['category_id']) ?>'">
             <!-- Image container -->
             <img
                 src="./public/img/category_img/<?= $category["category_img"] ?>"

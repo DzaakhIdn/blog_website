@@ -38,6 +38,7 @@ $views = $posts->count_views(base64_decode($id));
             <p class="text-sm font-medium text-white">Follow</p>
           </button>
         </div>
+        <p class="text-sm text-slate-500"><?= $users[0]['bio']; ?></p>
         <div class="profile_info flex gap-5 items-center mt-2">
           <div class="rating flex gap-2">
             <i class="fa-solid fa-eye text-slate-500"></i>
@@ -69,7 +70,7 @@ $views = $posts->count_views(base64_decode($id));
             <p class="font-bold text-lg text-slate-800 truncate">
               <?= $post["title"] ?>
             </p>
-            <div class="text-slate-500 text-[14px] line-clamp-3">
+            <div class="text-slate-500 text-[14px] line-clamp-2">
               <?= htmlspecialchars_decode($post["content"]) ?>
             </div>
           </div>
@@ -83,7 +84,7 @@ $views = $posts->count_views(base64_decode($id));
                 </div>
               </div>
               <div class="header">
-                <p class="font-bold text-[14px] text-slate-800"><?= $post["username"] ?></p>
+                <p onclick="window.location.href='?pg=about-author&user_id=<?= base64_encode($post['user_id']) ?>'" class="font-bold text-[14px] text-slate-800"><?= $post["username"] ?></p>
                 <p class="text-[12px] text-slate-700"><?= date('M d, Y', strtotime($post['created_at'])) ?></p>
               </div>
             </div>

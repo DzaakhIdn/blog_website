@@ -14,4 +14,7 @@ switch ($pg) {
     case 'about-author' :
         include('./src/pages/about_author.php');
         break;
+    case 'singgle_category' :
+        include('./src/pages/singgle_category.php');
+        break;
 }

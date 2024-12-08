@@ -216,6 +216,7 @@ class Category extends Model
         $sql = "SELECT
     categories.name_category AS category_name,
     categories.category_img AS category_img,
+    categories.category_id AS category_id,
     COUNT(blog_posts.id_post) AS total_articles
     FROM
     categories

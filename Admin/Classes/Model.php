@@ -142,49 +142,4 @@ class Model extends Connection
         return $this->convert_data($result);
     }
 
-    public function handleFileUpload($file, $upload_path, $allowed_extension, $current_file = null)
-    {
-        $allowed_mime_types = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml', 'image/avif'];
-
-        // Validasi file upload
-        if (empty($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
-            throw new Exception('File tidak valid atau gagal diunggah');
-        }
-
-        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-
-        if (!in_array($extension, $allowed_extension)) {
-            throw new Exception('Format file tidak diizinkan');
-        }
-
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mime_type = finfo_file($finfo, $file['tmp_name']);
-        finfo_close($finfo);
-
-        if (!in_array($mime_type, $allowed_mime_types)) {
-            throw new Exception('Tipe MIME file tidak diizinkan');
-        }
-
-        // Generate nama file baru
-        $new_file_name = random_int(1000, 9999) . "_" . time() . "." . $extension;
-
-        // Cek dan buat folder jika tidak ada
-        if (!file_exists($upload_path)) {
-            if (!mkdir($upload_path, 0777, true) && !is_dir($upload_path)) {
-                throw new Exception('Gagal membuat direktori upload');
-            }
-        }
-
-        // Pindahkan file ke direktori tujuan
-        if (!move_uploaded_file($file['tmp_name'], $upload_path . $new_file_name)) {
-            throw new Exception('Gagal mengupload file');
-        }
-
-        // Hapus file lama jika ada
-        if (!empty($current_file) && file_exists($upload_path . $current_file)) {
-            unlink($upload_path . $current_file);
-        }
-
-        return $new_file_name;
-    }
 }
