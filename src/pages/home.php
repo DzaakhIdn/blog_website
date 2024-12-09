@@ -1,173 +1,197 @@
 <?php require_once("./Admin/Classes/init.php") ?>
-<header class="grid grid-cols-1 lg:grid-cols-3 gap-5 w-full h-auto mt-10 px-10">
-    <!-- Slider container - left side (span 2 columns) -->
-    <div class="lg:col-span-2 flex flex-col gap-5">
-        <!-- Main Slider -->
-        <div
-            class="slider_container w-full h-[367px] lg:h-[515px] overflow-hidden relative rounded-md shadow-md">
-            <!-- Main slider -->
-            <div class="slider flex w-full h-full">
-                <!-- Slide 1 -->
-                <div
-                    class="slide w-full h-[367px] lg:h-[515px] bg-green-300 flex-shrink-0 relative overflow-hidden rounded-lg shadow-lg">
-                    <img
-                        src="./assets/card_img/card_3.jpg"
-                        alt="Card Image"
-                        class="w-full h-full object-cover" />
-                    <div
-                        class="absolute bottom-0 left-0 right-0 bg-gray-900 bg-opacity-70 text-white p-6">
-                        <h3 class="font-bold text-xl lg:text-2xl leading-tight mb-2">
-                            Why I Stopped Using Multiple Monitors
-                        </h3>
-                        <p class="text-sm lg:text-base leading-relaxed">
-                            A Single Monitor Manifesto — Many Developers Believe Multiple
-                            Monitors Improve Productivity...
-                        </p>
-                    </div>
-                </div>
-                <!-- Slide 2 -->
-                <div
-                    class="slide w-full h-[367px] lg:h-[515px] bg-green-300 flex-shrink-0 relative overflow-hidden rounded-lg shadow-lg">
-                    <img
-                        src="./assets/card_img/card_3.jpg"
-                        alt="Card Image"
-                        class="w-full h-full object-cover" />
-                    <div
-                        class="absolute bottom-0 left-0 right-0 bg-gray-900 bg-opacity-70 text-white p-6">
-                        <h3 class="font-bold text-xl lg:text-2xl leading-tight mb-2">
-                            Why I Stopped Using Multiple Monitors
-                        </h3>
-                        <p class="text-sm lg:text-base leading-relaxed">
-                            A Single Monitor Manifesto — Many Developers Believe Multiple
-                            Monitors Improve Productivity...
-                        </p>
-                    </div>
-                </div>
-            </div>
+<!--
+  Heads up! 👋
 
-            <!-- Navigation controls -->
-            <button
-                id="btn_left"
-                class="btn_control absolute left-4 top-1/2 transform -translate-y-1/2 bg-white text-gray-800 rounded-full p-2 shadow-lg">
-                <i class="ph-bold ph-caret-left"></i>
-            </button>
-            <button
-                id="btn_right"
-                class="btn_control absolute right-4 top-1/2 transform -translate-y-1/2 bg-white text-gray-800 rounded-full p-2 shadow-lg">
-                <i class="ph-bold ph-caret-right"></i>
-            </button>
+  This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
+-->
 
-            <!-- Dot indicators -->
-            <div
-                class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                <span class="w-2 h-2 bg-white rounded-full cursor-pointer"></span>
-                <span
-                    class="w-2 h-2 bg-white opacity-50 rounded-full cursor-pointer"></span>
-                <span
-                    class="w-2 h-2 bg-white opacity-50 rounded-full cursor-pointer"></span>
-            </div>
-        </div>
+<!--
+  Heads up! 👋
+
+  This component comes with some `rtl` classes. Please remove them if they are not needed in your project.
+-->
+
+<section class="relative">
+    <div id="slider_for" class="absolute inset-0">
+        <img
+            src="https://images.unsplash.com/photo-1604014237800-1c9102c219da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+            alt="Background Image"
+            class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gray-900/75 bg-gradient-to-r from-gray-900/95 to-gray-900/25"></div>
     </div>
 
-    <!-- Sidebar - right side -->
-    <aside class="w-full h-fit border rounded-md p-5">
-        <p
-            class="font-bold text-[23px] mt-10"
-            style="font-family: 'Montserrat Alternates'">
-            Popular Tags
-        </p>
-        <div class="leader_board rounded-md flex flex-col gap-4 mt-5">
-            <?php
-            $tag = new Tag();
-            $tags = $tag->popular_tag();
-            foreach ($tags as $tag) {
-            ?>
-            <div class="popular_tag">
-                <div class="tag">
-                    <p class="font-bold text-lg text-slate-800">#<?= $tag['nama_tag'] ?></p>
-                </div>
-                <div class="">
-                    <p
-                        class="text-slate-400 text-lg font-semibold"
-                        style="font-family: 'Montserrat Alternates'">
-                        <?= $tag['total_articles'] ?> Post
-                    </p>
-                </div>
-            </div>
-            <?php } ?>
-        </div>
-    </aside>
-</header>
-<!-- Top Writer -->
-<section class="top_writer mt-5 relative p-5 md:px-10">
-    <div class="sect_title flex items-center w-full justify-between">
-        <p
-            class="font-semibold text-[20px] before:w-1 before:h-1 before:rounded-sm before:mr-2 before:bg-orange-500 before:content-['-'] before:text-orange-500"
-            style="font-family: 'Montserrat Alternates'">
-            Top Writer
-        </p>
-        <div class="slide_control lg:hidden flex flex-row-reverse gap-2">
-            <div class="btn_control" id="btn_next">
-                <i class="ph-bold ph-caret-right"></i>
-            </div>
-            <div class="btn_control" id="btn_prev">
-                <i class="ph-bold ph-caret-left"></i>
-            </div>
-        </div>
-    </div>
-    <div class="carrousel_author pb-6 overflow-hidden">
-        <?php 
-        $author = new User();
-        $top_user = $author->top_user();
-        foreach ($top_user as $user) {
-        ?>
-        <div
-            class="card_profile p-6 shadow-lg rounded-lg border bg-white flex flex-col items-center justify-center text-center w-full mx-auto">
-            <!-- Foto Profil -->
-            <div class="avatar w-24 h-24 rounded-full overflow-hidden mb-4">
-                <img
-                    src="<?= $user["avatar"] ? "./public/img/profile/$user[avatar]" : "./Admin/assets/images/profile/no-profile.png"; ?>"
-                    alt="Profile Photo"
-                    class="w-full h-full object-cover" />
-            </div>
-
-            <!-- Nama Profil -->
-            <h2 class="font-bold text-lg text-slate-800"><?= $user["username"] ?></h2>
-            <p class="text-slate-500 text-sm mb-4"><?= $user["job"] ?? "" ?></p>
-
-            <!-- Statistik -->
-            <div class="stats w-full flex justify-around border-t border-b py-4">
-                <div class="stat">
-                    <p class="font-bold text-lg text-slate-800"><?= $user["total_posts"] ?></p>
-                    <p class="text-slate-500 text-sm">Postingan</p>
-                </div>
-                <div class="stat">
-                    <p class="font-bold text-lg text-slate-800"><?= $user["total_views"] ?></p>
-                    <p class="text-slate-500 text-sm">Viewers</p>
-                </div>
-            </div>
-
-            <!-- Tombol Aksi -->
-            <div class="actions mt-4 w-full">
-                <button 
-                    onclick="window.location.href='?pg=about-author&user_id=<?= base64_encode($user['id_user']) ?>'"
-                    class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md font-medium">
-                    Lihat Profil
-                </button>
-            </div>
-        </div>
-        <?php } ?>
-    </div>
     <div
-        class="penutup_card absolute right-0 top-16 w-[171px] h-[380px] hidden md:block lg:hidden"
-        style="
-          background: rgb(2, 0, 36);
-          background: linear-gradient(
-            90deg,
-            rgba(2, 0, 36, 0) 0%,
-            rgba(255, 255, 255, 1) 100%
-          );
-        "></div>
+        class="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
+        <div class="max-w-xl ltr:sm:text-left rtl:sm:text-right">
+            <h1 class="text-3xl font-extrabold text-white sm:text-5xl">
+                Let us find your
+
+                <strong class="block font-extrabold text-rose-500"> Forever Home. </strong>
+            </h1>
+
+            <p class="mt-4 max-w-lg text-white sm:text-xl/relaxed">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt illo tenetur fuga ducimus
+                numquam ea!
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-4 text-center">
+                <a
+                    href="#"
+                    class="block w-full rounded bg-rose-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-rose-700 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto">
+                    Get Started
+                </a>
+
+                <a
+                    href="#"
+                    class="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-rose-600 shadow hover:text-rose-700 focus:outline-none focus:ring active:text-rose-500 sm:w-auto">
+                    Learn More
+                </a>
+            </div>
+
+            <div class="mt-10">
+                <h2 class="text-lg font-medium text-white mb-4">Popular Tags</h2>
+                <div id="slider_nav" class="flex flex-wrap gap-2">
+                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">#RealEstate</span>
+                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">#DreamHome</span>
+                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">#ForeverHome</span>
+                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">#LuxuryLiving</span>
+                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">#Affordable</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Top Writer -->
+<section class="bg-gray-50">
+    <div class="mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
+        <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
+            <div class="max-w-xl ltr:sm:text-left rtl:sm:text-right">
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                    Author Papan Atas Bro...
+                </h2>
+
+                <p class="mt-4 text-gray-700">
+                    ini adalah kumpulan author papan atas !
+                </p>
+
+                <div class="hidden lg:mt-8 lg:flex lg:gap-4">
+                    <button
+                        aria-label="Previous slide"
+                        id="keen-slider-previous-desktop"
+                        class="rounded-full border border-rose-600 p-3 text-rose-600 transition hover:bg-rose-600 hover:text-white">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="size-5 rtl:rotate-180">
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15.75 19.5L8.25 12l7.5-7.5" />
+                        </svg>
+                    </button>
+
+                    <button
+                        aria-label="Next slide"
+                        id="keen-slider-next-desktop"
+                        class="rounded-full border border-rose-600 p-3 text-rose-600 transition hover:bg-rose-600 hover:text-white">
+                        <svg
+                            class="size-5 rtl:rotate-180"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 5l7 7-7 7"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="-mx-6 lg:col-span-2 lg:mx-0">
+                <div id="keen-slider" class="keen-slider">
+                    <?php
+                    $users = new User();
+                    $top_author = $users->top_user();
+                    foreach ($top_author as $author) { 
+                    ?>
+                    <div class="keen-slider__slide">
+                        <blockquote class="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12 rounded-lg">
+                            <div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="<?= $author["avatar"] ? "./public/img/profile/$author[avatar]" : "./Admin/assets/images/profile/no-profile.png"; ?>" alt="Author Profile" class="w-12 h-12 rounded-full object-cover">
+                                        <div>
+                                            <p class="font-semibold text-gray-800"><?= $author['username'] ?></p>
+                                            <p class="text-sm text-gray-500"><?= $author['job'] ?></p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2 text-gray-500">
+                                        <i class="fas fa-eye"></i>
+                                        <span class="text-sm"><?= $author['total_views'] ?> views</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-2xl font-bold text-rose-600 sm:text-3xl mb-4">Stayin' Alive</p>
+
+                                    <p class="leading-relaxed text-gray-700">
+                                        <?= $author['bio'] ?>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <footer class="mt-4 flex justify-between items-center">
+                                <div class="flex items-center space-x-2 text-gray-500">
+                                    <i class="fas fa-newspaper"></i>
+                                    <span class="text-sm"><?= $author['total_posts'] ?> Artikel</span>
+                                </div>
+                                <div class="text-sm font-medium text-gray-700">
+                                    &mdash; Join on <?= date('d M Y', strtotime($author['created_at_user'])) ?>
+                                </div>
+                            </footer>
+                        </blockquote>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 flex justify-center gap-4 lg:hidden">
+            <button
+                aria-label="Previous slide"
+                id="keen-slider-previous"
+                class="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white">
+                <svg
+                    class="size-5 -rotate-180 transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                </svg>
+            </button>
+
+            <button
+                aria-label="Next slide"
+                id="keen-slider-next"
+                class="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white">
+                <svg
+                    class="size-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                </svg>
+            </button>
+        </div>
+    </div>
 </section>
 
 <!-- Popular Post -->
@@ -257,23 +281,23 @@
         $categories = $popular_category->category_views(4);
         foreach ($categories as $category) {
         ?>
-        <div class="card_category group" onclick="window.location.href='?pg=singgle_category&category=<?= base64_encode($category['category_id']) ?>'">
-            <!-- Image container -->
-            <img
-                src="./public/img/category_img/<?= $category["category_img"] ?>"
-                alt="<?= $category["category_name"] ?>"
-                class="w-14 h-14 left-5 rounded-full object-cover absolute group-hover:w-full group-hover:h-full group-hover:left-0 group-hover:scale-110 transition-all duration-500 ease-in-out" />
-            <!-- Overlay untuk background gelap -->
-            <div
-                class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
+            <div class="card_category group" onclick="window.location.href='?pg=singgle_category&category=<?= base64_encode($category['category_id']) ?>'">
+                <!-- Image container -->
+                <img
+                    src="./public/img/category_img/<?= $category["category_img"] ?>"
+                    alt="<?= $category["category_name"] ?>"
+                    class="w-14 h-14 left-5 rounded-full object-cover absolute group-hover:w-full group-hover:h-full group-hover:left-0 group-hover:scale-110 transition-all duration-500 ease-in-out" />
+                <!-- Overlay untuk background gelap -->
+                <div
+                    class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
 
-            <!-- Content -->
-            <div
-                class="category_content relative z-10 text-slate-800 group-hover:text-white transition-colors duration-500 ml-24">
-                <h3 class="font-semibold text-lg lg:text-xl"><?= $category["category_name"] ?></h3>
-                <p class="text-sm opacity-75"><?= $category["total_articles"] ?> articles</p>
+                <!-- Content -->
+                <div
+                    class="category_content relative z-10 text-slate-800 group-hover:text-white transition-colors duration-500 ml-24">
+                    <h3 class="font-semibold text-lg lg:text-xl"><?= $category["category_name"] ?></h3>
+                    <p class="text-sm opacity-75"><?= $category["total_articles"] ?> articles</p>
+                </div>
             </div>
-        </div>
         <?php } ?>
     </div>
     <div class="w-full flex justify-center">
@@ -295,7 +319,7 @@
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-5 pb-6 overflow-hidden">
         <?php foreach ($newest as $post) : ?>
-            <div class="card p-3 shadow-md flex flex-col border mt-3 mb-3 hover:shadow-lg hover:cursor-pointer" onclick="window.location.href='?pg=post&content=<?= base64_encode($post['id_post']) ?>'">
+            <div class="card p-3 shadow-md flex flex-col border hover:shadow-lg hover:cursor-pointer" onclick="window.location.href='?pg=post&content=<?= base64_encode($post['id_post']) ?>'">
                 <div class="img_card rounded-md mb-2 lg:h-[160px] overflow-hidden">
                     <img
                         src="./public/img/post_img/<?= $post['image_url']; ?>"

@@ -6,19 +6,30 @@ $categories_id = $category->post_cagtegory(base64_decode($id));
 // var_dump($categories_id);
 ?>
 <div class="breadcrumbs text-sm px-5 lg:px-10 mt-5">
-  <ul>
-    <li><a href="./index.php">Home</a></li>
-    <li><a href="?pg=category">Categories</a></li>
-    <li class="text-slate-400"><?= $categories_id[0]['name_category'] ?></li>
-  </ul>
+    <ul>
+        <li><a href="./index.php">Home</a></li>
+        <li><a href="?pg=category">Categories</a></li>
+        <li class="text-slate-400">
+            <?= isset($categories_id[0]['name_category']) && $categories_id[0]['name_category'] !== null
+                ? $categories_id[0]['name_category']
+                : "Ga ada data category" ?>
+        </li>
+    </ul>
 </div>
 
 <section class="categories_container p-6">
-  <div
-    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    <?php foreach ($categories_id as $post) : ?>
-    <!-- Card Category -->
-    <div class="card p-3 shadow-md flex flex-col border hover:shadow-lg hover:cursor-pointer" onclick="window.location.href='?pg=post&content=<?= base64_encode($post['id_post']) ?>'">
+    <?php if(empty($categories_id)) : ?>
+    <div class="flex justify-center items-center flex-col">
+        <img src="./Admin/assets/images/empty.png" alt="pop" width="500">
+        <p class="text-3xl font-bold text-blue-500">Upss! Kategori Kosong</p>
+        <p class="text-slate-500 text-2xl">Ga ada artikel terkait</p>
+    </div>
+    <?php else : ?>
+    <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <?php foreach ($categories_id as $post) : ?>
+            <!-- Card Category -->
+            <div class="card p-3 shadow-md flex flex-col border hover:shadow-lg hover:cursor-pointer" onclick="window.location.href='?pg=post&content=<?= base64_encode($post['id_post']) ?>'">
                 <div class="img_card rounded-md mb-2 lg:h-[160px] overflow-hidden">
                     <img
                         src="./public/img/post_img/<?= $post['image_url']; ?>"
@@ -52,6 +63,7 @@ $categories_id = $category->post_cagtegory(base64_decode($id));
                     </div>
                 </div>
             </div>
-    <?php endforeach; ?>
-  </div>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
 </section>

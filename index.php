@@ -30,12 +30,14 @@ $newest = $post->filter_data(null, 'created_at', 'DESC', 8);
     integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/keen-slider.min.css" rel="stylesheet" />
 </head>
 <style>
   .carrousel_author .slick-slide {
     margin: 0 10px;
-}
+  }
 </style>
+
 <body>
   <?php include('./src/componenet/navbar_lg.php') ?>
 
@@ -57,59 +59,76 @@ $newest = $post->filter_data(null, 'created_at', 'DESC', 8);
   <!-- Script -->
   <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", () => {
+
       $('.carrousel_author').slick({
         infinite: true,
         slidesToShow: 4, // Default untuk layar besar (lg)
         slidesToScroll: 1,
         autoplay: false,
         responsive: [{
-                breakpoint: 1024, // Untuk layar medium (md)
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    autoplay: false
-                }
-            },
-            {
-                breakpoint: 768, // Untuk layar kecil (sm)
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    autoplay: true,
-                    autoplaySpeed: 4000
-                }
+            breakpoint: 1024, // Untuk layar medium (md)
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+              infinite: true,
+              autoplay: false
             }
+          },
+          {
+            breakpoint: 768, // Untuk layar kecil (sm)
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              infinite: true,
+              autoplay: true,
+              autoplaySpeed: 4000
+            }
+          }
         ]
-    });
+      });
 
-    $('#carrousel_popular').slick({
+      ('.slider-for').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.slider-nav'
+      });
+      $('.slider-nav').slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        asNavFor: '.slider-for',
+        dots: true,
+        centerMode: true,
+        focusOnSelect: true
+      });
+
+      $('#carrousel_popular').slick({
         infinite: true,
         slidesToShow: 8, // Default untuk layar besar (lg)
         slidesToScroll: 1,
         autoplay: false,
         responsive: [{
-                breakpoint: 1024, // Untuk layar medium (md)
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    autoplay: false
-                }
-            },
-            {
-                breakpoint: 768, // Untuk layar kecil (sm)
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    infinite: true,
-                    autoplay: true,
-                    autoplaySpeed: 4000
-                }
+            breakpoint: 1024, // Untuk layar medium (md)
+            settings: {
+              slidesToShow: 4,
+              slidesToScroll: 1,
+              infinite: true,
+              autoplay: false
             }
+          },
+          {
+            breakpoint: 768, // Untuk layar kecil (sm)
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              infinite: true,
+              autoplay: true,
+              autoplaySpeed: 4000
+            }
+          }
         ]
-    });
+      });
 
       const buttons = document.querySelectorAll(".nav-button");
 
@@ -157,6 +176,42 @@ $newest = $post->filter_data(null, 'created_at', 'DESC', 8);
         });
       }
     });
+  </script>
+  <script type="module">
+    import KeenSlider from 'https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/+esm'
+
+    const keenSlider = new KeenSlider(
+      '#keen-slider', {
+        loop: true,
+        slides: {
+          origin: 'center',
+          perView: 1.25,
+          spacing: 16,
+        },
+        breakpoints: {
+          '(min-width: 1024px)': {
+            slides: {
+              origin: 'auto',
+              perView: 1.5,
+              spacing: 32,
+            },
+          },
+        },
+      },
+      []
+    )
+
+    const keenSliderPrevious = document.getElementById('keen-slider-previous')
+    const keenSliderNext = document.getElementById('keen-slider-next')
+
+    const keenSliderPreviousDesktop = document.getElementById('keen-slider-previous-desktop')
+    const keenSliderNextDesktop = document.getElementById('keen-slider-next-desktop')
+
+    keenSliderPrevious.addEventListener('click', () => keenSlider.prev())
+    keenSliderNext.addEventListener('click', () => keenSlider.next())
+
+    keenSliderPreviousDesktop.addEventListener('click', () => keenSlider.prev())
+    keenSliderNextDesktop.addEventListener('click', () => keenSlider.next())
   </script>
 </body>
 

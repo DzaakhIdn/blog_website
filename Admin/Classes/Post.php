@@ -366,6 +366,7 @@ class Post extends Model
         }
 
         $result = mysqli_query($this->db, $query);
+        
 
         if (!$result) {
             die("Query gagal: " . mysqli_error($this->db));
@@ -420,6 +421,7 @@ class Post extends Model
         JOIN blog_posts ON categories.category_id = blog_posts.id_category
         JOIN users ON blog_posts.user_id = users.id_user
         WHERE id_category = $id_category";
+
         $result = mysqli_query($this->db, $sql);
         return parent::convert_data($result);
     }

@@ -269,7 +269,7 @@ GROUP BY
     users.id_user
 ORDER BY
     total_posts
-DESC";
+DESC LIMIT 4";
         $result = $this->db->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
