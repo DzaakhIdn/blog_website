@@ -23,40 +23,36 @@
     <div
         class="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
         <div class="max-w-xl ltr:sm:text-left rtl:sm:text-right">
-            <h1 class="text-3xl font-extrabold text-white sm:text-5xl">
-                Let us find your
-
-                <strong class="block font-extrabold text-rose-500"> Forever Home. </strong>
+            <h1 class="text-4xl font-bold text-white sm:text-6xl lg:text-5xl leading-tight">
+                <span class="block">Welcome to</span>
+                <span class="block mt-2 bg-gradient-to-r from-orange-400 to-orange-600 text-transparent bg-clip-text animate-gradient pb-2">Blogify</span>
             </h1>
 
-            <p class="mt-4 max-w-lg text-white sm:text-xl/relaxed">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt illo tenetur fuga ducimus
-                numquam ea!
+            <p class="mt-6 max-w-lg text-gray-300 text-lg sm:text-xl leading-relaxed">
+                Buat blog terbaik untuk membangun dan memperkaya hidupmu
             </p>
+
+            <div class="mt-8 flex items-center space-x-4">
+                <div class="flex -space-x-2">
+                    <img class="w-10 h-10 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/women/1.jpg" alt="User">
+                    <img class="w-10 h-10 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/men/1.jpg" alt="User">
+                    <img class="w-10 h-10 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/women/2.jpg" alt="User">
+                </div>
+                <span class="text-sm text-gray-300">Join 100+ others who are already using Blogify</span>
+            </div>
 
             <div class="mt-8 flex flex-wrap gap-4 text-center">
                 <a
-                    href="#"
-                    class="block w-full rounded bg-rose-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-rose-700 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto">
+                    href="./Admin/index.php"
+                    class="block w-full rounded bg-orange-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-orange-700 focus:outline-none focus:ring active:bg-orange-500 sm:w-auto">
                     Get Started
                 </a>
 
                 <a
-                    href="#"
-                    class="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-rose-600 shadow hover:text-rose-700 focus:outline-none focus:ring active:text-rose-500 sm:w-auto">
+                    href="?pg=about"
+                    class="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-orange-600 shadow hover:text-orange-700 focus:outline-none focus:ring active:text-orange-500 sm:w-auto">
                     Learn More
                 </a>
-            </div>
-
-            <div class="mt-10">
-                <h2 class="text-lg font-medium text-white mb-4">Popular Tags</h2>
-                <div id="slider_nav" class="flex flex-wrap gap-2">
-                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">#RealEstate</span>
-                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">#DreamHome</span>
-                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">#ForeverHome</span>
-                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">#LuxuryLiving</span>
-                    <span class="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">#Affordable</span>
-                </div>
             </div>
         </div>
     </div>
@@ -67,19 +63,24 @@
     <div class="mx-auto max-w-[1340px] px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24">
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16">
             <div class="max-w-xl ltr:sm:text-left rtl:sm:text-right">
-                <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                    Author Papan Atas Bro...
+                <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
+                    Top-Tier Authors Showcase
                 </h2>
 
-                <p class="mt-4 text-gray-700">
-                    ini adalah kumpulan author papan atas !
+                <p class="mt-4 text-gray-700 max-w-2xl">
+                    Discover our top-tier authors who have contributed to our platform and are known for their exceptional writing skills.
                 </p>
+
+                <div class="mt-6 flex items-center">
+                    <span class="inline-block h-1 w-10 bg-orange-500 rounded-full"></span>
+                    <span class="ml-3 text-sm font-medium text-orange-500">Curated Excellence</span>
+                </div>
 
                 <div class="hidden lg:mt-8 lg:flex lg:gap-4">
                     <button
                         aria-label="Previous slide"
                         id="keen-slider-previous-desktop"
-                        class="rounded-full border border-rose-600 p-3 text-rose-600 transition hover:bg-rose-600 hover:text-white">
+                        class="rounded-full border border-orange-600 p-3 text-orange-600 transition hover:bg-orange-600 hover:text-white">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -97,7 +98,7 @@
                     <button
                         aria-label="Next slide"
                         id="keen-slider-next-desktop"
-                        class="rounded-full border border-rose-600 p-3 text-rose-600 transition hover:bg-rose-600 hover:text-white">
+                        class="rounded-full border border-orange-600 p-3 text-orange-600 transition hover:bg-orange-600 hover:text-white">
                         <svg
                             class="size-5 rtl:rotate-180"
                             fill="none"
@@ -121,8 +122,8 @@
                     $top_author = $users->top_user();
                     foreach ($top_author as $author) { 
                     ?>
-                    <div class="keen-slider__slide">
-                        <blockquote class="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8 lg:p-12 rounded-lg">
+                    <div class="keen-slider__slide p-2">
+                        <blockquote class="flex h-full flex-col justify-between shadow-md bg-white p-6 sm:p-8 lg:p-12 rounded-lg">
                             <div>
                                 <div class="flex justify-between items-center mb-4">
                                     <div class="flex items-center space-x-4">
@@ -138,7 +139,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <p class="text-2xl font-bold text-rose-600 sm:text-3xl mb-4">Stayin' Alive</p>
+                                    <p class="text-2xl font-bold text-orange-600 sm:text-3xl mb-4">About Me</p>
 
                                     <p class="leading-relaxed text-gray-700">
                                         <?= $author['bio'] ?>
@@ -166,7 +167,7 @@
             <button
                 aria-label="Previous slide"
                 id="keen-slider-previous"
-                class="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white">
+                class="rounded-full border border-orange-600 p-4 text-orange-600 transition hover:bg-orange-600 hover:text-white">
                 <svg
                     class="size-5 -rotate-180 transform"
                     fill="none"
@@ -180,7 +181,7 @@
             <button
                 aria-label="Next slide"
                 id="keen-slider-next"
-                class="rounded-full border border-rose-600 p-4 text-rose-600 transition hover:bg-rose-600 hover:text-white">
+                class="rounded-full border border-orange-600 p-4 text-orange-600 transition hover:bg-orange-600 hover:text-white">
                 <svg
                     class="size-5"
                     fill="none"
@@ -197,10 +198,18 @@
 <!-- Popular Post -->
 <section class="popular_post mt-5 relative p-5 md:px-10">
     <div class="sect_title flex items-center w-full justify-between">
-        <p
-            class="font-semibold text-[20px] before:w-1 before:h-1 before:rounded-sm before:mr-2 before:bg-orange-500 before:content-['-'] before:text-orange-500"
-            style="font-family: 'Montserrat Alternates'">
-            Popular Posts
+        <h2 class="font-bold text-2xl lg:text-3xl text-slate-800 mb-4 flex items-center font-montserrat">
+            <span class="w-2 h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mr-3" aria-hidden="true"></span>
+            Trending Articles
+            <span class="ml-3 text-sm font-normal text-orange-500 bg-orange-100 px-2 py-1 rounded-full inline-flex items-center">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                </svg>
+                Trending
+            </span>
+        </h2>
+        <p class="text-slate-600 mb-6 max-w-3xl">
+            Discover our most popular and engaging content, handpicked for you. These articles have captivated our community with their insightful perspectives and timely relevance.
         </p>
         <div class="slide_control lg:hidden flex flex-row-reverse gap-2">
             <div class="btn_control" id="btn_next">
@@ -264,15 +273,17 @@
 <!-- Popular Category -->
 <section
     class="popular_category bg-slate-100 w-full h-auto mt-5 p-5 lg:p-10 md:px-10">
-    <div class="judul_category mb-5">
-        <p
-            class="font-bold text-2xl lg:text-4xl text-slate-800 text-center mb-2"
-            style="font-family: 'Montserrat Alternates'">
-            Popular Category
+    <div class="mb-10 text-center">
+        <h2 class="font-montserrat font-bold text-3xl lg:text-5xl text-slate-800 mb-3 relative inline-block">
+            Explore Popular Categories
+        </h2>
+        <p class="text-slate-600 text-lg max-w-2xl mx-auto">
+            Discover trending topics and join vibrant discussions in our most active categories
         </p>
-        <p class="text-slate-500 text-center text-[14px]">
-            Kategori populer dari kami
-        </p>
+        <div class="mt-4 flex justify-center space-x-2">
+            <span class="bg-orange-100 text-orange-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Hot</span>
+            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Trending</span>
+        </div>
     </div>
     <div
         class="popular_category_container grid grid-cols-1 lg:grid-cols-2 gap-5">
@@ -281,21 +292,29 @@
         $categories = $popular_category->category_views(4);
         foreach ($categories as $category) {
         ?>
-            <div class="card_category group" onclick="window.location.href='?pg=singgle_category&category=<?= base64_encode($category['category_id']) ?>'">
-                <!-- Image container -->
+            <div class="card_category group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="window.location.href='?pg=singgle_category&category=<?= base64_encode($category['category_id']) ?>'">
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 opacity-0 group-hover:opacity-80 transition-opacity duration-500 ease-in-out"></div>
+                
                 <img
                     src="./public/img/category_img/<?= $category["category_img"] ?>"
-                    alt="<?= $category["category_name"] ?>"
-                    class="w-14 h-14 left-5 rounded-full object-cover absolute group-hover:w-full group-hover:h-full group-hover:left-0 group-hover:scale-110 transition-all duration-500 ease-in-out" />
-                <!-- Overlay untuk background gelap -->
-                <div
-                    class="absolute inset-0 bg-black opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
-
-                <!-- Content -->
-                <div
-                    class="category_content relative z-10 text-slate-800 group-hover:text-white transition-colors duration-500 ml-24">
-                    <h3 class="font-semibold text-lg lg:text-xl"><?= $category["category_name"] ?></h3>
-                    <p class="text-sm opacity-75"><?= $category["total_articles"] ?> articles</p>
+                    alt="<?= htmlspecialchars($category["category_name"]) ?>"
+                    class="w-full h-56 object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                    loading="lazy"
+                />
+                
+                <div class="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <h3 class="text-2xl font-bold text-white mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"><?= htmlspecialchars($category["category_name"]) ?></h3>
+                    <p class="text-sm text-gray-200 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                        <span class="inline-block bg-white/20 rounded-full px-3 py-1 backdrop-blur-sm">
+                            <?= number_format($category["total_articles"]) ?> articles
+                        </span>
+                    </p>
+                </div>
+                
+                <div class="absolute top-4 right-4 bg-white/30 rounded-full p-2 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-2 group-hover:translate-x-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
                 </div>
             </div>
         <?php } ?>
@@ -307,15 +326,18 @@
 
 <!-- Newest Post -->
 <section class="popular_post mt-5 relative p-5 md:px-10">
-    <div class="judul_category mb-5">
-        <p
-            class="font-bold text-2xl lg:text-4xl text-slate-800 text-center mb-2"
-            style="font-family: 'Montserrat Alternates'">
-            Newest Post
+    <div class="section-header text-center mb-8">
+        <h2 class="font-montserrat-alternates font-bold text-2xl lg:text-4xl text-slate-800 mb-3">
+            Latest Insights
+        </h2>
+        <p class="text-slate-600 text-sm lg:text-base max-w-2xl mx-auto">
+            Discover our freshest content, hot off the press and ready to inspire
         </p>
-        <p class="text-slate-500 text-center text-[14px]">
-            Postingan terbaru dari kami
-        </p>
+        <div class="mt-4 flex justify-center space-x-2">
+            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">New</span>
+            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Updated</span>
+        </div>
+    </div>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-4 gap-5 pb-6 overflow-hidden">
         <?php foreach ($newest as $post) : ?>

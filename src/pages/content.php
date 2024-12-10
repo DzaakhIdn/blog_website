@@ -17,4 +17,7 @@ switch ($pg) {
     case 'singgle_category' :
         include('./src/pages/singgle_category.php');
         break;
+    case 'about' :
+        include('./src/pages/about-us.php');
+        break;
 }

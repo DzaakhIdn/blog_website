@@ -7,7 +7,7 @@
           <a href="?pg=category">Category</a>
         </li>
         <li><a href="?pg=contact-us">Contact Us</a></li>
-        <li><a href="?pg=about-us">About Us</a></li>
+        <li><a href="?pg=about">About Us</a></li>
       </ul>
     </div>
     <div class="top_mobile_container">
