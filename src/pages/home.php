@@ -25,7 +25,7 @@
         <div class="max-w-xl ltr:sm:text-left rtl:sm:text-right">
             <h1 class="text-4xl font-bold text-white sm:text-6xl lg:text-5xl leading-tight">
                 <span class="block">Welcome to</span>
-                <span class="block mt-2 bg-gradient-to-r from-orange-400 to-orange-600 text-transparent bg-clip-text animate-gradient pb-2">Blogify</span>
+                <span class="block mt-2 bg-gradient-to-r from-orange-400 to-orange-600 text-transparent bg-clip-text animate-gradient pb-2">Blog.my</span>
             </h1>
 
             <p class="mt-6 max-w-lg text-gray-300 text-lg sm:text-xl leading-relaxed">
@@ -33,12 +33,13 @@
             </p>
 
             <div class="mt-8 flex items-center space-x-4">
+                <?php $user = new User(); $users = $user->all(); $user_limit = $user->all_limit(3) ?>
                 <div class="flex -space-x-2">
-                    <img class="w-10 h-10 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/women/1.jpg" alt="User">
-                    <img class="w-10 h-10 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/men/1.jpg" alt="User">
-                    <img class="w-10 h-10 rounded-full border-2 border-white" src="https://randomuser.me/api/portraits/women/2.jpg" alt="User">
+                    <?php foreach($user_limit as $user) : ?>
+                    <img class="w-10 h-10 rounded-full border-2 border-white" src="<?= $user["avatar"] ? "./public/img/profile/$user[avatar]" : "./Admin/assets/images/profile/no-profile.png"; ?>" alt="User">
+                    <?php endforeach; ?>
                 </div>
-                <span class="text-sm text-gray-300">Join 100+ others who are already using Blogify</span>
+                <span class="text-sm text-gray-300">Join <?= count($users) ?> others who are already using Blog.my</span>
             </div>
 
             <div class="mt-8 flex flex-wrap gap-4 text-center">

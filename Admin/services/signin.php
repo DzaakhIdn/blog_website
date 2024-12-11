@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../Classes/init.php';
 
-if(isset($_POST["submit"])){
+if (isset($_POST["submit"])) {
     $user = new User();
     $result = $user->login($_POST);
 }
@@ -30,6 +30,11 @@ if(isset($_POST["submit"])){
         <div class="col-lg-6">
             <div class="signin-wrapper">
                 <div class="form-wrapper">
+                    <div class="button-group d-flex mb-2">
+                        <button onclick="window.location.href = '../../index.php'" class="main-btn primary-btn btn-hover text-center">
+                        <i class="fa-solid fa-caret-left"></i>
+                        </button>
+                    </div>
                     <h2 class="mb-15 title">Sign In</h2>
                     <p class="text-sm mb-25">
                         Sign in ke akun mu untuk liat perkembangan Blog mu!

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('./Admin/DB/connections.php');
 require_once('./Admin/Classes/init.php');
 
@@ -12,7 +13,8 @@ $newest = $post->filter_data(null, 'created_at', 'DESC', 8);
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Main Page</title>
+  <title>Blog.my</title>
+  <link rel="icon" href="./src/img/logo.png" />
   <!-- CSS -->
   <link rel="stylesheet" href="src/css/output.css" />
   <link rel="stylesheet" href="./assets/slick/slick.css" type="text/css" />
@@ -43,8 +45,7 @@ $newest = $post->filter_data(null, 'created_at', 'DESC', 8);
 
   <?php include('./src/pages/content.php') ?>
 
-  <!-- Mobile Navigation -->
-  <?php include('./src/componenet/navigation.php'); ?>
+  
   <!-- Tab and Large Footer -->
   <footer id="lg_footer" class="lg_footer py-5 my-5 w-full">
     <?php include('./src/componenet/footer.php'); ?>

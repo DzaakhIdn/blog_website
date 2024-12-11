@@ -22,13 +22,26 @@ class Model extends Connection
         }
     }
 
-    public function all_data($table)
+    public function all_data($table, $limit = null)
     {
-        $query = "SELECT * FROM $table";
+        // Validasi nama tabel untuk mencegah SQL Injection
+        $table = mysqli_real_escape_string($this->db, $table);
+
+        $sql_limit = "";
+        if (isset($limit) && !empty($limit)) {
+            $sql_limit = " LIMIT " . intval($limit); // Konversi ke integer untuk keamanan
+        }
+
+        $query = "SELECT * FROM `$table` $sql_limit"; // Gunakan backtick untuk nama tabel
         $result = mysqli_query($this->db, $query);
+
+        if (!$result) {
+            die("Query Error: " . mysqli_error($this->db)); // Debugging jika query gagal
+        }
 
         return $this->convert_data($result);
     }
+
 
     public function update_data($id, $datas, $table, $column)
     {
@@ -141,5 +154,4 @@ class Model extends Connection
 
         return $this->convert_data($result);
     }
-
 }

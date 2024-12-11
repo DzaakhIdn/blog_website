@@ -1,10 +1,12 @@
 <?php
 require_once __DIR__ . '/../Classes/init.php';
-$user = new User();
-
-$result = $user->logout();
-
-if ($result) {
-    header("Location: ./auth-page.php");
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
-exit();
+
+if (isset($_SESSION)) {
+    session_destroy();
+}
+
+header('Location: ./../views/auth-page.php'); 
+exit;

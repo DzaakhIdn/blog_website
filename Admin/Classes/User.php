@@ -10,12 +10,14 @@ class User extends Model
     {
         return parent::all_data($this->table);
     }
+    public function all_limit($limit)
+    {
+        return parent::all_data($this->table, $limit);
+    }
     public function find($id)
     {
         return parent::find_data($id, $this->table, $this->primary_key);
     }
-
-
     public function update_profile($id, $post_data, $file_data = null)
     {
         $allowed_extension = ["jpg", "jpeg", "gif", "svg", "png", "webp", "avif"];
