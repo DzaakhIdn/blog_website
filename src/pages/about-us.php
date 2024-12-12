@@ -6,15 +6,15 @@
 </div>
 
 <header class="px-5 lg:px-8 py-10 text-center">
-  <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text mb-4">Blogify</h1>
-  <p class="text-lg text-slate-600 mb-8">Your trusted companion in the ever-evolving world of technology</p>
+  <h1 class="text-4xl font-bold pb-2 bg-gradient-to-r from-orange-500 to-yellow-600 text-transparent bg-clip-text mb-4">Blog.my</h1>
+  <p class="text-lg text-slate-600 mb-8">Tempat dimana semua keajaiban dimualai </p>
 </header>
 
 <section class="about-content px-5 lg:px-8 py-8 bg-slate-50 rounded-lg shadow-md hover:shadow-lg transition duration-300">
   <div class="max-w-3xl mx-auto">
     <h2 class="text-2xl font-semibold text-slate-700 mb-4">Who We Are</h2>
     <p class="text-slate-600 mb-6">
-      Blogify is your trusted companion in the ever-evolving world of technology. Founded by a team of passionate tech enthusiasts, we're here to guide you through the latest innovations, gadgets, and digital trends.
+    Blog.my is your trusted companion in the ever-evolving world of blogging. Founded by a team of passionate tech enthusiasts, we're here to guide you through the passion of our writers.
     </p>
 
     <!-- Sections with similar enhancements -->

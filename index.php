@@ -14,7 +14,7 @@ $newest = $post->filter_data(null, 'created_at', 'DESC', 8);
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blog.my</title>
-  <link rel="icon" href="./src/img/logo.png" />
+  <link rel="icon" href="./assets/icon/logoipsum-327.svg" />
   <!-- CSS -->
   <link rel="stylesheet" href="src/css/output.css" />
   <link rel="stylesheet" href="./assets/slick/slick.css" type="text/css" />

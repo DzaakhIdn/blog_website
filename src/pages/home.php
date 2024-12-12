@@ -46,7 +46,7 @@
                 <a
                     href="./Admin/index.php"
                     class="block w-full rounded bg-orange-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-orange-700 focus:outline-none focus:ring active:bg-orange-500 sm:w-auto">
-                    Get Started
+                    Let's Create
                 </a>
 
                 <a
